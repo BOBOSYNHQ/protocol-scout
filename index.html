@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Protocol Scout — BOBOSYN</title>
 
   <style>
@@ -13,34 +12,33 @@
 
     body {
       margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      background: #050505;
-      color: #f5f5f5;
+      background: #000;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     header {
+      padding: 28px 40px;
       border-bottom: 1px solid #222;
-      padding: 22px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .brand {
-      font-weight: 700;
-      letter-spacing: 0.08em;
+    header strong {
+      font-size: 20px;
+      letter-spacing: 1px;
     }
 
-    .by {
+    header span {
       color: #777;
       font-size: 13px;
-      margin-left: 8px;
     }
 
     main {
-      max-width: 1100px;
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 90px 24px;
+      padding: 80px 30px;
     }
 
     .hero {
@@ -49,74 +47,52 @@
     }
 
     .hero h1 {
-      font-size: 64px;
+      font-size: 58px;
       margin: 0 0 18px;
-      letter-spacing: -0.04em;
+      letter-spacing: -2px;
     }
 
     .hero p {
       color: #888;
       font-size: 18px;
+      margin-bottom: 35px;
     }
 
     .search {
-      max-width: 700px;
-      margin: 35px auto 0;
       display: flex;
+      max-width: 700px;
+      margin: 0 auto;
       gap: 10px;
     }
 
-    .search input {
+    input {
       flex: 1;
       padding: 17px 18px;
       background: #111;
       border: 1px solid #333;
-      color: white;
+      color: #fff;
       border-radius: 8px;
-      font-size: 15px;
+      font-size: 16px;
       outline: none;
     }
 
-    .search input:focus {
-      border-color: #666;
-    }
-
-    .search button {
-      padding: 0 25px;
-      background: white;
-      color: black;
+    button {
+      padding: 17px 25px;
+      background: #fff;
+      color: #000;
       border: none;
       border-radius: 8px;
-      font-weight: 600;
+      font-weight: bold;
       cursor: pointer;
     }
 
-    .search button:hover {
-      opacity: 0.85;
-    }
-
-    #status {
-      text-align: center;
-      color: #777;
-      margin: 30px 0;
+    button:hover {
+      opacity: .85;
     }
 
     #result {
-      margin-top: 50px;
-    }
-
-    .protocol-header {
-      margin-bottom: 35px;
-    }
-
-    .protocol-header h2 {
-      font-size: 36px;
-      margin-bottom: 8px;
-    }
-
-    .protocol-header p {
-      color: #777;
-      margin: 0;
+      display: none;
+      margin-top: 70px;
     }
 
     .section {
@@ -124,101 +100,140 @@
       padding: 30px 0;
     }
 
-    .section h3 {
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #888;
-      margin-bottom: 24px;
+    .section h2 {
+      margin: 0 0 25px;
+      font-size: 22px;
+    }
+
+    .protocol-title {
+      margin-bottom: 35px;
+    }
+
+    .protocol-title h2 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      color: #999;
+      font-size: 16px;
+      line-height: 1.7;
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+      gap: 18px;
     }
 
     .card {
       background: #0d0d0d;
-      border: 1px solid #1e1e1e;
+      border: 1px solid #222;
       border-radius: 10px;
-      padding: 20px;
-      min-height: 90px;
+      padding: 22px;
     }
 
     .label {
       color: #666;
-      font-size: 12px;
-      margin-bottom: 9px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+      font-size: 13px;
+      margin-bottom: 8px;
     }
 
     .value {
-      font-size: 18px;
-      line-height: 1.5;
+      font-size: 20px;
+      font-weight: bold;
       word-break: break-word;
     }
 
-    .big-value {
-      font-size: 25px;
-      font-weight: 600;
+    .value.small {
+      font-size: 15px;
+      line-height: 1.7;
+      font-weight: normal;
     }
 
-    .positive {
-      color: #8ee28e;
+    .how-summary {
+      color: #bbb;
+      font-size: 17px;
+      line-height: 1.8;
+      margin-bottom: 30px;
     }
 
-    .negative {
-      color: #ff8585;
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
 
-    .pending {
-      color: #666;
+    .step {
+      display: flex;
+      gap: 18px;
+      padding: 20px;
+      background: #0d0d0d;
+      border: 1px solid #222;
+      border-radius: 10px;
     }
 
-    .links a {
-      color: white;
-      text-decoration: none;
-      border-bottom: 1px solid #444;
+    .step-number {
+      width: 34px;
+      height: 34px;
+      min-width: 34px;
+      border: 1px solid #555;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
     }
 
-    .links a:hover {
-      border-color: white;
+    .step-text {
+      color: #bbb;
+      line-height: 1.7;
+      padding-top: 4px;
+    }
+
+    .risk {
+      color: #aaa;
+    }
+
+    .error {
+      margin-top: 25px;
+      padding: 15px;
+      border: 1px solid #522;
+      background: #160909;
+      color: #f88;
+      border-radius: 8px;
     }
 
     footer {
-      border-top: 1px solid #222;
-      margin-top: 100px;
-      padding: 30px;
       text-align: center;
+      padding: 60px 20px;
       color: #555;
       font-size: 13px;
     }
 
     @media (max-width: 700px) {
       header {
-        padding: 18px 20px;
+        padding: 22px 20px;
       }
 
       main {
-        padding: 60px 18px;
+        padding: 50px 20px;
       }
 
       .hero h1 {
-        font-size: 44px;
+        font-size: 42px;
       }
 
       .search {
         flex-direction: column;
       }
 
-      .search button {
-        height: 50px;
-      }
-
       .grid {
         grid-template-columns: 1fr;
+      }
+
+      .protocol-title h2 {
+        font-size: 30px;
       }
     }
   </style>
@@ -227,20 +242,15 @@
 <body>
 
 <header>
-  <div>
-    <span class="brand">BOBOSYN</span>
-    <span class="by">Protocol Scout</span>
-  </div>
+  <strong>BOBOSYN</strong>
+  <span>Protocol Scout</span>
 </header>
 
 <main>
 
   <section class="hero">
     <h1>Scout. Research. Understand.</h1>
-
-    <p>
-      AI-powered Web3 protocol research.
-    </p>
+    <p>AI-powered Web3 protocol research.</p>
 
     <div class="search">
       <input
@@ -248,601 +258,397 @@
         type="text"
         placeholder="Enter a protocol name or URL..."
       >
-
-      <button onclick="analyzeProtocol()">
-        Analyze
-      </button>
+      <button onclick="analyze()">Analyze</button>
     </div>
+
+    <div id="error"></div>
   </section>
 
-  <div id="status"></div>
+  <div id="result">
 
-  <section id="result"></section>
+    <section class="protocol-title">
+      <h2 id="protocolName"></h2>
+      <div id="protocolDescription" class="description"></div>
+    </section>
 
+    <section class="section">
+      <h2>Overview</h2>
+
+      <div class="grid">
+        <div class="card">
+          <div class="label">Category</div>
+          <div class="value" id="category"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Status</div>
+          <div class="value" id="status"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Website</div>
+          <div class="value small" id="website"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Chains</div>
+          <div class="value small" id="chains"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Market</h2>
+
+      <div class="grid">
+        <div class="card">
+          <div class="label">TVL</div>
+          <div class="value" id="tvl"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Token</div>
+          <div class="value" id="token"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Token Price</div>
+          <div class="value" id="tokenPrice"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">24h Change</div>
+          <div class="value" id="priceChange"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Protocol Metrics</h2>
+
+      <div class="grid">
+        <div class="card">
+          <div class="label">Fees · 24h</div>
+          <div class="value" id="fees24h"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Fees · 7d</div>
+          <div class="value" id="fees7d"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Fees · 30d</div>
+          <div class="value" id="fees30d"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Revenue · 24h</div>
+          <div class="value" id="revenue24h"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Revenue · 7d</div>
+          <div class="value" id="revenue7d"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Revenue · 30d</div>
+          <div class="value" id="revenue30d"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>How It Works</h2>
+
+      <div id="howSummary" class="how-summary"></div>
+
+      <div id="howSteps" class="steps"></div>
+    </section>
+
+    <section class="section">
+      <h2>Research</h2>
+
+      <div class="grid">
+        <div class="card">
+          <div class="label">Core Function</div>
+          <div class="value small" id="coreFunction"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Mechanism</div>
+          <div class="value small" id="mechanism"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Users</div>
+          <div class="value small" id="users"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Revenue</div>
+          <div class="value small" id="researchRevenue"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Risk Snapshot</h2>
+
+      <div class="grid">
+        <div class="card">
+          <div class="label">Smart Contract</div>
+          <div class="value small risk" id="smartContract"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Protocol</div>
+          <div class="value small risk" id="protocolRisk"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Token</div>
+          <div class="value small risk" id="tokenRisk"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Dependencies</div>
+          <div class="value small risk" id="dependencies"></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
 </main>
 
 <footer>
   Built by BOBOSYN
 </footer>
 
-
 <script>
+  const API_URL =
+    "https://protocol-scout-api.superhelong.workers.dev/analyze";
 
-const API_URL =
-  "https://protocol-scout-api.superhelong.workers.dev/analyze";
+  function formatMoney(value) {
+    if (value === null || value === undefined) {
+      return "N/A";
+    }
 
+    const n = Number(value);
 
-// ==========================================
-// Analyze
-// ==========================================
+    if (!Number.isFinite(n)) {
+      return "N/A";
+    }
 
-async function analyzeProtocol() {
+    if (Math.abs(n) >= 1e9) {
+      return "$" + (n / 1e9).toFixed(2) + "B";
+    }
 
-  const input =
-    document.getElementById("protocolInput").value.trim();
+    if (Math.abs(n) >= 1e6) {
+      return "$" + (n / 1e6).toFixed(2) + "M";
+    }
 
-  const status =
-    document.getElementById("status");
+    if (Math.abs(n) >= 1e3) {
+      return "$" + (n / 1e3).toFixed(2) + "K";
+    }
 
-  const result =
-    document.getElementById("result");
-
-  if (!input) {
-    status.textContent =
-      "Please enter a protocol name or URL.";
-
-    return;
+    return "$" + n.toFixed(2);
   }
 
-  status.textContent =
-    "Analyzing protocol...";
+  function formatPrice(value) {
+    if (value === null || value === undefined) {
+      return "N/A";
+    }
 
-  result.innerHTML = "";
+    const n = Number(value);
 
-  try {
+    if (!Number.isFinite(n)) {
+      return "N/A";
+    }
 
-    const response = await fetch(API_URL, {
+    if (n >= 1) {
+      return "$" + n.toFixed(2);
+    }
 
-      method: "POST",
+    return "$" + n.toFixed(6);
+  }
 
-      headers: {
-        "Content-Type": "application/json"
-      },
+  async function analyze() {
+    const input =
+      document.getElementById("protocolInput").value.trim();
 
-      body: JSON.stringify({
-        protocol: input
-      })
+    const result =
+      document.getElementById("result");
 
+    const error =
+      document.getElementById("error");
+
+    error.innerHTML = "";
+
+    if (!input) {
+      error.innerHTML =
+        '<div class="error">Please enter a protocol name.</div>';
+      return;
+    }
+
+    result.style.display = "none";
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          input
+        })
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(
+          data.error || "Unable to analyze protocol"
+        );
+      }
+
+      const p = data.protocol || {};
+      const m = data.market || {};
+      const metrics = data.metrics || {};
+      const r = data.research || {};
+      const risk = data.risk || {};
+      const how = r.howItWorks || {};
+
+      document.getElementById("protocolName").textContent =
+        p.name || "Unknown";
+
+      document.getElementById("protocolDescription").textContent =
+        p.description || "";
+
+      document.getElementById("category").textContent =
+        p.category || "N/A";
+
+      document.getElementById("status").textContent =
+        p.status || "N/A";
+
+      document.getElementById("website").textContent =
+        p.website || "N/A";
+
+      document.getElementById("chains").textContent =
+        Array.isArray(p.chains)
+          ? p.chains.join(", ")
+          : "N/A";
+
+      document.getElementById("tvl").textContent =
+        formatMoney(m.tvl);
+
+      document.getElementById("token").textContent =
+        m.token || "N/A";
+
+      document.getElementById("tokenPrice").textContent =
+        formatPrice(m.tokenPrice);
+
+      document.getElementById("priceChange").textContent =
+        m.priceChange24h !== null &&
+        m.priceChange24h !== undefined
+          ? m.priceChange24h + "%"
+          : "N/A";
+
+      document.getElementById("fees24h").textContent =
+        formatMoney(metrics.fees24h);
+
+      document.getElementById("fees7d").textContent =
+        formatMoney(metrics.fees7d);
+
+      document.getElementById("fees30d").textContent =
+        formatMoney(metrics.fees30d);
+
+      document.getElementById("revenue24h").textContent =
+        formatMoney(metrics.revenue24h);
+
+      document.getElementById("revenue7d").textContent =
+        formatMoney(metrics.revenue7d);
+
+      document.getElementById("revenue30d").textContent =
+        formatMoney(metrics.revenue30d);
+
+      document.getElementById("howSummary").textContent =
+        how.summary || "Research data pending";
+
+      const steps =
+        Array.isArray(how.steps)
+          ? how.steps
+          : [];
+
+      const stepsContainer =
+        document.getElementById("howSteps");
+
+      stepsContainer.innerHTML = "";
+
+      steps.forEach((step, index) => {
+        const item =
+          document.createElement("div");
+
+        item.className = "step";
+
+        item.innerHTML = `
+          <div class="step-number">
+            ${index + 1}
+          </div>
+          <div class="step-text">
+            ${step}
+          </div>
+        `;
+
+        stepsContainer.appendChild(item);
+      });
+
+      document.getElementById("coreFunction").textContent =
+        r.coreFunction || "N/A";
+
+      document.getElementById("mechanism").textContent =
+        r.mechanism || "N/A";
+
+      document.getElementById("users").textContent =
+        r.users || "N/A";
+
+      document.getElementById("researchRevenue").textContent =
+        r.revenue || "N/A";
+
+      document.getElementById("smartContract").textContent =
+        risk.smartContract || "N/A";
+
+      document.getElementById("protocolRisk").textContent =
+        risk.protocol || "N/A";
+
+      document.getElementById("tokenRisk").textContent =
+        risk.token || "N/A";
+
+      document.getElementById("dependencies").textContent =
+        Array.isArray(risk.dependencies)
+          ? risk.dependencies.join(", ")
+          : "N/A";
+
+      result.style.display = "block";
+
+      result.scrollIntoView({
+        behavior: "smooth"
+      });
+
+    } catch (err) {
+      error.innerHTML =
+        `<div class="error">Error: ${err.message}</div>`;
+    }
+  }
+
+  document
+    .getElementById("protocolInput")
+    .addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        analyze();
+      }
     });
-
-    const data =
-      await response.json();
-
-    if (!data.success) {
-
-      throw new Error(
-        data.error ||
-        "Analysis failed"
-      );
-
-    }
-
-    renderResult(data);
-
-    status.textContent = "";
-
-  } catch (error) {
-
-    status.textContent =
-      "Error: " + error.message;
-
-  }
-}
-
-
-// ==========================================
-// Render
-// ==========================================
-
-function renderResult(data) {
-
-  const protocol =
-    data.protocol || {};
-
-  const market =
-    data.market || {};
-
-  const metrics =
-    data.metrics || {};
-
-  const research =
-    data.research || {};
-
-  const risk =
-    data.risk || {};
-
-
-  document.getElementById("result").innerHTML = `
-
-    <div class="protocol-header">
-
-      <h2>
-        ${escapeHtml(
-          protocol.name || "Unknown Protocol"
-        )}
-      </h2>
-
-      <p>
-        ${escapeHtml(
-          protocol.description ||
-          "Web3 protocol research report."
-        )}
-      </p>
-
-    </div>
-
-
-    <!-- ================================== -->
-    <!-- Overview -->
-    <!-- ================================== -->
-
-    <div class="section">
-
-      <h3>Overview</h3>
-
-      <div class="grid">
-
-        ${card(
-          "Category",
-          protocol.category
-        )}
-
-        ${card(
-          "Status",
-          protocol.status
-        )}
-
-        ${websiteCard(
-          "Website",
-          protocol.website
-        )}
-
-        ${card(
-          "Chains",
-          Array.isArray(protocol.chains)
-            ? protocol.chains.join(", ")
-            : protocol.chains
-        )}
-
-      </div>
-
-    </div>
-
-
-    <!-- ================================== -->
-    <!-- Market -->
-    <!-- ================================== -->
-
-    <div class="section">
-
-      <h3>Market</h3>
-
-      <div class="grid">
-
-        ${bigCard(
-          "TVL",
-          formatMoney(market.tvl)
-        )}
-
-        ${bigCard(
-          "Token",
-          market.token || "N/A"
-        )}
-
-        ${bigCard(
-          "Token Price",
-          formatPrice(market.tokenPrice)
-        )}
-
-        ${changeCard(
-          "24h Change",
-          market.priceChange24h
-        )}
-
-      </div>
-
-    </div>
-
-
-    <!-- ================================== -->
-    <!-- Protocol Metrics -->
-    <!-- ================================== -->
-
-    <div class="section">
-
-      <h3>Protocol Metrics</h3>
-
-      <div class="grid">
-
-        ${bigCard(
-          "Fees · 24h",
-          formatMoney(metrics.fees24h)
-        )}
-
-        ${bigCard(
-          "Fees · 7d",
-          formatMoney(metrics.fees7d)
-        )}
-
-        ${bigCard(
-          "Fees · 30d",
-          formatMoney(metrics.fees30d)
-        )}
-
-        ${bigCard(
-          "Revenue · 24h",
-          formatMoney(metrics.revenue24h)
-        )}
-
-        ${bigCard(
-          "Revenue · 7d",
-          formatMoney(metrics.revenue7d)
-        )}
-
-        ${bigCard(
-          "Revenue · 30d",
-          formatMoney(metrics.revenue30d)
-        )}
-
-      </div>
-
-    </div>
-
-
-    <!-- ================================== -->
-    <!-- Research -->
-    <!-- ================================== -->
-
-    <div class="section">
-
-      <h3>Research</h3>
-
-      <div class="grid">
-
-        ${card(
-          "Core Function",
-          research.coreFunction
-        )}
-
-        ${card(
-          "Mechanism",
-          research.mechanism
-        )}
-
-        ${card(
-          "Users",
-          research.users
-        )}
-
-        ${card(
-          "Revenue",
-          research.revenue
-        )}
-
-      </div>
-
-    </div>
-
-
-    <!-- ================================== -->
-    <!-- Risk -->
-    <!-- ================================== -->
-
-    <div class="section">
-
-      <h3>Risk Snapshot</h3>
-
-      <div class="grid">
-
-        ${card(
-          "Smart Contract",
-          risk.smartContract
-        )}
-
-        ${card(
-          "Protocol",
-          risk.protocol
-        )}
-
-        ${card(
-          "Token",
-          risk.token
-        )}
-
-        ${card(
-          "Dependencies",
-          risk.dependencies
-        )}
-
-      </div>
-
-    </div>
-
-  `;
-}
-
-
-// ==========================================
-// Cards
-// ==========================================
-
-function card(label, value) {
-
-  return `
-    <div class="card">
-
-      <div class="label">
-        ${escapeHtml(label)}
-      </div>
-
-      <div class="value">
-        ${displayValue(value)}
-      </div>
-
-    </div>
-  `;
-}
-
-
-function bigCard(label, value) {
-
-  return `
-    <div class="card">
-
-      <div class="label">
-        ${escapeHtml(label)}
-      </div>
-
-      <div class="value big-value">
-        ${displayValue(value)}
-      </div>
-
-    </div>
-  `;
-}
-
-
-function changeCard(label, value) {
-
-  if (
-    value === null ||
-    value === undefined
-  ) {
-
-    return bigCard(
-      label,
-      "N/A"
-    );
-
-  }
-
-  const number =
-    Number(value);
-
-  const formatted =
-    number > 0
-      ? "+" + number.toFixed(2) + "%"
-      : number.toFixed(2) + "%";
-
-  const className =
-    number > 0
-      ? "positive"
-      : number < 0
-        ? "negative"
-        : "";
-
-  return `
-    <div class="card">
-
-      <div class="label">
-        ${escapeHtml(label)}
-      </div>
-
-      <div class="value big-value ${className}">
-        ${formatted}
-      </div>
-
-    </div>
-  `;
-}
-
-
-function websiteCard(label, url) {
-
-  if (!url) {
-
-    return card(
-      label,
-      "N/A"
-    );
-
-  }
-
-  return `
-    <div class="card">
-
-      <div class="label">
-        ${escapeHtml(label)}
-      </div>
-
-      <div class="value links">
-
-        <a
-          href="${escapeAttribute(url)}"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          ${escapeHtml(url)}
-        </a>
-
-      </div>
-
-    </div>
-  `;
-}
-
-
-// ==========================================
-// Formatting
-// ==========================================
-
-function displayValue(value) {
-
-  if (
-    value === null ||
-    value === undefined ||
-    value === ""
-  ) {
-
-    return `
-      <span class="pending">
-        N/A
-      </span>
-    `;
-
-  }
-
-  return escapeHtml(
-    String(value)
-  );
-}
-
-
-function formatMoney(value) {
-
-  if (
-    value === null ||
-    value === undefined ||
-    isNaN(Number(value))
-  ) {
-
-    return "N/A";
-
-  }
-
-  const number =
-    Number(value);
-
-  if (Math.abs(number) >= 1e12) {
-
-    return "$" +
-      (number / 1e12).toFixed(2) +
-      "T";
-
-  }
-
-  if (Math.abs(number) >= 1e9) {
-
-    return "$" +
-      (number / 1e9).toFixed(2) +
-      "B";
-
-  }
-
-  if (Math.abs(number) >= 1e6) {
-
-    return "$" +
-      (number / 1e6).toFixed(2) +
-      "M";
-
-  }
-
-  if (Math.abs(number) >= 1e3) {
-
-    return "$" +
-      (number / 1e3).toFixed(2) +
-      "K";
-
-  }
-
-  return "$" +
-    number.toFixed(2);
-}
-
-
-function formatPrice(value) {
-
-  if (
-    value === null ||
-    value === undefined ||
-    isNaN(Number(value))
-  ) {
-
-    return "N/A";
-
-  }
-
-  const number =
-    Number(value);
-
-  if (number < 0.01) {
-
-    return "$" +
-      number.toFixed(6);
-
-  }
-
-  if (number < 1) {
-
-    return "$" +
-      number.toFixed(4);
-
-  }
-
-  return "$" +
-    number.toFixed(2);
-}
-
-
-// ==========================================
-// Security helpers
-// ==========================================
-
-function escapeHtml(value) {
-
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-
-function escapeAttribute(value) {
-
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/"/g, "&quot;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-}
-
-
-// ==========================================
-// Enter key
-// ==========================================
-
-document
-  .getElementById("protocolInput")
-  .addEventListener("keydown", event => {
-
-    if (event.key === "Enter") {
-      analyzeProtocol();
-    }
-
-  });
-
 </script>
 
 </body>
