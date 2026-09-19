@@ -124,7 +124,7 @@
 
     .result {
       display: none;
-      max-width: 680px;
+      max-width: 760px;
       margin: 24px auto 0;
       padding: 28px;
       border: 1px solid #292929;
@@ -139,20 +139,27 @@
 
     .result h2 {
       margin-bottom: 20px;
-      font-size: 24px;
+      font-size: 28px;
     }
 
     .result h3 {
-      margin-top: 24px;
-      margin-bottom: 10px;
+      margin-top: 28px;
+      margin-bottom: 12px;
       font-size: 15px;
       color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .result p {
       color: #999;
       line-height: 1.7;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
+    }
+
+    .result strong {
+      color: #ddd;
+      font-weight: 500;
     }
 
     .loading {
@@ -338,29 +345,52 @@
           throw new Error(data.error || "API request failed");
         }
 
+        const p = data.protocol || {};
+        const m = data.market || {};
+        const r = data.research || {};
+        const risk = data.risk || {};
+
         result.innerHTML = `
-          <h2>${escapeHtml(data.protocol)}</h2>
+          <h2>${escapeHtml(p.name || protocol)}</h2>
 
           <h3>Overview</h3>
-          <p>Category: ${escapeHtml(data.analysis.overview.category)}</p>
-          <p>Status: ${escapeHtml(data.analysis.overview.status)}</p>
+          <p><strong>Category:</strong> ${displayValue(p.category)}</p>
+          <p><strong>Status:</strong> ${displayValue(p.status)}</p>
+          <p><strong>Website:</strong> ${
+            p.website
+              ? `<a href="${escapeAttribute(p.website)}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   style="color:#ddd;">
+                   ${escapeHtml(p.website)}
+                 </a>`
+              : "N/A"
+          }</p>
+          <p><strong>Chains:</strong> ${displayValue(
+            Array.isArray(p.chains)
+              ? p.chains.join(", ")
+              : p.chains
+          )}</p>
 
           <h3>Market</h3>
-          <p>TVL: ${escapeHtml(data.analysis.market.tvl)}</p>
-          <p>Token: ${escapeHtml(data.analysis.market.token)}</p>
-          <p>Market Cap: ${escapeHtml(data.analysis.market.marketCap)}</p>
+          <p><strong>TVL:</strong> ${formatMoney(m.tvl)}</p>
+          <p><strong>Token:</strong> ${displayValue(m.token)}</p>
+          <p><strong>Token Price:</strong> ${formatPrice(m.tokenPrice)}</p>
+          <p><strong>Market Cap:</strong> ${formatMoney(m.marketCap)}</p>
+          <p><strong>24h Volume:</strong> ${formatMoney(m.volume24h)}</p>
+          <p><strong>24h Change:</strong> ${formatPercent(m.priceChange24h)}</p>
 
           <h3>Research</h3>
-          <p>Core Function: ${escapeHtml(data.analysis.research.coreFunction)}</p>
-          <p>Mechanism: ${escapeHtml(data.analysis.research.mechanism)}</p>
-          <p>Users: ${escapeHtml(data.analysis.research.users)}</p>
-          <p>Revenue: ${escapeHtml(data.analysis.research.revenue)}</p>
+          <p><strong>Core Function:</strong> ${displayValue(r.coreFunction)}</p>
+          <p><strong>Mechanism:</strong> ${displayValue(r.mechanism)}</p>
+          <p><strong>Users:</strong> ${displayValue(r.users)}</p>
+          <p><strong>Revenue:</strong> ${displayValue(r.revenue)}</p>
 
           <h3>Risk Snapshot</h3>
-          <p>Smart Contract: ${escapeHtml(data.analysis.risk.smartContract)}</p>
-          <p>Protocol: ${escapeHtml(data.analysis.risk.protocol)}</p>
-          <p>Token: ${escapeHtml(data.analysis.risk.token)}</p>
-          <p>Dependencies: ${escapeHtml(data.analysis.risk.dependencies)}</p>
+          <p><strong>Smart Contract:</strong> ${displayValue(risk.smartContract)}</p>
+          <p><strong>Protocol:</strong> ${displayValue(risk.protocol)}</p>
+          <p><strong>Token:</strong> ${displayValue(risk.token)}</p>
+          <p><strong>Dependencies:</strong> ${displayValue(risk.dependencies)}</p>
         `;
 
       } catch (error) {
@@ -376,6 +406,104 @@
       }
     }
 
+    function displayValue(value) {
+      if (
+        value === null ||
+        value === undefined ||
+        value === ""
+      ) {
+        return "N/A";
+      }
+
+      return escapeHtml(value);
+    }
+
+    function formatMoney(value) {
+      if (
+        value === null ||
+        value === undefined ||
+        value === ""
+      ) {
+        return "N/A";
+      }
+
+      const number = Number(value);
+
+      if (!Number.isFinite(number)) {
+        return escapeHtml(value);
+      }
+
+      if (number >= 1000000000) {
+        return "$" + (number / 1000000000).toFixed(2) + "B";
+      }
+
+      if (number >= 1000000) {
+        return "$" + (number / 1000000).toFixed(2) + "M";
+      }
+
+      if (number >= 1000) {
+        return "$" + (number / 1000).toFixed(2) + "K";
+      }
+
+      return "$" + number.toLocaleString(
+        undefined,
+        {
+          maximumFractionDigits: 2
+        }
+      );
+    }
+
+    function formatPrice(value) {
+      if (
+        value === null ||
+        value === undefined ||
+        value === ""
+      ) {
+        return "N/A";
+      }
+
+      const number = Number(value);
+
+      if (!Number.isFinite(number)) {
+        return escapeHtml(value);
+      }
+
+      if (number < 0.01) {
+        return "$" + number.toFixed(6);
+      }
+
+      if (number < 1) {
+        return "$" + number.toFixed(4);
+      }
+
+      return "$" + number.toLocaleString(
+        undefined,
+        {
+          maximumFractionDigits: 2
+        }
+      );
+    }
+
+    function formatPercent(value) {
+      if (
+        value === null ||
+        value === undefined ||
+        value === ""
+      ) {
+        return "N/A";
+      }
+
+      const number = Number(value);
+
+      if (!Number.isFinite(number)) {
+        return escapeHtml(value);
+      }
+
+      const sign = number > 0 ? "+" : "";
+
+      return sign + number.toFixed(2) + "%";
+    }
+
     function escapeHtml(value) {
       return String(value)
         .replace(/&/g, "&amp;")
@@ -383,6 +511,14 @@
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+    }
+
+    function escapeAttribute(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
     }
 
     document
