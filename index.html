@@ -3,224 +3,221 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Protocol Scout — Web3 Research</title>
-  <meta name="description" content="AI-powered Web3 protocol discovery and research toolkit.">
+
+  <title>Protocol Scout — BOBOSYN</title>
 
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #0a0a0a;
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: #050505;
       color: #f5f5f5;
-      min-height: 100vh;
-    }
-
-    .container {
-      width: min(1100px, 92%);
-      margin: 0 auto;
     }
 
     header {
-      padding: 28px 0;
       border-bottom: 1px solid #222;
-    }
-
-    nav {
+      padding: 22px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .logo {
-      font-size: 20px;
+    .brand {
       font-weight: 700;
-      letter-spacing: -0.5px;
+      letter-spacing: 0.08em;
     }
 
-    .brand {
-      color: #888;
-      font-size: 14px;
+    .by {
+      color: #777;
+      font-size: 13px;
+      margin-left: 8px;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 90px 24px;
     }
 
     .hero {
-      padding: 110px 0 80px;
       text-align: center;
+      margin-bottom: 60px;
     }
 
-    .badge {
-      display: inline-block;
-      padding: 7px 12px;
-      border: 1px solid #333;
-      border-radius: 999px;
-      color: #aaa;
-      font-size: 13px;
-      margin-bottom: 28px;
-    }
-
-    h1 {
-      font-size: clamp(48px, 8vw, 86px);
-      line-height: 0.95;
-      letter-spacing: -4px;
-      margin-bottom: 28px;
+    .hero h1 {
+      font-size: 64px;
+      margin: 0 0 18px;
+      letter-spacing: -0.04em;
     }
 
     .hero p {
-      max-width: 620px;
-      margin: 0 auto 42px;
-      color: #999;
+      color: #888;
       font-size: 18px;
-      line-height: 1.7;
     }
 
-    .search-box {
+    .search {
+      max-width: 700px;
+      margin: 35px auto 0;
       display: flex;
-      max-width: 680px;
-      margin: 0 auto;
+      gap: 10px;
+    }
+
+    .search input {
+      flex: 1;
+      padding: 17px 18px;
       background: #111;
       border: 1px solid #333;
-      border-radius: 14px;
-      padding: 7px;
-    }
-
-    .search-box input {
-      flex: 1;
-      min-width: 0;
-      background: transparent;
-      border: 0;
-      outline: none;
       color: white;
-      padding: 16px;
-      font-size: 16px;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
     }
 
-    .search-box input::placeholder {
-      color: #666;
+    .search input:focus {
+      border-color: #666;
     }
 
-    .search-box button {
-      border: 0;
-      border-radius: 9px;
-      padding: 0 24px;
+    .search button {
+      padding: 0 25px;
       background: white;
       color: black;
+      border: none;
+      border-radius: 8px;
       font-weight: 600;
       cursor: pointer;
-      transition: 0.2s;
     }
 
-    .search-box button:hover {
+    .search button:hover {
       opacity: 0.85;
     }
 
-    .search-box button:disabled {
-      opacity: 0.5;
-      cursor: wait;
+    #status {
+      text-align: center;
+      color: #777;
+      margin: 30px 0;
     }
 
-    .result {
-      display: none;
-      max-width: 760px;
-      margin: 24px auto 0;
-      padding: 28px;
-      border: 1px solid #292929;
-      border-radius: 14px;
-      text-align: left;
-      background: #101010;
+    #result {
+      margin-top: 50px;
     }
 
-    .result.active {
-      display: block;
+    .protocol-header {
+      margin-bottom: 35px;
     }
 
-    .result h2 {
-      margin-bottom: 20px;
-      font-size: 28px;
+    .protocol-header h2 {
+      font-size: 36px;
+      margin-bottom: 8px;
     }
 
-    .result h3 {
-      margin-top: 28px;
-      margin-bottom: 12px;
-      font-size: 15px;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    .protocol-header p {
+      color: #777;
+      margin: 0;
     }
 
-    .result p {
-      color: #999;
-      line-height: 1.7;
-      margin-bottom: 6px;
+    .section {
+      border-top: 1px solid #222;
+      padding: 30px 0;
     }
 
-    .result strong {
-      color: #ddd;
-      font-weight: 500;
-    }
-
-    .loading {
-      color: #aaa;
-    }
-
-    .error {
-      color: #ff8a8a;
-    }
-
-    .features {
-      padding: 70px 0 110px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .feature {
-      padding: 28px;
-      border: 1px solid #222;
-      border-radius: 14px;
-      background: #0d0d0d;
-    }
-
-    .feature h3 {
-      margin-bottom: 12px;
-      font-size: 18px;
-    }
-
-    .feature p {
-      color: #888;
-      line-height: 1.6;
+    .section h3 {
       font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #888;
+      margin-bottom: 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .card {
+      background: #0d0d0d;
+      border: 1px solid #1e1e1e;
+      border-radius: 10px;
+      padding: 20px;
+      min-height: 90px;
+    }
+
+    .label {
+      color: #666;
+      font-size: 12px;
+      margin-bottom: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .value {
+      font-size: 18px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .big-value {
+      font-size: 25px;
+      font-weight: 600;
+    }
+
+    .positive {
+      color: #8ee28e;
+    }
+
+    .negative {
+      color: #ff8585;
+    }
+
+    .pending {
+      color: #666;
+    }
+
+    .links a {
+      color: white;
+      text-decoration: none;
+      border-bottom: 1px solid #444;
+    }
+
+    .links a:hover {
+      border-color: white;
     }
 
     footer {
       border-top: 1px solid #222;
-      padding: 28px 0;
-      color: #666;
+      margin-top: 100px;
+      padding: 30px;
+      text-align: center;
+      color: #555;
       font-size: 13px;
     }
 
     @media (max-width: 700px) {
-      .hero {
-        padding: 80px 0 60px;
+      header {
+        padding: 18px 20px;
       }
 
-      h1 {
-        letter-spacing: -2px;
+      main {
+        padding: 60px 18px;
       }
 
-      .search-box {
+      .hero h1 {
+        font-size: 44px;
+      }
+
+      .search {
         flex-direction: column;
-        gap: 8px;
       }
 
-      .search-box button {
+      .search button {
         height: 50px;
       }
 
-      .features {
+      .grid {
         grid-template-columns: 1fr;
       }
     }
@@ -229,306 +226,624 @@
 
 <body>
 
-  <header>
-    <div class="container">
-      <nav>
-        <div class="logo">Protocol Scout</div>
-        <div class="brand">by BOBOSYN</div>
-      </nav>
+<header>
+  <div>
+    <span class="brand">BOBOSYN</span>
+    <span class="by">Protocol Scout</span>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <h1>Scout. Research. Understand.</h1>
+
+    <p>
+      AI-powered Web3 protocol research.
+    </p>
+
+    <div class="search">
+      <input
+        id="protocolInput"
+        type="text"
+        placeholder="Enter a protocol name or URL..."
+      >
+
+      <button onclick="analyzeProtocol()">
+        Analyze
+      </button>
     </div>
-  </header>
+  </section>
 
-  <main>
+  <div id="status"></div>
 
-    <section class="hero">
-      <div class="container">
+  <section id="result"></section>
 
-        <div class="badge">Web3 Research Toolkit</div>
+</main>
 
-        <h1>Scout.<br>Research.<br>Understand.</h1>
+<footer>
+  Built by BOBOSYN
+</footer>
 
-        <p>
-          Discover and research Web3 protocols faster.
-          Turn scattered protocol information into structured intelligence.
-        </p>
 
-        <div class="search-box">
-          <input
-            id="protocolInput"
-            type="text"
-            placeholder="Enter a protocol name or URL..."
-          >
+<script>
 
-          <button id="analyzeButton" onclick="analyzeProtocol()">
-            Analyze
-          </button>
-        </div>
+const API_URL =
+  "https://protocol-scout-api.superhelong.workers.dev/analyze";
 
-        <div id="result" class="result"></div>
 
-      </div>
-    </section>
+// ==========================================
+// Analyze
+// ==========================================
 
-    <section class="container features">
+async function analyzeProtocol() {
 
-      <div class="feature">
-        <h3>Discover</h3>
-        <p>
-          Find Web3 protocols and organize important project information.
-        </p>
-      </div>
+  const input =
+    document.getElementById("protocolInput").value.trim();
 
-      <div class="feature">
-        <h3>Research</h3>
-        <p>
-          Turn protocol data into structured research reports.
-        </p>
-      </div>
+  const status =
+    document.getElementById("status");
 
-      <div class="feature">
-        <h3>Analyze</h3>
-        <p>
-          Use AI-powered workflows to understand protocols faster.
-        </p>
-      </div>
+  const result =
+    document.getElementById("result");
 
-    </section>
+  if (!input) {
+    status.textContent =
+      "Please enter a protocol name or URL.";
 
-  </main>
+    return;
+  }
 
-  <footer>
-    <div class="container">
-      © 2026 BOBOSYN · Protocol Scout
+  status.textContent =
+    "Analyzing protocol...";
+
+  result.innerHTML = "";
+
+  try {
+
+    const response = await fetch(API_URL, {
+
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        protocol: input
+      })
+
+    });
+
+    const data =
+      await response.json();
+
+    if (!data.success) {
+
+      throw new Error(
+        data.error ||
+        "Analysis failed"
+      );
+
+    }
+
+    renderResult(data);
+
+    status.textContent = "";
+
+  } catch (error) {
+
+    status.textContent =
+      "Error: " + error.message;
+
+  }
+}
+
+
+// ==========================================
+// Render
+// ==========================================
+
+function renderResult(data) {
+
+  const protocol =
+    data.protocol || {};
+
+  const market =
+    data.market || {};
+
+  const metrics =
+    data.metrics || {};
+
+  const research =
+    data.research || {};
+
+  const risk =
+    data.risk || {};
+
+
+  document.getElementById("result").innerHTML = `
+
+    <div class="protocol-header">
+
+      <h2>
+        ${escapeHtml(
+          protocol.name || "Unknown Protocol"
+        )}
+      </h2>
+
+      <p>
+        ${escapeHtml(
+          protocol.description ||
+          "Web3 protocol research report."
+        )}
+      </p>
+
     </div>
-  </footer>
 
-  <script>
-    async function analyzeProtocol() {
-      const input = document.getElementById("protocolInput");
-      const result = document.getElementById("result");
-      const button = document.getElementById("analyzeButton");
 
-      const protocol = input.value.trim();
+    <!-- ================================== -->
+    <!-- Overview -->
+    <!-- ================================== -->
 
-      if (!protocol) {
-        input.focus();
-        return;
-      }
+    <div class="section">
 
-      result.classList.add("active");
+      <h3>Overview</h3>
 
-      result.innerHTML = `
-        <div class="loading">
-          Researching ${escapeHtml(protocol)}...
-        </div>
-      `;
+      <div class="grid">
 
-      button.disabled = true;
+        ${card(
+          "Category",
+          protocol.category
+        )}
 
-      try {
-        const response = await fetch(
-          "https://protocol-scout-api.superhelong.workers.dev/analyze",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              protocol: protocol
-            })
-          }
-        );
+        ${card(
+          "Status",
+          protocol.status
+        )}
 
-        const data = await response.json();
+        ${websiteCard(
+          "Website",
+          protocol.website
+        )}
 
-        if (!response.ok || !data.success) {
-          throw new Error(data.error || "API request failed");
-        }
+        ${card(
+          "Chains",
+          Array.isArray(protocol.chains)
+            ? protocol.chains.join(", ")
+            : protocol.chains
+        )}
 
-        const p = data.protocol || {};
-        const m = data.market || {};
-        const r = data.research || {};
-        const risk = data.risk || {};
+      </div>
 
-        result.innerHTML = `
-          <h2>${escapeHtml(p.name || protocol)}</h2>
+    </div>
 
-          <h3>Overview</h3>
-          <p><strong>Category:</strong> ${displayValue(p.category)}</p>
-          <p><strong>Status:</strong> ${displayValue(p.status)}</p>
-          <p><strong>Website:</strong> ${
-            p.website
-              ? `<a href="${escapeAttribute(p.website)}"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   style="color:#ddd;">
-                   ${escapeHtml(p.website)}
-                 </a>`
-              : "N/A"
-          }</p>
-          <p><strong>Chains:</strong> ${displayValue(
-            Array.isArray(p.chains)
-              ? p.chains.join(", ")
-              : p.chains
-          )}</p>
 
-          <h3>Market</h3>
-          <p><strong>TVL:</strong> ${formatMoney(m.tvl)}</p>
-          <p><strong>Token:</strong> ${displayValue(m.token)}</p>
-          <p><strong>Token Price:</strong> ${formatPrice(m.tokenPrice)}</p>
-          <p><strong>Market Cap:</strong> ${formatMoney(m.marketCap)}</p>
-          <p><strong>24h Volume:</strong> ${formatMoney(m.volume24h)}</p>
-          <p><strong>24h Change:</strong> ${formatPercent(m.priceChange24h)}</p>
+    <!-- ================================== -->
+    <!-- Market -->
+    <!-- ================================== -->
 
-          <h3>Research</h3>
-          <p><strong>Core Function:</strong> ${displayValue(r.coreFunction)}</p>
-          <p><strong>Mechanism:</strong> ${displayValue(r.mechanism)}</p>
-          <p><strong>Users:</strong> ${displayValue(r.users)}</p>
-          <p><strong>Revenue:</strong> ${displayValue(r.revenue)}</p>
+    <div class="section">
 
-          <h3>Risk Snapshot</h3>
-          <p><strong>Smart Contract:</strong> ${displayValue(risk.smartContract)}</p>
-          <p><strong>Protocol:</strong> ${displayValue(risk.protocol)}</p>
-          <p><strong>Token:</strong> ${displayValue(risk.token)}</p>
-          <p><strong>Dependencies:</strong> ${displayValue(risk.dependencies)}</p>
-        `;
+      <h3>Market</h3>
 
-      } catch (error) {
+      <div class="grid">
 
-        result.innerHTML = `
-          <div class="error">
-            Connection error: ${escapeHtml(error.message)}
-          </div>
-        `;
+        ${bigCard(
+          "TVL",
+          formatMoney(market.tvl)
+        )}
 
-      } finally {
-        button.disabled = false;
-      }
+        ${bigCard(
+          "Token",
+          market.token || "N/A"
+        )}
+
+        ${bigCard(
+          "Token Price",
+          formatPrice(market.tokenPrice)
+        )}
+
+        ${changeCard(
+          "24h Change",
+          market.priceChange24h
+        )}
+
+      </div>
+
+    </div>
+
+
+    <!-- ================================== -->
+    <!-- Protocol Metrics -->
+    <!-- ================================== -->
+
+    <div class="section">
+
+      <h3>Protocol Metrics</h3>
+
+      <div class="grid">
+
+        ${bigCard(
+          "Fees · 24h",
+          formatMoney(metrics.fees24h)
+        )}
+
+        ${bigCard(
+          "Fees · 7d",
+          formatMoney(metrics.fees7d)
+        )}
+
+        ${bigCard(
+          "Fees · 30d",
+          formatMoney(metrics.fees30d)
+        )}
+
+        ${bigCard(
+          "Revenue · 24h",
+          formatMoney(metrics.revenue24h)
+        )}
+
+        ${bigCard(
+          "Revenue · 7d",
+          formatMoney(metrics.revenue7d)
+        )}
+
+        ${bigCard(
+          "Revenue · 30d",
+          formatMoney(metrics.revenue30d)
+        )}
+
+      </div>
+
+    </div>
+
+
+    <!-- ================================== -->
+    <!-- Research -->
+    <!-- ================================== -->
+
+    <div class="section">
+
+      <h3>Research</h3>
+
+      <div class="grid">
+
+        ${card(
+          "Core Function",
+          research.coreFunction
+        )}
+
+        ${card(
+          "Mechanism",
+          research.mechanism
+        )}
+
+        ${card(
+          "Users",
+          research.users
+        )}
+
+        ${card(
+          "Revenue",
+          research.revenue
+        )}
+
+      </div>
+
+    </div>
+
+
+    <!-- ================================== -->
+    <!-- Risk -->
+    <!-- ================================== -->
+
+    <div class="section">
+
+      <h3>Risk Snapshot</h3>
+
+      <div class="grid">
+
+        ${card(
+          "Smart Contract",
+          risk.smartContract
+        )}
+
+        ${card(
+          "Protocol",
+          risk.protocol
+        )}
+
+        ${card(
+          "Token",
+          risk.token
+        )}
+
+        ${card(
+          "Dependencies",
+          risk.dependencies
+        )}
+
+      </div>
+
+    </div>
+
+  `;
+}
+
+
+// ==========================================
+// Cards
+// ==========================================
+
+function card(label, value) {
+
+  return `
+    <div class="card">
+
+      <div class="label">
+        ${escapeHtml(label)}
+      </div>
+
+      <div class="value">
+        ${displayValue(value)}
+      </div>
+
+    </div>
+  `;
+}
+
+
+function bigCard(label, value) {
+
+  return `
+    <div class="card">
+
+      <div class="label">
+        ${escapeHtml(label)}
+      </div>
+
+      <div class="value big-value">
+        ${displayValue(value)}
+      </div>
+
+    </div>
+  `;
+}
+
+
+function changeCard(label, value) {
+
+  if (
+    value === null ||
+    value === undefined
+  ) {
+
+    return bigCard(
+      label,
+      "N/A"
+    );
+
+  }
+
+  const number =
+    Number(value);
+
+  const formatted =
+    number > 0
+      ? "+" + number.toFixed(2) + "%"
+      : number.toFixed(2) + "%";
+
+  const className =
+    number > 0
+      ? "positive"
+      : number < 0
+        ? "negative"
+        : "";
+
+  return `
+    <div class="card">
+
+      <div class="label">
+        ${escapeHtml(label)}
+      </div>
+
+      <div class="value big-value ${className}">
+        ${formatted}
+      </div>
+
+    </div>
+  `;
+}
+
+
+function websiteCard(label, url) {
+
+  if (!url) {
+
+    return card(
+      label,
+      "N/A"
+    );
+
+  }
+
+  return `
+    <div class="card">
+
+      <div class="label">
+        ${escapeHtml(label)}
+      </div>
+
+      <div class="value links">
+
+        <a
+          href="${escapeAttribute(url)}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ${escapeHtml(url)}
+        </a>
+
+      </div>
+
+    </div>
+  `;
+}
+
+
+// ==========================================
+// Formatting
+// ==========================================
+
+function displayValue(value) {
+
+  if (
+    value === null ||
+    value === undefined ||
+    value === ""
+  ) {
+
+    return `
+      <span class="pending">
+        N/A
+      </span>
+    `;
+
+  }
+
+  return escapeHtml(
+    String(value)
+  );
+}
+
+
+function formatMoney(value) {
+
+  if (
+    value === null ||
+    value === undefined ||
+    isNaN(Number(value))
+  ) {
+
+    return "N/A";
+
+  }
+
+  const number =
+    Number(value);
+
+  if (Math.abs(number) >= 1e12) {
+
+    return "$" +
+      (number / 1e12).toFixed(2) +
+      "T";
+
+  }
+
+  if (Math.abs(number) >= 1e9) {
+
+    return "$" +
+      (number / 1e9).toFixed(2) +
+      "B";
+
+  }
+
+  if (Math.abs(number) >= 1e6) {
+
+    return "$" +
+      (number / 1e6).toFixed(2) +
+      "M";
+
+  }
+
+  if (Math.abs(number) >= 1e3) {
+
+    return "$" +
+      (number / 1e3).toFixed(2) +
+      "K";
+
+  }
+
+  return "$" +
+    number.toFixed(2);
+}
+
+
+function formatPrice(value) {
+
+  if (
+    value === null ||
+    value === undefined ||
+    isNaN(Number(value))
+  ) {
+
+    return "N/A";
+
+  }
+
+  const number =
+    Number(value);
+
+  if (number < 0.01) {
+
+    return "$" +
+      number.toFixed(6);
+
+  }
+
+  if (number < 1) {
+
+    return "$" +
+      number.toFixed(4);
+
+  }
+
+  return "$" +
+    number.toFixed(2);
+}
+
+
+// ==========================================
+// Security helpers
+// ==========================================
+
+function escapeHtml(value) {
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+function escapeAttribute(value) {
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+
+// ==========================================
+// Enter key
+// ==========================================
+
+document
+  .getElementById("protocolInput")
+  .addEventListener("keydown", event => {
+
+    if (event.key === "Enter") {
+      analyzeProtocol();
     }
 
-    function displayValue(value) {
-      if (
-        value === null ||
-        value === undefined ||
-        value === ""
-      ) {
-        return "N/A";
-      }
+  });
 
-      return escapeHtml(value);
-    }
-
-    function formatMoney(value) {
-      if (
-        value === null ||
-        value === undefined ||
-        value === ""
-      ) {
-        return "N/A";
-      }
-
-      const number = Number(value);
-
-      if (!Number.isFinite(number)) {
-        return escapeHtml(value);
-      }
-
-      if (number >= 1000000000) {
-        return "$" + (number / 1000000000).toFixed(2) + "B";
-      }
-
-      if (number >= 1000000) {
-        return "$" + (number / 1000000).toFixed(2) + "M";
-      }
-
-      if (number >= 1000) {
-        return "$" + (number / 1000).toFixed(2) + "K";
-      }
-
-      return "$" + number.toLocaleString(
-        undefined,
-        {
-          maximumFractionDigits: 2
-        }
-      );
-    }
-
-    function formatPrice(value) {
-      if (
-        value === null ||
-        value === undefined ||
-        value === ""
-      ) {
-        return "N/A";
-      }
-
-      const number = Number(value);
-
-      if (!Number.isFinite(number)) {
-        return escapeHtml(value);
-      }
-
-      if (number < 0.01) {
-        return "$" + number.toFixed(6);
-      }
-
-      if (number < 1) {
-        return "$" + number.toFixed(4);
-      }
-
-      return "$" + number.toLocaleString(
-        undefined,
-        {
-          maximumFractionDigits: 2
-        }
-      );
-    }
-
-    function formatPercent(value) {
-      if (
-        value === null ||
-        value === undefined ||
-        value === ""
-      ) {
-        return "N/A";
-      }
-
-      const number = Number(value);
-
-      if (!Number.isFinite(number)) {
-        return escapeHtml(value);
-      }
-
-      const sign = number > 0 ? "+" : "";
-
-      return sign + number.toFixed(2) + "%";
-    }
-
-    function escapeHtml(value) {
-      return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-    function escapeAttribute(value) {
-      return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/"/g, "&quot;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
-    }
-
-    document
-      .getElementById("protocolInput")
-      .addEventListener("keydown", function(event) {
-        if (event.key === "Enter") {
-          analyzeProtocol();
-        }
-      });
-  </script>
+</script>
 
 </body>
 </html>
