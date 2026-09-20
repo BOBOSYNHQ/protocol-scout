@@ -1,1241 +1,1687 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Protocol Scout — BOBOSYN</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BOBOSYN Protocol Scout</title>
+
+  <meta
+    name="description"
+    content="BOBOSYN Protocol Scout — AI-powered Web3 protocol research."
+  />
 
   <style>
+    :root {
+      --bg: #f7f7f5;
+      --card: #ffffff;
+      --text: #111111;
+      --muted: #6b6b6b;
+      --line: #e5e5e5;
+      --accent: #111111;
+      --danger: #b42318;
+      --success: #067647;
+    }
+
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      background: #000;
-      color: #fff;
-      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
     }
 
     header {
-      padding: 28px 40px;
-      border-bottom: 1px solid #222;
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 247, 245, 0.96);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      min-height: 72px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      gap: 24px;
     }
 
-    header strong {
-      font-size: 20px;
-      letter-spacing: 1px;
+    .brand {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
     }
 
-    header span {
-      color: #777;
-      font-size: 13px;
+    .brand span {
+      font-weight: 500;
     }
 
-    main {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 80px 30px;
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
     }
 
     .hero {
+      padding: 90px 0 60px;
       text-align: center;
-      margin-bottom: 60px;
     }
 
-    .hero h1 {
-      font-size: 58px;
-      margin: 0 0 18px;
-      letter-spacing: -2px;
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
 
-    .hero p {
-      color: #888;
+    h1 {
+      margin: 0;
+      font-size: clamp(42px, 7vw, 78px);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+    }
+
+    .tagline {
+      margin: 22px auto 0;
+      max-width: 620px;
+      color: var(--muted);
       font-size: 18px;
-      margin-bottom: 35px;
     }
 
-    .search {
+    .analyzer {
+      margin: 46px auto 0;
+      max-width: 780px;
+    }
+
+    .input-row {
       display: flex;
-      max-width: 700px;
-      margin: 0 auto;
       gap: 10px;
+      padding: 8px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.05);
     }
 
     input {
       flex: 1;
-      padding: 17px 18px;
-      background: #111;
-      border: 1px solid #333;
-      color: #fff;
-      border-radius: 8px;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      padding: 14px 16px;
       font-size: 16px;
-      outline: none;
+      color: var(--text);
     }
 
     button {
-      padding: 17px 25px;
-      background: #fff;
-      color: #000;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
+      border: 0;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #fff;
+      padding: 0 24px;
+      min-height: 50px;
+      font-size: 15px;
+      font-weight: 700;
       cursor: pointer;
-      min-width: 110px;
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
     }
 
-    button:hover:not(:disabled) {
-      opacity: .85;
+    button:hover {
+      opacity: 0.88;
+    }
+
+    button:active {
+      transform: scale(0.98);
     }
 
     button:disabled {
+      opacity: 0.55;
       cursor: not-allowed;
-      opacity: .55;
+      transform: none;
     }
 
-    /* Analysis status */
-
-    #analysisStatus {
-      display: none;
-      max-width: 700px;
-      margin: 18px auto 0;
-      padding: 14px 18px;
-      background: #0d0d0d;
-      border: 1px solid #222;
-      border-radius: 8px;
-      color: #aaa;
+    .status {
+      margin-top: 16px;
+      min-height: 24px;
+      color: var(--muted);
       font-size: 14px;
-      text-align: left;
     }
 
-    #analysisStatus.active {
-      display: block;
-    }
-
-    .status-main {
-      color: #fff;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .status-detail {
-      color: #777;
-      line-height: 1.5;
-    }
-
-    .status-spinner {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      margin-right: 8px;
-      border: 2px solid #555;
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: spin .8s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    #result {
+    .error-box {
       display: none;
-      margin-top: 70px;
+      margin-top: 20px;
+      padding: 16px 18px;
+      background: #fff5f5;
+      border: 1px solid #f0caca;
+      border-radius: 12px;
+      color: var(--danger);
+      text-align: left;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 14px;
+    }
+
+    .results {
+      display: none;
+      padding: 30px 0 90px;
+    }
+
+    .protocol-header {
+      margin-bottom: 28px;
+      padding: 30px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+
+    .protocol-name {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .protocol-description {
+      margin: 10px 0 0;
+      color: var(--muted);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fafafa;
+      color: #444;
+      font-size: 13px;
     }
 
     .section {
-      border-top: 1px solid #222;
-      padding: 34px 0;
+      margin-top: 24px;
+      padding: 28px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
     }
 
     .section h2 {
-      margin: 0 0 25px;
+      margin: 0 0 20px;
       font-size: 22px;
-    }
-
-    .protocol-title {
-      margin-bottom: 35px;
-    }
-
-    .protocol-title h2 {
-      font-size: 36px;
-      margin-bottom: 10px;
-    }
-
-    .description {
-      color: #999;
-      font-size: 16px;
-      line-height: 1.7;
+      letter-spacing: -0.03em;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
     }
 
-    .card {
-      background: #0d0d0d;
-      border: 1px solid #222;
-      border-radius: 10px;
-      padding: 22px;
+    .metric {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fafafa;
     }
 
-    .label {
-      color: #666;
+    .metric-label {
+      color: var(--muted);
       font-size: 13px;
-      margin-bottom: 8px;
     }
 
-    .value {
+    .metric-value {
+      margin-top: 5px;
       font-size: 20px;
-      font-weight: bold;
+      font-weight: 750;
       word-break: break-word;
     }
 
-    .value.small {
-      font-size: 15px;
-      line-height: 1.7;
-      font-weight: normal;
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
     }
 
-    .research-summary {
-      color: #bbb;
-      font-size: 17px;
-      line-height: 1.8;
+    .subsection {
+      margin-top: 18px;
     }
 
-    .how-summary {
-      color: #bbb;
-      font-size: 17px;
-      line-height: 1.8;
-      margin-bottom: 30px;
+    .subsection:first-child {
+      margin-top: 0;
     }
 
-    .steps {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+    .subsection-title {
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 750;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
     }
 
-    .step {
-      display: flex;
-      gap: 18px;
-      padding: 20px;
-      background: #0d0d0d;
-      border: 1px solid #222;
-      border-radius: 10px;
+    .content {
+      color: #292929;
+      white-space: pre-wrap;
+      word-break: break-word;
     }
 
-    .step-number {
-      width: 34px;
-      height: 34px;
-      min-width: 34px;
-      border: 1px solid #555;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
     }
 
-    .step-text {
-      color: #bbb;
-      line-height: 1.7;
-      padding-top: 4px;
+    li {
+      margin: 5px 0;
     }
 
-    .pending {
-      color: #666;
-      font-size: 14px;
-      font-style: italic;
+    .risk-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
     }
 
     .risk {
-      color: #aaa;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
     }
 
-    .error {
-      margin-top: 25px;
-      padding: 15px;
-      border: 1px solid #522;
-      background: #160909;
-      color: #f88;
-      border-radius: 8px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 60px 20px;
-      color: #555;
+    .risk-label {
+      color: var(--muted);
       font-size: 13px;
     }
 
-    @media (max-width: 700px) {
-      header {
-        padding: 22px 20px;
+    .risk-value {
+      margin-top: 6px;
+      font-weight: 700;
+    }
+
+    .summary {
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    .footer {
+      padding: 40px 0 70px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 850px) {
+      .grid,
+      .risk-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      main {
-        padding: 50px 20px;
-      }
-
-      .hero h1 {
-        font-size: 42px;
-      }
-
-      .search {
-        flex-direction: column;
-      }
-
-      .grid {
+      .two-col {
         grid-template-columns: 1fr;
       }
+    }
 
-      .protocol-title h2 {
-        font-size: 30px;
+    @media (max-width: 620px) {
+      .container {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 60px 0 40px;
+      }
+
+      .input-row {
+        flex-direction: column;
       }
 
       button {
         width: 100%;
+      }
+
+      .grid,
+      .risk-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .protocol-header,
+      .section {
+        padding: 20px;
       }
     }
   </style>
 </head>
 
 <body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#">
+        BOBOSYN<span> Protocol Scout</span>
+      </a>
 
-<header>
-  <strong>BOBOSYN</strong>
-  <span>Protocol Scout</span>
-</header>
-
-<main>
-
-  <section class="hero">
-    <h1>Scout. Research. Understand.</h1>
-    <p>AI-powered Web3 protocol research.</p>
-
-    <div class="search">
-      <input
-        id="protocolInput"
-        type="text"
-        placeholder="Enter a protocol name or URL..."
-      >
-      <button id="analyzeButton" onclick="analyze()">Analyze</button>
+      <nav class="nav-links">
+        <a href="#overview">About</a>
+        <a href="#research">Research</a>
+        <a href="#risks">Risk</a>
+      </nav>
     </div>
+  </header>
 
-    <div id="analysisStatus">
-      <div class="status-main">
-        <span class="status-spinner"></span>
-        <span id="analysisStatusMain">Analyzing...</span>
-      </div>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">Independent Web3 Research</div>
 
-      <div
-        id="analysisStatusDetail"
-        class="status-detail"
-      >
-        Fetching protocol data and generating AI research. Please wait.
+        <h1>BOBOSYN<br />Protocol Scout</h1>
+
+        <p class="tagline">
+          Scout. Research. Understand.
+          <br />
+          AI-powered Web3 protocol research.
+        </p>
+
+        <div class="analyzer">
+          <div class="input-row">
+            <input
+              id="protocolInput"
+              type="text"
+              placeholder="Enter a protocol name or URL..."
+              autocomplete="off"
+              spellcheck="false"
+            />
+
+            <button id="analyzeButton" type="button">
+              Analyze
+            </button>
+          </div>
+
+          <div id="status" class="status"></div>
+
+          <div id="errorBox" class="error-box"></div>
+        </div>
       </div>
+    </section>
+
+    <section id="results" class="results">
+      <div class="container">
+
+        <div class="protocol-header">
+          <h2 id="protocolName" class="protocol-name">Protocol</h2>
+
+          <p id="protocolDescription" class="protocol-description"></p>
+
+          <div id="protocolMeta" class="meta"></div>
+        </div>
+
+        <section id="overview" class="section">
+          <h2>Protocol Overview</h2>
+
+          <div class="grid">
+            <div class="metric">
+              <div class="metric-label">Category</div>
+              <div id="category" class="metric-value">N/A</div>
+            </div>
+
+            <div class="metric">
+              <div class="metric-label">Status</div>
+              <div id="statusValue" class="metric-value">N/A</div>
+            </div>
+
+            <div class="metric">
+              <div class="metric-label">Website</div>
+              <div id="website" class="metric-value">N/A</div>
+            </div>
+
+            <div class="metric">
+              <div class="metric-label">Chains</div>
+              <div id="chains" class="metric-value">N/A</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Market</h2>
+
+          <div class="grid">
+            <div class="metric">
+              <div class="metric-label">TVL</div>
+              <div id="tvl" class="metric-value">N/A</div>
+            </div>
+
+            <div class="metric">
+              <div class="metric-label">Token</div>
+              <div id="token" class="metric-value">N/A</div>
+            </div>
+
+            <div class="metric">
+              <div class="metric-label">Token Price</div>
+              <div id="tokenPrice" class="metric-value">N/A</div>
+            </div>
+
+            <div class="metric">
+              <div class="metric-label">24h Change</div>
+              <div id="tokenChange" class="metric-value">N/A</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Protocol Metrics</h2>
+
+          <div class="grid">
+            <div class="metric">
+              <div class="metric-label">Fees 24h</div>
+              <div id="fees24h" class="metric-value">N/A</div>
+            </div>
+
+            <div class="metric">
+              <div class="metric-label">Fees 7d</div>
+              <div id="fees7d" class="metric-value">N/A</div>
+            </div>
+
+            <div class="metric">
+              <div class="metric-label">Fees 30d</div>
+              <div id="fees30d" class="metric-value">N/A</div>
+            </div>
+
+            <div class="metric">
+              <div class="metric-label">Revenue 24h</div>
+              <div id="revenue24h" class="metric-value">N/A</div>
+            </div>
+          </div>
+
+          <div class="grid" style="margin-top: 12px;">
+            <div class="metric">
+              <div class="metric-label">Revenue 7d</div>
+              <div id="revenue7d" class="metric-value">N/A</div>
+            </div>
+
+            <div class="metric">
+              <div class="metric-label">Revenue 30d</div>
+              <div id="revenue30d" class="metric-value">N/A</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>How It Works</h2>
+
+          <div id="howItWorks" class="content">
+            Research data pending
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Business Model</h2>
+
+          <div class="two-col">
+            <div>
+              <div class="subsection">
+                <div class="subsection-title">Status</div>
+                <div id="businessStatus" class="content">N/A</div>
+              </div>
+
+              <div class="subsection">
+                <div class="subsection-title">Model</div>
+                <div id="businessModel" class="content">N/A</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="subsection">
+                <div class="subsection-title">Revenue Sources</div>
+                <div id="revenueSources" class="content">N/A</div>
+              </div>
+
+              <div class="subsection">
+                <div class="subsection-title">Explanation</div>
+                <div id="businessExplanation" class="content">N/A</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Users & Adoption</h2>
+
+          <div class="two-col">
+            <div>
+              <div class="subsection">
+                <div class="subsection-title">Status</div>
+                <div id="usersStatus" class="content">N/A</div>
+              </div>
+
+              <div class="subsection">
+                <div class="subsection-title">Primary Users</div>
+                <div id="primaryUsers" class="content">N/A</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="subsection">
+                <div class="subsection-title">Use Cases</div>
+                <div id="useCases" class="content">N/A</div>
+              </div>
+
+              <div class="subsection">
+                <div class="subsection-title">Adoption</div>
+                <div id="adoption" class="content">N/A</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Competitive Landscape</h2>
+
+          <div class="two-col">
+            <div>
+              <div class="subsection">
+                <div class="subsection-title">Status</div>
+                <div id="competitionStatus" class="content">N/A</div>
+              </div>
+
+              <div class="subsection">
+                <div class="subsection-title">Category</div>
+                <div id="competitionCategory" class="content">N/A</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="subsection">
+                <div class="subsection-title">Competitors</div>
+                <div id="competitors" class="content">N/A</div>
+              </div>
+
+              <div class="subsection">
+                <div class="subsection-title">Differentiation</div>
+                <div id="differentiation" class="content">N/A</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="risks" class="section">
+          <h2>Risk Analysis</h2>
+
+          <div class="two-col">
+            <div>
+              <div class="subsection">
+                <div class="subsection-title">Status</div>
+                <div id="riskStatus" class="content">N/A</div>
+              </div>
+
+              <div class="subsection">
+                <div class="subsection-title">Smart Contract</div>
+                <div id="smartContractRisk" class="content">N/A</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="subsection">
+                <div class="subsection-title">Protocol</div>
+                <div id="protocolRisk" class="content">N/A</div>
+              </div>
+
+              <div class="subsection">
+                <div class="subsection-title">Token</div>
+                <div id="tokenRisk" class="content">N/A</div>
+              </div>
+
+              <div class="subsection">
+                <div class="subsection-title">Dependencies</div>
+                <div id="dependenciesRisk" class="content">N/A</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="research" class="section">
+          <h2>Research Summary</h2>
+
+          <div class="subsection">
+            <div class="subsection-title">Research Status</div>
+            <div id="researchStatus" class="content">N/A</div>
+          </div>
+
+          <div class="subsection">
+            <div id="summary" class="content summary">
+              Research data pending
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Research</h2>
+
+          <div class="two-col">
+            <div>
+              <div class="subsection">
+                <div class="subsection-title">Core Function</div>
+                <div id="coreFunction" class="content">N/A</div>
+              </div>
+
+              <div class="subsection">
+                <div class="subsection-title">Mechanism</div>
+                <div id="mechanism" class="content">N/A</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="subsection">
+                <div class="subsection-title">Users</div>
+                <div id="researchUsers" class="content">N/A</div>
+              </div>
+
+              <div class="subsection">
+                <div class="subsection-title">Revenue</div>
+                <div id="researchRevenue" class="content">N/A</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Risk Snapshot</h2>
+
+          <div class="risk-grid">
+            <div class="risk">
+              <div class="risk-label">Smart Contract</div>
+              <div id="snapshotSmartContract" class="risk-value">N/A</div>
+            </div>
+
+            <div class="risk">
+              <div class="risk-label">Protocol</div>
+              <div id="snapshotProtocol" class="risk-value">N/A</div>
+            </div>
+
+            <div class="risk">
+              <div class="risk-label">Token</div>
+              <div id="snapshotToken" class="risk-value">N/A</div>
+            </div>
+
+            <div class="risk">
+              <div class="risk-label">Dependencies</div>
+              <div id="snapshotDependencies" class="risk-value">N/A</div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      Built by BOBOSYN
     </div>
-
-    <div id="error"></div>
-  </section>
-
-  <div id="result">
-
-    <section class="protocol-title">
-      <h2 id="protocolName"></h2>
-      <div id="protocolDescription" class="description"></div>
-    </section>
-
-    <!-- Protocol Overview -->
-    <section class="section">
-      <h2>Protocol Overview</h2>
-
-      <div class="grid">
-
-        <div class="card">
-          <div class="label">Category</div>
-          <div class="value" id="category"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Status</div>
-          <div class="value" id="status"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Website</div>
-          <div class="value small" id="website"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Chains</div>
-          <div class="value small" id="chains"></div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Market -->
-    <section class="section">
-      <h2>Market</h2>
-
-      <div class="grid">
-
-        <div class="card">
-          <div class="label">TVL</div>
-          <div class="value" id="tvl"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Token</div>
-          <div class="value" id="token"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Token Price</div>
-          <div class="value" id="tokenPrice"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">24h Change</div>
-          <div class="value" id="priceChange"></div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Protocol Metrics -->
-    <section class="section">
-      <h2>Protocol Metrics</h2>
-
-      <div class="grid">
-
-        <div class="card">
-          <div class="label">Fees · 24h</div>
-          <div class="value" id="fees24h"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Fees · 7d</div>
-          <div class="value" id="fees7d"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Fees · 30d</div>
-          <div class="value" id="fees30d"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Revenue · 24h</div>
-          <div class="value" id="revenue24h"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Revenue · 7d</div>
-          <div class="value" id="revenue7d"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Revenue · 30d</div>
-          <div class="value" id="revenue30d"></div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- How It Works -->
-    <section class="section">
-      <h2>How It Works</h2>
-
-      <div id="howSummary" class="how-summary"></div>
-
-      <div id="howSteps" class="steps"></div>
-    </section>
-
-    <!-- Business Model -->
-    <section class="section">
-      <h2>Business Model</h2>
-
-      <div class="grid">
-
-        <div class="card">
-          <div class="label">Status</div>
-          <div class="value small" id="businessStatus"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Model</div>
-          <div class="value small" id="businessModel"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Revenue Sources</div>
-          <div class="value small" id="revenueSources"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Explanation</div>
-          <div class="value small" id="businessExplanation"></div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Users & Adoption -->
-    <section class="section">
-      <h2>Users & Adoption</h2>
-
-      <div class="grid">
-
-        <div class="card">
-          <div class="label">Status</div>
-          <div class="value small" id="usersStatus"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Primary Users</div>
-          <div class="value small" id="primaryUsers"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Use Cases</div>
-          <div class="value small" id="useCases"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Adoption</div>
-          <div class="value small" id="adoption"></div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Competitive Landscape -->
-    <section class="section">
-      <h2>Competitive Landscape</h2>
-
-      <div class="grid">
-
-        <div class="card">
-          <div class="label">Status</div>
-          <div class="value small" id="competitiveStatus"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Category</div>
-          <div class="value small" id="competitiveCategory"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Competitors</div>
-          <div class="value small" id="competitors"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Differentiation</div>
-          <div class="value small" id="differentiation"></div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Risk Analysis -->
-    <section class="section">
-      <h2>Risk Analysis</h2>
-
-      <div class="grid">
-
-        <div class="card">
-          <div class="label">Status</div>
-          <div class="value small" id="riskStatus"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Smart Contract</div>
-          <div class="value small risk" id="riskSmartContract"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Protocol</div>
-          <div class="value small risk" id="riskProtocol"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Token</div>
-          <div class="value small risk" id="riskToken"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Dependencies</div>
-          <div class="value small risk" id="riskDependencies"></div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Research Summary -->
-    <section class="section">
-      <h2>Research Summary</h2>
-
-      <div class="card">
-        <div class="label">Research Status</div>
-        <div class="value small" id="summaryStatus"></div>
-
-        <div
-          id="summaryText"
-          class="research-summary"
-          style="margin-top:18px;"
-        ></div>
-      </div>
-    </section>
-
-    <!-- Legacy Research -->
-    <section class="section">
-      <h2>Research</h2>
-
-      <div class="grid">
-
-        <div class="card">
-          <div class="label">Core Function</div>
-          <div class="value small" id="coreFunction"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Mechanism</div>
-          <div class="value small" id="mechanism"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Users</div>
-          <div class="value small" id="users"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Revenue</div>
-          <div class="value small" id="researchRevenue"></div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Risk Snapshot -->
-    <section class="section">
-      <h2>Risk Snapshot</h2>
-
-      <div class="grid">
-
-        <div class="card">
-          <div class="label">Smart Contract</div>
-          <div class="value small risk" id="smartContract"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Protocol</div>
-          <div class="value small risk" id="protocolRisk"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Token</div>
-          <div class="value small risk" id="tokenRisk"></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Dependencies</div>
-          <div class="value small risk" id="dependencies"></div>
-        </div>
-
-      </div>
-    </section>
-
-  </div>
-</main>
-
-<footer>
-  Built by BOBOSYN
-</footer>
-
-<script>
-  const API_URL =
-    "https://protocol-scout-api.superhelong.workers.dev/analyze";
-
-  let isAnalyzing = false;
-
-  function formatMoney(value) {
-    if (value === null || value === undefined) {
-      return "N/A";
+  </footer>
+
+  <script>
+    /*
+     * BOBOSYN Protocol Scout
+     * Frontend version: 0.9.0
+     *
+     * IMPORTANT:
+     * This is the Cloudflare Worker API endpoint.
+     */
+    const API_URL =
+      "https://protocol-scout-api.superhelong.workers.dev/analyze";
+
+    const input = document.getElementById("protocolInput");
+    const button = document.getElementById("analyzeButton");
+    const status = document.getElementById("status");
+    const errorBox = document.getElementById("errorBox");
+    const results = document.getElementById("results");
+
+    function byId(id) {
+      return document.getElementById(id);
     }
 
-    const n = Number(value);
+    function setText(id, value) {
+      const el = byId(id);
 
-    if (!Number.isFinite(n)) {
-      return "N/A";
+      if (!el) {
+        return;
+      }
+
+      if (
+        value === null ||
+        value === undefined ||
+        value === "" ||
+        (Array.isArray(value) && value.length === 0)
+      ) {
+        el.textContent = "N/A";
+        return;
+      }
+
+      if (Array.isArray(value)) {
+        el.textContent = value.join(", ");
+        return;
+      }
+
+      if (typeof value === "object") {
+        el.textContent = JSON.stringify(value, null, 2);
+        return;
+      }
+
+      el.textContent = String(value);
     }
 
-    if (Math.abs(n) >= 1e9) {
-      return "$" + (n / 1e9).toFixed(2) + "B";
+    function setList(id, value) {
+      const el = byId(id);
+
+      if (!el) {
+        return;
+      }
+
+      el.innerHTML = "";
+
+      if (
+        value === null ||
+        value === undefined ||
+        value === ""
+      ) {
+        el.textContent = "N/A";
+        return;
+      }
+
+      let items = [];
+
+      if (Array.isArray(value)) {
+        items = value;
+      } else {
+        items = [value];
+      }
+
+      items.forEach((item) => {
+        const li = document.createElement("div");
+        li.textContent = String(item);
+        li.style.marginBottom = "6px";
+        el.appendChild(li);
+      });
     }
 
-    if (Math.abs(n) >= 1e6) {
-      return "$" + (n / 1e6).toFixed(2) + "M";
+    function formatMoney(value) {
+      if (
+        value === null ||
+        value === undefined ||
+        value === "" ||
+        value === "N/A"
+      ) {
+        return "N/A";
+      }
+
+      if (typeof value === "string") {
+        return value;
+      }
+
+      const number = Number(value);
+
+      if (!Number.isFinite(number)) {
+        return String(value);
+      }
+
+      if (Math.abs(number) >= 1_000_000_000) {
+        return (
+          "$" +
+          (number / 1_000_000_000).toFixed(2) +
+          "B"
+        );
+      }
+
+      if (Math.abs(number) >= 1_000_000) {
+        return (
+          "$" +
+          (number / 1_000_000).toFixed(2) +
+          "M"
+        );
+      }
+
+      if (Math.abs(number) >= 1_000) {
+        return (
+          "$" +
+          (number / 1_000).toFixed(2) +
+          "K"
+        );
+      }
+
+      return "$" + number.toFixed(2);
     }
 
-    if (Math.abs(n) >= 1e3) {
-      return "$" + (n / 1e3).toFixed(2) + "K";
+    function clearError() {
+      errorBox.style.display = "none";
+      errorBox.textContent = "";
     }
 
-    return "$" + n.toFixed(2);
-  }
-
-  function formatPrice(value) {
-    if (value === null || value === undefined) {
-      return "N/A";
+    function showError(message) {
+      errorBox.textContent = message;
+      errorBox.style.display = "block";
     }
 
-    const n = Number(value);
+    function getNested(object, paths) {
+      for (const path of paths) {
+        const parts = path.split(".");
+        let current = object;
 
-    if (!Number.isFinite(n)) {
-      return "N/A";
+        for (const part of parts) {
+          if (
+            current === null ||
+            current === undefined ||
+            typeof current !== "object" ||
+            !(part in current)
+          ) {
+            current = undefined;
+            break;
+          }
+
+          current = current[part];
+        }
+
+        if (
+          current !== undefined &&
+          current !== null &&
+          current !== ""
+        ) {
+          return current;
+        }
+      }
+
+      return null;
     }
 
-    if (n >= 1) {
-      return "$" + n.toFixed(2);
+    function normalizeArray(value) {
+      if (value === null || value === undefined) {
+        return [];
+      }
+
+      if (Array.isArray(value)) {
+        return value;
+      }
+
+      if (typeof value === "string") {
+        return [value];
+      }
+
+      return [value];
     }
 
-    return "$" + n.toFixed(6);
-  }
+    function resetResults() {
+      const ids = [
+        "category",
+        "statusValue",
+        "website",
+        "chains",
+        "tvl",
+        "token",
+        "tokenPrice",
+        "tokenChange",
+        "fees24h",
+        "fees7d",
+        "fees30d",
+        "revenue24h",
+        "revenue7d",
+        "revenue30d",
+        "howItWorks",
+        "businessStatus",
+        "businessModel",
+        "revenueSources",
+        "businessExplanation",
+        "usersStatus",
+        "primaryUsers",
+        "useCases",
+        "adoption",
+        "competitionStatus",
+        "competitionCategory",
+        "competitors",
+        "differentiation",
+        "riskStatus",
+        "smartContractRisk",
+        "protocolRisk",
+        "tokenRisk",
+        "dependenciesRisk",
+        "researchStatus",
+        "summary",
+        "coreFunction",
+        "mechanism",
+        "researchUsers",
+        "researchRevenue",
+        "snapshotSmartContract",
+        "snapshotProtocol",
+        "snapshotToken",
+        "snapshotDependencies"
+      ];
 
-  function displayValue(value) {
-    if (
-      value === null ||
-      value === undefined ||
-      value === ""
-    ) {
-      return "Research data pending";
+      ids.forEach((id) => {
+        setText(id, "N/A");
+      });
+
+      setText("howItWorks", "Research data pending");
+      setText("summary", "Research data pending");
     }
 
-    return value;
-  }
+    function renderResult(response) {
+      const data = response.data || response.result || response;
 
-  function displayArray(value) {
-    if (!Array.isArray(value) || value.length === 0) {
-      return "Research data pending";
+      const protocol =
+        data.protocol ||
+        data.protocolData ||
+        {};
+
+      const market =
+        data.market ||
+        data.marketData ||
+        {};
+
+      const metrics =
+        data.metrics ||
+        data.protocolMetrics ||
+        {};
+
+      const research =
+        data.research ||
+        data.ai ||
+        {};
+
+      const howItWorks =
+        research.howItWorks ||
+        data.howItWorks ||
+        {};
+
+      const business =
+        research.businessModel ||
+        data.businessModel ||
+        {};
+
+      const users =
+        research.users ||
+        data.users ||
+        {};
+
+      const competition =
+        research.competition ||
+        data.competition ||
+        {};
+
+      const risks =
+        research.risks ||
+        data.risks ||
+        {};
+
+      const summary =
+        research.summary ||
+        data.summary ||
+        {};
+
+      const protocolName =
+        getNested(protocol, [
+          "name",
+          "protocol",
+          "title"
+        ]) ||
+        getNested(data, [
+          "name",
+          "protocolName"
+        ]) ||
+        "Protocol";
+
+      const description =
+        getNested(protocol, [
+          "description",
+          "summary"
+        ]) ||
+        getNested(data, [
+          "description"
+        ]) ||
+        "";
+
+      setText("protocolName", protocolName);
+      setText("protocolDescription", description);
+
+      const meta = byId("protocolMeta");
+      meta.innerHTML = "";
+
+      const category =
+        getNested(protocol, [
+          "category",
+          "categoryName"
+        ]) ||
+        getNested(data, [
+          "category"
+        ]);
+
+      const statusValue =
+        getNested(protocol, [
+          "status"
+        ]) ||
+        getNested(data, [
+          "status"
+        ]);
+
+      if (category) {
+        const badge = document.createElement("div");
+        badge.className = "badge";
+        badge.textContent = category;
+        meta.appendChild(badge);
+      }
+
+      if (statusValue) {
+        const badge = document.createElement("div");
+        badge.className = "badge";
+        badge.textContent = statusValue;
+        meta.appendChild(badge);
+      }
+
+      setText("category", category);
+      setText("statusValue", statusValue);
+
+      const website =
+        getNested(protocol, [
+          "website",
+          "url"
+        ]) ||
+        getNested(data, [
+          "website"
+        ]);
+
+      setText("website", website);
+
+      if (website && /^https?:\/\//i.test(String(website))) {
+        const websiteEl = byId("website");
+        websiteEl.innerHTML = "";
+
+        const link = document.createElement("a");
+        link.href = website;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = website;
+        link.style.textDecoration = "underline";
+
+        websiteEl.appendChild(link);
+      }
+
+      const chains =
+        getNested(protocol, [
+          "chains",
+          "chainList"
+        ]) ||
+        getNested(data, [
+          "chains"
+        ]);
+
+      setText("chains", chains);
+
+      const tvl =
+        getNested(market, [
+          "tvl"
+        ]) ||
+        getNested(data, [
+          "tvl"
+        ]) ||
+        getNested(protocol, [
+          "tvl"
+        ]);
+
+      setText("tvl", formatMoney(tvl));
+
+      const token =
+        getNested(market, [
+          "token",
+          "symbol"
+        ]) ||
+        getNested(data, [
+          "token",
+          "tokenSymbol"
+        ]) ||
+        getNested(protocol, [
+          "token"
+        ]);
+
+      setText("token", token);
+
+      const tokenPrice =
+        getNested(market, [
+          "tokenPrice",
+          "price"
+        ]) ||
+        getNested(data, [
+          "tokenPrice"
+        ]);
+
+      setText(
+        "tokenPrice",
+        tokenPrice === null
+          ? "N/A"
+          : formatMoney(tokenPrice)
+      );
+
+      const tokenChange =
+        getNested(market, [
+          "tokenChange24h",
+          "change24h",
+          "priceChange24h"
+        ]) ||
+        getNested(data, [
+          "tokenChange24h",
+          "priceChange24h"
+        ]);
+
+      setText(
+        "tokenChange",
+        tokenChange === null
+          ? "N/A"
+          : String(tokenChange)
+      );
+
+      const fees24h =
+        getNested(metrics, [
+          "fees24h",
+          "fees.24h"
+        ]) ||
+        getNested(data, [
+          "fees24h"
+        ]);
+
+      const fees7d =
+        getNested(metrics, [
+          "fees7d",
+          "fees.7d"
+        ]) ||
+        getNested(data, [
+          "fees7d"
+        ]);
+
+      const fees30d =
+        getNested(metrics, [
+          "fees30d",
+          "fees.30d"
+        ]) ||
+        getNested(data, [
+          "fees30d"
+        ]);
+
+      const revenue24h =
+        getNested(metrics, [
+          "revenue24h",
+          "revenue.24h"
+        ]) ||
+        getNested(data, [
+          "revenue24h"
+        ]);
+
+      const revenue7d =
+        getNested(metrics, [
+          "revenue7d",
+          "revenue.7d"
+        ]) ||
+        getNested(data, [
+          "revenue7d"
+        ]);
+
+      const revenue30d =
+        getNested(metrics, [
+          "revenue30d",
+          "revenue.30d"
+        ]) ||
+        getNested(data, [
+          "revenue30d"
+        ]);
+
+      setText("fees24h", formatMoney(fees24h));
+      setText("fees7d", formatMoney(fees7d));
+      setText("fees30d", formatMoney(fees30d));
+      setText("revenue24h", formatMoney(revenue24h));
+      setText("revenue7d", formatMoney(revenue7d));
+      setText("revenue30d", formatMoney(revenue30d));
+
+      const howText =
+        getNested(howItWorks, [
+          "explanation",
+          "description",
+          "text",
+          "mechanism"
+        ]) ||
+        getNested(data, [
+          "howItWorks"
+        ]);
+
+      setText(
+        "howItWorks",
+        howText || "Research data pending"
+      );
+
+      const businessStatus =
+        getNested(business, [
+          "status"
+        ]);
+
+      const businessModel =
+        getNested(business, [
+          "model",
+          "businessModel"
+        ]);
+
+      const revenueSources =
+        getNested(business, [
+          "revenueSources",
+          "revenue"
+        ]);
+
+      const businessExplanation =
+        getNested(business, [
+          "explanation",
+          "description"
+        ]);
+
+      setText("businessStatus", businessStatus);
+      setText("businessModel", businessModel);
+      setList("revenueSources", normalizeArray(revenueSources));
+      setText("businessExplanation", businessExplanation);
+
+      setText(
+        "usersStatus",
+        getNested(users, ["status"])
+      );
+
+      setList(
+        "primaryUsers",
+        normalizeArray(
+          getNested(users, [
+            "primaryUsers",
+            "users"
+          ])
+        )
+      );
+
+      setList(
+        "useCases",
+        normalizeArray(
+          getNested(users, [
+            "useCases"
+          ])
+        )
+      );
+
+      setText(
+        "adoption",
+        getNested(users, [
+          "adoption",
+          "description"
+        ]) ||
+        getNested(users, [
+          "adoption"
+        ])
+      );
+
+      setText(
+        "competitionStatus",
+        getNested(competition, [
+          "status"
+        ])
+      );
+
+      setText(
+        "competitionCategory",
+        getNested(competition, [
+          "category"
+        ])
+      );
+
+      setList(
+        "competitors",
+        normalizeArray(
+          getNested(competition, [
+            "competitors"
+          ])
+        )
+      );
+
+      setText(
+        "differentiation",
+        getNested(competition, [
+          "differentiation",
+          "explanation"
+        ])
+      );
+
+      setText(
+        "riskStatus",
+        getNested(risks, [
+          "status"
+        ])
+      );
+
+      setText(
+        "smartContractRisk",
+        getNested(risks, [
+          "smartContract",
+          "smartContractRisk"
+        ])
+      );
+
+      setText(
+        "protocolRisk",
+        getNested(risks, [
+          "protocol",
+          "protocolRisk"
+        ])
+      );
+
+      setText(
+        "tokenRisk",
+        getNested(risks, [
+          "token",
+          "tokenRisk"
+        ])
+      );
+
+      setText(
+        "dependenciesRisk",
+        getNested(risks, [
+          "dependencies",
+          "dependenciesRisk"
+        ])
+      );
+
+      setText(
+        "researchStatus",
+        getNested(summary, [
+          "status"
+        ]) ||
+        getNested(research, [
+          "status"
+        ])
+      );
+
+      setText(
+        "summary",
+        getNested(summary, [
+          "text",
+          "summary",
+          "description"
+        ]) ||
+        (typeof summary === "string" ? summary : null) ||
+        "Research data pending"
+      );
+
+      setText(
+        "coreFunction",
+        getNested(research, [
+          "coreFunction"
+        ]) ||
+        getNested(data, [
+          "coreFunction"
+        ])
+      );
+
+      setText(
+        "mechanism",
+        getNested(research, [
+          "mechanism"
+        ]) ||
+        getNested(howItWorks, [
+          "mechanism"
+        ])
+      );
+
+      setList(
+        "researchUsers",
+        normalizeArray(
+          getNested(research, [
+            "users"
+          ]) ||
+          getNested(users, [
+            "primaryUsers"
+          ])
+        )
+      );
+
+      setText(
+        "researchRevenue",
+        getNested(research, [
+          "revenue"
+        ]) ||
+        getNested(business, [
+          "explanation"
+        ])
+      );
+
+      setText(
+        "snapshotSmartContract",
+        getNested(risks, [
+          "smartContract"
+        ])
+      );
+
+      setText(
+        "snapshotProtocol",
+        getNested(risks, [
+          "protocol"
+        ])
+      );
+
+      setText(
+        "snapshotToken",
+        getNested(risks, [
+          "token"
+        ])
+      );
+
+      setText(
+        "snapshotDependencies",
+        getNested(risks, [
+          "dependencies"
+        ])
+      );
+
+      results.style.display = "block";
     }
 
-    return value.join(", ");
-  }
+    async function analyzeProtocol() {
+      const protocol = input.value.trim();
 
-  function setAnalyzingState(active, protocolName = "") {
-    const button =
-      document.getElementById("analyzeButton");
+      clearError();
 
-    const input =
-      document.getElementById("protocolInput");
+      if (!protocol) {
+        showError("Please enter a protocol name or URL.");
+        input.focus();
+        return;
+      }
 
-    const status =
-      document.getElementById("analysisStatus");
-
-    const statusMain =
-      document.getElementById("analysisStatusMain");
-
-    const statusDetail =
-      document.getElementById("analysisStatusDetail");
-
-    isAnalyzing = active;
-
-    button.disabled = active;
-    input.disabled = active;
-
-    if (active) {
+      button.disabled = true;
       button.textContent = "Analyzing...";
-      status.classList.add("active");
+      status.textContent = "Researching protocol data...";
+      results.style.display = "none";
 
-      statusMain.textContent =
-        `Analyzing ${protocolName || "protocol"}...`;
+      resetResults();
 
-      statusDetail.textContent =
-        "Fetching protocol data and generating AI research. Please wait.";
-    } else {
-      button.textContent = "Analyze";
-      status.classList.remove("active");
-      input.disabled = false;
-    }
-  }
-
-  async function analyze() {
-    if (isAnalyzing) {
-      return;
-    }
-
-    const inputElement =
-      document.getElementById("protocolInput");
-
-    const input =
-      inputElement.value.trim();
-
-    const result =
-      document.getElementById("result");
-
-    const error =
-      document.getElementById("error");
-
-    error.innerHTML = "";
-
-    if (!input) {
-      error.innerHTML =
-        '<div class="error">Please enter a protocol name.</div>';
-      return;
-    }
-
-    result.style.display = "none";
-
-    setAnalyzingState(true, input);
-
-    try {
-      const response =
-        await fetch(API_URL, {
+      try {
+        /*
+         * IMPORTANT:
+         * The browser sends the protocol itself as "input".
+         * "POST" is the HTTP method, not the input value.
+         */
+        const response = await fetch(API_URL, {
           method: "POST",
+
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Accept": "application/json"
           },
+
           body: JSON.stringify({
-            input
+            input: protocol
           })
         });
 
-      let data;
+        const rawText = await response.text();
 
-      try {
-        data = await response.json();
-      } catch {
-        throw new Error(
-          `Server returned an invalid response (${response.status})`
+        let payload = null;
+
+        try {
+          payload = rawText
+            ? JSON.parse(rawText)
+            : null;
+        } catch (parseError) {
+          throw new Error(
+            "Worker returned invalid JSON.\n\n" +
+            "HTTP status: " +
+            response.status +
+            "\n\n" +
+            "Raw response:\n" +
+            rawText
+          );
+        }
+
+        /*
+         * Do NOT hide backend diagnostics.
+         */
+        if (!response.ok) {
+          const backendMessage =
+            payload?.error ||
+            payload?.message ||
+            payload?.details ||
+            rawText ||
+            "Unknown Worker error";
+
+          throw new Error(
+            "Worker request failed.\n\n" +
+            "HTTP status: " +
+            response.status +
+            "\n\n" +
+            String(backendMessage)
+          );
+        }
+
+        /*
+         * v0.8.4 can return HTTP 200 with ok:false
+         * so we explicitly check that here.
+         */
+        if (payload && payload.ok === false) {
+          const backendMessage =
+            payload.error ||
+            payload.message ||
+            "Unable to analyze protocol";
+
+          let diagnostic = "";
+
+          if (payload.debug) {
+            diagnostic =
+              "\n\nDebug:\n" +
+              JSON.stringify(
+                payload.debug,
+                null,
+                2
+              );
+          }
+
+          throw new Error(
+            String(backendMessage) +
+            diagnostic
+          );
+        }
+
+        if (!payload) {
+          throw new Error(
+            "Worker returned an empty response."
+          );
+        }
+
+        status.textContent = "Analysis complete.";
+
+        renderResult(payload);
+
+        setTimeout(() => {
+          results.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+        }, 100);
+      } catch (error) {
+        console.error(
+          "BOBOSYN Protocol Scout error:",
+          error
         );
-      }
 
-      if (!response.ok) {
-        throw new Error(
-          data.error ||
-          `Request failed with status ${response.status}`
-        );
-      }
+        status.textContent = "";
 
-      if (!data.success) {
-        throw new Error(
-          data.error ||
+        showError(
+          error?.message ||
           "Unable to analyze protocol"
         );
+      } finally {
+        button.disabled = false;
+        button.textContent = "Analyze";
       }
-
-      const p =
-        data.protocol || {};
-
-      const m =
-        data.market || {};
-
-      const metrics =
-        data.metrics || {};
-
-      const r =
-        data.research || {};
-
-      const risk =
-        data.risk || {};
-
-      const how =
-        r.howItWorks || {};
-
-      const business =
-        r.businessModel || {};
-
-      const users =
-        r.users || {};
-
-      const competitive =
-        r.competitiveLandscape || {};
-
-      const researchRisks =
-        r.risks || {};
-
-      const summary =
-        r.summary || {};
-
-      /* Protocol */
-
-      document
-        .getElementById("protocolName")
-        .textContent =
-        p.name || "Unknown";
-
-      document
-        .getElementById("protocolDescription")
-        .textContent =
-        p.description || "";
-
-      document
-        .getElementById("category")
-        .textContent =
-        p.category || "N/A";
-
-      document
-        .getElementById("status")
-        .textContent =
-        p.status || "N/A";
-
-      document
-        .getElementById("website")
-        .textContent =
-        p.website || "N/A";
-
-      document
-        .getElementById("chains")
-        .textContent =
-        displayArray(p.chains);
-
-      /* Market */
-
-      document
-        .getElementById("tvl")
-        .textContent =
-        formatMoney(m.tvl);
-
-      document
-        .getElementById("token")
-        .textContent =
-        m.token || "N/A";
-
-      document
-        .getElementById("tokenPrice")
-        .textContent =
-        formatPrice(m.tokenPrice);
-
-      document
-        .getElementById("priceChange")
-        .textContent =
-        m.priceChange24h !== null &&
-        m.priceChange24h !== undefined
-          ? m.priceChange24h + "%"
-          : "N/A";
-
-      /* Metrics */
-
-      document
-        .getElementById("fees24h")
-        .textContent =
-        formatMoney(metrics.fees24h);
-
-      document
-        .getElementById("fees7d")
-        .textContent =
-        formatMoney(metrics.fees7d);
-
-      document
-        .getElementById("fees30d")
-        .textContent =
-        formatMoney(metrics.fees30d);
-
-      document
-        .getElementById("revenue24h")
-        .textContent =
-        formatMoney(metrics.revenue24h);
-
-      document
-        .getElementById("revenue7d")
-        .textContent =
-        formatMoney(metrics.revenue7d);
-
-      document
-        .getElementById("revenue30d")
-        .textContent =
-        formatMoney(metrics.revenue30d);
-
-      /* How It Works */
-
-      document
-        .getElementById("howSummary")
-        .textContent =
-        how.summary ||
-        "Research data pending";
-
-      const steps =
-        Array.isArray(how.steps)
-          ? how.steps
-          : [];
-
-      const stepsContainer =
-        document.getElementById("howSteps");
-
-      stepsContainer.innerHTML = "";
-
-      steps.forEach((step, index) => {
-        const item =
-          document.createElement("div");
-
-        item.className = "step";
-
-        const number =
-          document.createElement("div");
-
-        number.className =
-          "step-number";
-
-        number.textContent =
-          index + 1;
-
-        const text =
-          document.createElement("div");
-
-        text.className =
-          "step-text";
-
-        text.textContent =
-          step;
-
-        item.appendChild(number);
-        item.appendChild(text);
-
-        stepsContainer.appendChild(item);
-      });
-
-      /* Business Model */
-
-      document
-        .getElementById("businessStatus")
-        .textContent =
-        displayValue(
-          business.status
-        );
-
-      document
-        .getElementById("businessModel")
-        .textContent =
-        displayValue(
-          business.model
-        );
-
-      document
-        .getElementById("revenueSources")
-        .textContent =
-        displayArray(
-          business.revenueSources
-        );
-
-      document
-        .getElementById("businessExplanation")
-        .textContent =
-        displayValue(
-          business.explanation
-        );
-
-      /* Users */
-
-      document
-        .getElementById("usersStatus")
-        .textContent =
-        displayValue(
-          users.status
-        );
-
-      document
-        .getElementById("primaryUsers")
-        .textContent =
-        displayArray(
-          users.primaryUsers
-        );
-
-      document
-        .getElementById("useCases")
-        .textContent =
-        displayArray(
-          users.useCases
-        );
-
-      document
-        .getElementById("adoption")
-        .textContent =
-        displayValue(
-          users.adoption
-        );
-
-      /* Competitive Landscape */
-
-      document
-        .getElementById("competitiveStatus")
-        .textContent =
-        displayValue(
-          competitive.status
-        );
-
-      document
-        .getElementById("competitiveCategory")
-        .textContent =
-        displayValue(
-          competitive.category
-        );
-
-      document
-        .getElementById("competitors")
-        .textContent =
-        displayArray(
-          competitive.competitors
-        );
-
-      document
-        .getElementById("differentiation")
-        .textContent =
-        displayValue(
-          competitive.differentiation
-        );
-
-      /* Risk Analysis */
-
-      document
-        .getElementById("riskStatus")
-        .textContent =
-        displayValue(
-          researchRisks.status
-        );
-
-      document
-        .getElementById("riskSmartContract")
-        .textContent =
-        displayValue(
-          researchRisks.smartContract
-        );
-
-      document
-        .getElementById("riskProtocol")
-        .textContent =
-        displayValue(
-          researchRisks.protocol
-        );
-
-      document
-        .getElementById("riskToken")
-        .textContent =
-        displayValue(
-          researchRisks.token
-        );
-
-      document
-        .getElementById("riskDependencies")
-        .textContent =
-        displayArray(
-          researchRisks.dependencies
-        );
-
-      /* Research Summary */
-
-      document
-        .getElementById("summaryStatus")
-        .textContent =
-        displayValue(
-          summary.status
-        );
-
-      document
-        .getElementById("summaryText")
-        .textContent =
-        summary.text ||
-        "Research data pending";
-
-      /* Existing Research */
-
-      document
-        .getElementById("coreFunction")
-        .textContent =
-        r.coreFunction ||
-        (
-          p.category
-            ? p.category + " protocol"
-            : "N/A"
-        );
-
-      document
-        .getElementById("mechanism")
-        .textContent =
-        how.summary ||
-        "Research data pending";
-
-      document
-        .getElementById("users")
-        .textContent =
-        displayArray(
-          users.primaryUsers
-        );
-
-      document
-        .getElementById("researchRevenue")
-        .textContent =
-        metrics.revenue24h !== null &&
-        metrics.revenue24h !== undefined
-          ? "Protocol revenue data available"
-          : "Research data pending";
-
-      /* Risk Snapshot */
-
-      document
-        .getElementById("smartContract")
-        .textContent =
-        risk.smartContract ||
-        "N/A";
-
-      document
-        .getElementById("protocolRisk")
-        .textContent =
-        risk.protocol ||
-        "N/A";
-
-      document
-        .getElementById("tokenRisk")
-        .textContent =
-        risk.token ||
-        "N/A";
-
-      document
-        .getElementById("dependencies")
-        .textContent =
-        displayArray(
-          risk.dependencies
-        );
-
-      result.style.display =
-        "block";
-
-      result.scrollIntoView({
-        behavior: "smooth"
-      });
-
-    } catch (err) {
-      error.innerHTML =
-        `<div class="error">Error: ${err.message}</div>`;
-    } finally {
-      setAnalyzingState(false);
     }
-  }
 
-  document
-    .getElementById("protocolInput")
-    .addEventListener(
+    button.addEventListener(
+      "click",
+      analyzeProtocol
+    );
+
+    input.addEventListener(
       "keydown",
-      function(event) {
+      (event) => {
         if (event.key === "Enter") {
           event.preventDefault();
-
-          if (!isAnalyzing) {
-            analyze();
-          }
+          analyzeProtocol();
         }
       }
     );
-</script>
-
+  </script>
 </body>
 </html>
+```
