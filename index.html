@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,10 +85,63 @@
       border-radius: 8px;
       font-weight: bold;
       cursor: pointer;
+      min-width: 110px;
     }
 
-    button:hover {
+    button:hover:not(:disabled) {
       opacity: .85;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: .55;
+    }
+
+    /* Analysis status */
+
+    #analysisStatus {
+      display: none;
+      max-width: 700px;
+      margin: 18px auto 0;
+      padding: 14px 18px;
+      background: #0d0d0d;
+      border: 1px solid #222;
+      border-radius: 8px;
+      color: #aaa;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    #analysisStatus.active {
+      display: block;
+    }
+
+    .status-main {
+      color: #fff;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .status-detail {
+      color: #777;
+      line-height: 1.5;
+    }
+
+    .status-spinner {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-right: 8px;
+      border: 2px solid #555;
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     #result {
@@ -247,6 +301,10 @@
       .protocol-title h2 {
         font-size: 30px;
       }
+
+      button {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -270,7 +328,21 @@
         type="text"
         placeholder="Enter a protocol name or URL..."
       >
-      <button onclick="analyze()">Analyze</button>
+      <button id="analyzeButton" onclick="analyze()">Analyze</button>
+    </div>
+
+    <div id="analysisStatus">
+      <div class="status-main">
+        <span class="status-spinner"></span>
+        <span id="analysisStatusMain">Analyzing...</span>
+      </div>
+
+      <div
+        id="analysisStatusDetail"
+        class="status-detail"
+      >
+        Fetching protocol data and generating AI research. Please wait.
+      </div>
     </div>
 
     <div id="error"></div>
@@ -595,6 +667,8 @@
   const API_URL =
     "https://protocol-scout-api.superhelong.workers.dev/analyze";
 
+  let isAnalyzing = false;
+
   function formatMoney(value) {
     if (value === null || value === undefined) {
       return "N/A";
@@ -659,12 +733,53 @@
     return value.join(", ");
   }
 
-  async function analyze() {
+  function setAnalyzingState(active, protocolName = "") {
+    const button =
+      document.getElementById("analyzeButton");
+
     const input =
-      document
-        .getElementById("protocolInput")
-        .value
-        .trim();
+      document.getElementById("protocolInput");
+
+    const status =
+      document.getElementById("analysisStatus");
+
+    const statusMain =
+      document.getElementById("analysisStatusMain");
+
+    const statusDetail =
+      document.getElementById("analysisStatusDetail");
+
+    isAnalyzing = active;
+
+    button.disabled = active;
+    input.disabled = active;
+
+    if (active) {
+      button.textContent = "Analyzing...";
+      status.classList.add("active");
+
+      statusMain.textContent =
+        `Analyzing ${protocolName || "protocol"}...`;
+
+      statusDetail.textContent =
+        "Fetching protocol data and generating AI research. Please wait.";
+    } else {
+      button.textContent = "Analyze";
+      status.classList.remove("active");
+      input.disabled = false;
+    }
+  }
+
+  async function analyze() {
+    if (isAnalyzing) {
+      return;
+    }
+
+    const inputElement =
+      document.getElementById("protocolInput");
+
+    const input =
+      inputElement.value.trim();
 
     const result =
       document.getElementById("result");
@@ -682,6 +797,8 @@
 
     result.style.display = "none";
 
+    setAnalyzingState(true, input);
+
     try {
       const response =
         await fetch(API_URL, {
@@ -694,8 +811,22 @@
           })
         });
 
-      const data =
-        await response.json();
+      let data;
+
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error(
+          `Server returned an invalid response (${response.status})`
+        );
+      }
+
+      if (!response.ok) {
+        throw new Error(
+          data.error ||
+          `Request failed with status ${response.status}`
+        );
+      }
 
       if (!data.success) {
         throw new Error(
@@ -1086,6 +1217,8 @@
     } catch (err) {
       error.innerHTML =
         `<div class="error">Error: ${err.message}</div>`;
+    } finally {
+      setAnalyzingState(false);
     }
   }
 
@@ -1095,7 +1228,11 @@
       "keydown",
       function(event) {
         if (event.key === "Enter") {
-          analyze();
+          event.preventDefault();
+
+          if (!isAnalyzing) {
+            analyze();
+          }
         }
       }
     );
@@ -1103,3 +1240,4 @@
 
 </body>
 </html>
+```
