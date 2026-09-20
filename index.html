@@ -97,7 +97,7 @@
 
     .section {
       border-top: 1px solid #222;
-      padding: 30px 0;
+      padding: 34px 0;
     }
 
     .section h2 {
@@ -151,6 +151,12 @@
       font-weight: normal;
     }
 
+    .research-summary {
+      color: #bbb;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
     .how-summary {
       color: #bbb;
       font-size: 17px;
@@ -189,6 +195,12 @@
       color: #bbb;
       line-height: 1.7;
       padding-top: 4px;
+    }
+
+    .pending {
+      color: #666;
+      font-size: 14px;
+      font-style: italic;
     }
 
     .risk {
@@ -271,10 +283,12 @@
       <div id="protocolDescription" class="description"></div>
     </section>
 
+    <!-- Protocol Overview -->
     <section class="section">
-      <h2>Overview</h2>
+      <h2>Protocol Overview</h2>
 
       <div class="grid">
+
         <div class="card">
           <div class="label">Category</div>
           <div class="value" id="category"></div>
@@ -294,13 +308,16 @@
           <div class="label">Chains</div>
           <div class="value small" id="chains"></div>
         </div>
+
       </div>
     </section>
 
+    <!-- Market -->
     <section class="section">
       <h2>Market</h2>
 
       <div class="grid">
+
         <div class="card">
           <div class="label">TVL</div>
           <div class="value" id="tvl"></div>
@@ -320,13 +337,16 @@
           <div class="label">24h Change</div>
           <div class="value" id="priceChange"></div>
         </div>
+
       </div>
     </section>
 
+    <!-- Protocol Metrics -->
     <section class="section">
       <h2>Protocol Metrics</h2>
 
       <div class="grid">
+
         <div class="card">
           <div class="label">Fees · 24h</div>
           <div class="value" id="fees24h"></div>
@@ -356,9 +376,11 @@
           <div class="label">Revenue · 30d</div>
           <div class="value" id="revenue30d"></div>
         </div>
+
       </div>
     </section>
 
+    <!-- How It Works -->
     <section class="section">
       <h2>How It Works</h2>
 
@@ -367,10 +389,149 @@
       <div id="howSteps" class="steps"></div>
     </section>
 
+    <!-- Business Model -->
+    <section class="section">
+      <h2>Business Model</h2>
+
+      <div class="grid">
+
+        <div class="card">
+          <div class="label">Status</div>
+          <div class="value small" id="businessStatus"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Model</div>
+          <div class="value small" id="businessModel"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Revenue Sources</div>
+          <div class="value small" id="revenueSources"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Explanation</div>
+          <div class="value small" id="businessExplanation"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Users & Adoption -->
+    <section class="section">
+      <h2>Users & Adoption</h2>
+
+      <div class="grid">
+
+        <div class="card">
+          <div class="label">Status</div>
+          <div class="value small" id="usersStatus"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Primary Users</div>
+          <div class="value small" id="primaryUsers"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Use Cases</div>
+          <div class="value small" id="useCases"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Adoption</div>
+          <div class="value small" id="adoption"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Competitive Landscape -->
+    <section class="section">
+      <h2>Competitive Landscape</h2>
+
+      <div class="grid">
+
+        <div class="card">
+          <div class="label">Status</div>
+          <div class="value small" id="competitiveStatus"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Category</div>
+          <div class="value small" id="competitiveCategory"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Competitors</div>
+          <div class="value small" id="competitors"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Differentiation</div>
+          <div class="value small" id="differentiation"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Risk Analysis -->
+    <section class="section">
+      <h2>Risk Analysis</h2>
+
+      <div class="grid">
+
+        <div class="card">
+          <div class="label">Status</div>
+          <div class="value small" id="riskStatus"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Smart Contract</div>
+          <div class="value small risk" id="riskSmartContract"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Protocol</div>
+          <div class="value small risk" id="riskProtocol"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Token</div>
+          <div class="value small risk" id="riskToken"></div>
+        </div>
+
+        <div class="card">
+          <div class="label">Dependencies</div>
+          <div class="value small risk" id="riskDependencies"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Research Summary -->
+    <section class="section">
+      <h2>Research Summary</h2>
+
+      <div class="card">
+        <div class="label">Research Status</div>
+        <div class="value small" id="summaryStatus"></div>
+
+        <div
+          id="summaryText"
+          class="research-summary"
+          style="margin-top:18px;"
+        ></div>
+      </div>
+    </section>
+
+    <!-- Legacy Research -->
     <section class="section">
       <h2>Research</h2>
 
       <div class="grid">
+
         <div class="card">
           <div class="label">Core Function</div>
           <div class="value small" id="coreFunction"></div>
@@ -390,13 +551,16 @@
           <div class="label">Revenue</div>
           <div class="value small" id="researchRevenue"></div>
         </div>
+
       </div>
     </section>
 
+    <!-- Risk Snapshot -->
     <section class="section">
       <h2>Risk Snapshot</h2>
 
       <div class="grid">
+
         <div class="card">
           <div class="label">Smart Contract</div>
           <div class="value small risk" id="smartContract"></div>
@@ -416,6 +580,7 @@
           <div class="label">Dependencies</div>
           <div class="value small risk" id="dependencies"></div>
         </div>
+
       </div>
     </section>
 
@@ -474,9 +639,32 @@
     return "$" + n.toFixed(6);
   }
 
+  function displayValue(value) {
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) {
+      return "Research data pending";
+    }
+
+    return value;
+  }
+
+  function displayArray(value) {
+    if (!Array.isArray(value) || value.length === 0) {
+      return "Research data pending";
+    }
+
+    return value.join(", ");
+  }
+
   async function analyze() {
     const input =
-      document.getElementById("protocolInput").value.trim();
+      document
+        .getElementById("protocolInput")
+        .value
+        .trim();
 
     const result =
       document.getElementById("result");
@@ -495,86 +683,156 @@
     result.style.display = "none";
 
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          input
-        })
-      });
+      const response =
+        await fetch(API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            input
+          })
+        });
 
-      const data = await response.json();
+      const data =
+        await response.json();
 
       if (!data.success) {
         throw new Error(
-          data.error || "Unable to analyze protocol"
+          data.error ||
+          "Unable to analyze protocol"
         );
       }
 
-      const p = data.protocol || {};
-      const m = data.market || {};
-      const metrics = data.metrics || {};
-      const r = data.research || {};
-      const risk = data.risk || {};
-      const how = r.howItWorks || {};
+      const p =
+        data.protocol || {};
 
-      document.getElementById("protocolName").textContent =
+      const m =
+        data.market || {};
+
+      const metrics =
+        data.metrics || {};
+
+      const r =
+        data.research || {};
+
+      const risk =
+        data.risk || {};
+
+      const how =
+        r.howItWorks || {};
+
+      const business =
+        r.businessModel || {};
+
+      const users =
+        r.users || {};
+
+      const competitive =
+        r.competitiveLandscape || {};
+
+      const researchRisks =
+        r.risks || {};
+
+      const summary =
+        r.summary || {};
+
+      /* Protocol */
+
+      document
+        .getElementById("protocolName")
+        .textContent =
         p.name || "Unknown";
 
-      document.getElementById("protocolDescription").textContent =
+      document
+        .getElementById("protocolDescription")
+        .textContent =
         p.description || "";
 
-      document.getElementById("category").textContent =
+      document
+        .getElementById("category")
+        .textContent =
         p.category || "N/A";
 
-      document.getElementById("status").textContent =
+      document
+        .getElementById("status")
+        .textContent =
         p.status || "N/A";
 
-      document.getElementById("website").textContent =
+      document
+        .getElementById("website")
+        .textContent =
         p.website || "N/A";
 
-      document.getElementById("chains").textContent =
-        Array.isArray(p.chains)
-          ? p.chains.join(", ")
-          : "N/A";
+      document
+        .getElementById("chains")
+        .textContent =
+        displayArray(p.chains);
 
-      document.getElementById("tvl").textContent =
+      /* Market */
+
+      document
+        .getElementById("tvl")
+        .textContent =
         formatMoney(m.tvl);
 
-      document.getElementById("token").textContent =
+      document
+        .getElementById("token")
+        .textContent =
         m.token || "N/A";
 
-      document.getElementById("tokenPrice").textContent =
+      document
+        .getElementById("tokenPrice")
+        .textContent =
         formatPrice(m.tokenPrice);
 
-      document.getElementById("priceChange").textContent =
+      document
+        .getElementById("priceChange")
+        .textContent =
         m.priceChange24h !== null &&
         m.priceChange24h !== undefined
           ? m.priceChange24h + "%"
           : "N/A";
 
-      document.getElementById("fees24h").textContent =
+      /* Metrics */
+
+      document
+        .getElementById("fees24h")
+        .textContent =
         formatMoney(metrics.fees24h);
 
-      document.getElementById("fees7d").textContent =
+      document
+        .getElementById("fees7d")
+        .textContent =
         formatMoney(metrics.fees7d);
 
-      document.getElementById("fees30d").textContent =
+      document
+        .getElementById("fees30d")
+        .textContent =
         formatMoney(metrics.fees30d);
 
-      document.getElementById("revenue24h").textContent =
+      document
+        .getElementById("revenue24h")
+        .textContent =
         formatMoney(metrics.revenue24h);
 
-      document.getElementById("revenue7d").textContent =
+      document
+        .getElementById("revenue7d")
+        .textContent =
         formatMoney(metrics.revenue7d);
 
-      document.getElementById("revenue30d").textContent =
+      document
+        .getElementById("revenue30d")
+        .textContent =
         formatMoney(metrics.revenue30d);
 
-      document.getElementById("howSummary").textContent =
-        how.summary || "Research data pending";
+      /* How It Works */
+
+      document
+        .getElementById("howSummary")
+        .textContent =
+        how.summary ||
+        "Research data pending";
 
       const steps =
         Array.isArray(how.steps)
@@ -592,45 +850,234 @@
 
         item.className = "step";
 
-        item.innerHTML = `
-          <div class="step-number">
-            ${index + 1}
-          </div>
-          <div class="step-text">
-            ${step}
-          </div>
-        `;
+        const number =
+          document.createElement("div");
+
+        number.className =
+          "step-number";
+
+        number.textContent =
+          index + 1;
+
+        const text =
+          document.createElement("div");
+
+        text.className =
+          "step-text";
+
+        text.textContent =
+          step;
+
+        item.appendChild(number);
+        item.appendChild(text);
 
         stepsContainer.appendChild(item);
       });
 
-      document.getElementById("coreFunction").textContent =
-        r.coreFunction || "N/A";
+      /* Business Model */
 
-      document.getElementById("mechanism").textContent =
-        r.mechanism || "N/A";
+      document
+        .getElementById("businessStatus")
+        .textContent =
+        displayValue(
+          business.status
+        );
 
-      document.getElementById("users").textContent =
-        r.users || "N/A";
+      document
+        .getElementById("businessModel")
+        .textContent =
+        displayValue(
+          business.model
+        );
 
-      document.getElementById("researchRevenue").textContent =
-        r.revenue || "N/A";
+      document
+        .getElementById("revenueSources")
+        .textContent =
+        displayArray(
+          business.revenueSources
+        );
 
-      document.getElementById("smartContract").textContent =
-        risk.smartContract || "N/A";
+      document
+        .getElementById("businessExplanation")
+        .textContent =
+        displayValue(
+          business.explanation
+        );
 
-      document.getElementById("protocolRisk").textContent =
-        risk.protocol || "N/A";
+      /* Users */
 
-      document.getElementById("tokenRisk").textContent =
-        risk.token || "N/A";
+      document
+        .getElementById("usersStatus")
+        .textContent =
+        displayValue(
+          users.status
+        );
 
-      document.getElementById("dependencies").textContent =
-        Array.isArray(risk.dependencies)
-          ? risk.dependencies.join(", ")
-          : "N/A";
+      document
+        .getElementById("primaryUsers")
+        .textContent =
+        displayArray(
+          users.primaryUsers
+        );
 
-      result.style.display = "block";
+      document
+        .getElementById("useCases")
+        .textContent =
+        displayArray(
+          users.useCases
+        );
+
+      document
+        .getElementById("adoption")
+        .textContent =
+        displayValue(
+          users.adoption
+        );
+
+      /* Competitive Landscape */
+
+      document
+        .getElementById("competitiveStatus")
+        .textContent =
+        displayValue(
+          competitive.status
+        );
+
+      document
+        .getElementById("competitiveCategory")
+        .textContent =
+        displayValue(
+          competitive.category
+        );
+
+      document
+        .getElementById("competitors")
+        .textContent =
+        displayArray(
+          competitive.competitors
+        );
+
+      document
+        .getElementById("differentiation")
+        .textContent =
+        displayValue(
+          competitive.differentiation
+        );
+
+      /* Risk Analysis */
+
+      document
+        .getElementById("riskStatus")
+        .textContent =
+        displayValue(
+          researchRisks.status
+        );
+
+      document
+        .getElementById("riskSmartContract")
+        .textContent =
+        displayValue(
+          researchRisks.smartContract
+        );
+
+      document
+        .getElementById("riskProtocol")
+        .textContent =
+        displayValue(
+          researchRisks.protocol
+        );
+
+      document
+        .getElementById("riskToken")
+        .textContent =
+        displayValue(
+          researchRisks.token
+        );
+
+      document
+        .getElementById("riskDependencies")
+        .textContent =
+        displayArray(
+          researchRisks.dependencies
+        );
+
+      /* Research Summary */
+
+      document
+        .getElementById("summaryStatus")
+        .textContent =
+        displayValue(
+          summary.status
+        );
+
+      document
+        .getElementById("summaryText")
+        .textContent =
+        summary.text ||
+        "Research data pending";
+
+      /* Existing Research */
+
+      document
+        .getElementById("coreFunction")
+        .textContent =
+        r.coreFunction ||
+        (
+          p.category
+            ? p.category + " protocol"
+            : "N/A"
+        );
+
+      document
+        .getElementById("mechanism")
+        .textContent =
+        how.summary ||
+        "Research data pending";
+
+      document
+        .getElementById("users")
+        .textContent =
+        displayArray(
+          users.primaryUsers
+        );
+
+      document
+        .getElementById("researchRevenue")
+        .textContent =
+        metrics.revenue24h !== null &&
+        metrics.revenue24h !== undefined
+          ? "Protocol revenue data available"
+          : "Research data pending";
+
+      /* Risk Snapshot */
+
+      document
+        .getElementById("smartContract")
+        .textContent =
+        risk.smartContract ||
+        "N/A";
+
+      document
+        .getElementById("protocolRisk")
+        .textContent =
+        risk.protocol ||
+        "N/A";
+
+      document
+        .getElementById("tokenRisk")
+        .textContent =
+        risk.token ||
+        "N/A";
+
+      document
+        .getElementById("dependencies")
+        .textContent =
+        displayArray(
+          risk.dependencies
+        );
+
+      result.style.display =
+        "block";
 
       result.scrollIntoView({
         behavior: "smooth"
@@ -644,11 +1091,14 @@
 
   document
     .getElementById("protocolInput")
-    .addEventListener("keydown", function(event) {
-      if (event.key === "Enter") {
-        analyze();
+    .addEventListener(
+      "keydown",
+      function(event) {
+        if (event.key === "Enter") {
+          analyze();
+        }
       }
-    });
+    );
 </script>
 
 </body>
