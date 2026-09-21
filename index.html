@@ -3,13 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>BOBOSYN Protocol Scout</title>
-
-  <meta
-    name="description"
-    content="AI-powered Web3 protocol research by BOBOSYN."
-  >
 
   <style>
     * {
@@ -22,312 +16,377 @@
 
     body {
       margin: 0;
-      background: #000;
-      color: #fff;
+      background: #050505;
+      color: #f5f5f5;
       font-family:
+        Inter,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
-        Helvetica,
-        Arial,
         sans-serif;
       line-height: 1.6;
     }
 
     a {
-      color: #fff;
+      color: inherit;
       text-decoration: none;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
     }
 
-    nav {
+    header {
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 20;
+      border-bottom: 1px solid #171717;
+      background: rgba(5, 5, 5, 0.92);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      height: 72px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
-      background: rgba(0, 0, 0, 0.92);
-      border-bottom: 1px solid #222;
-      backdrop-filter: blur(10px);
+      justify-content: space-between;
     }
 
     .logo {
-      font-size: 18px;
-      font-weight: 700;
+      font-size: 17px;
+      font-weight: 800;
       letter-spacing: 0.08em;
     }
 
-    .nav-links {
+    nav {
       display: flex;
-      gap: 28px;
+      gap: 26px;
+      color: #888;
       font-size: 14px;
     }
 
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 80px 30px 120px;
+    nav a:hover {
+      color: #fff;
     }
 
     .hero {
-      margin-bottom: 80px;
+      padding: 110px 0 70px;
+      text-align: center;
     }
 
     .eyebrow {
-      color: #888;
+      color: #777;
       font-size: 13px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     h1 {
       margin: 0;
       font-size: clamp(42px, 7vw, 76px);
-      line-height: 1.05;
-      letter-spacing: -0.04em;
+      line-height: 1;
+      letter-spacing: -0.045em;
     }
 
     .tagline {
-      margin-top: 22px;
-      color: #aaa;
+      margin: 24px 0 10px;
       font-size: 20px;
+      color: #ddd;
     }
 
-    .description {
-      margin-top: 8px;
-      color: #666;
+    .subtitle {
+      margin: 0 auto 36px;
+      color: #777;
+      max-width: 560px;
+    }
+
+    .analyzer {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      gap: 10px;
+    }
+
+    .analyzer input {
+      flex: 1;
+      min-width: 0;
+      height: 54px;
+      padding: 0 18px;
+      border: 1px solid #292929;
+      border-radius: 8px;
+      outline: none;
+      background: #0b0b0b;
+      color: #fff;
       font-size: 15px;
     }
 
-    .analyze-row {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin-top: 36px;
+    .analyzer input:focus {
+      border-color: #555;
     }
 
-    button {
-      border: 1px solid #fff;
+    .analyzer button {
+      height: 54px;
+      padding: 0 26px;
+      border: 0;
+      border-radius: 8px;
       background: #fff;
       color: #000;
-      padding: 12px 22px;
-      font-size: 14px;
+      font-weight: 700;
       cursor: pointer;
-      border-radius: 0;
+      font-size: 14px;
     }
 
-    button:hover {
+    .analyzer button:hover {
       background: #ddd;
     }
 
-    button:disabled {
+    .analyzer button:disabled {
       opacity: 0.5;
       cursor: wait;
     }
 
-    #analysisStatus {
-      color: #666;
-      font-size: 13px;
+    .message {
+      margin-top: 18px;
+      min-height: 24px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    .message.error {
+      color: #ff7777;
+    }
+
+    .message.success {
+      color: #aaa;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    #results {
+      padding: 20px 0 100px;
+    }
+
+    .protocol-title {
+      margin-bottom: 42px;
+    }
+
+    .protocol-title h2 {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 52px);
+      letter-spacing: -0.04em;
+    }
+
+    .protocol-title p {
+      margin: 8px 0 0;
+      color: #777;
     }
 
     section {
-      margin-top: 70px;
-      padding-top: 40px;
-      border-top: 1px solid #222;
+      margin-bottom: 70px;
     }
 
-    section:first-of-type {
-      margin-top: 0;
-    }
-
-    h2 {
-      margin: 0 0 30px;
-      font-size: 28px;
-      letter-spacing: -0.02em;
-    }
-
-    h3 {
-      margin: 0 0 12px;
-      font-size: 17px;
-      font-weight: 600;
-    }
-
-    .protocol-header {
-      display: flex;
-      align-items: baseline;
-      gap: 15px;
-      margin-bottom: 35px;
-    }
-
-    .protocol-header h2 {
-      margin: 0;
-    }
-
-    .protocol-category {
-      color: #777;
-      font-size: 14px;
+    .section-title {
+      margin-bottom: 24px;
+      font-size: 13px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
     }
 
     .grid {
       display: grid;
-      grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-      border-top: 1px solid #222;
-      border-left: 1px solid #222;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid #1b1b1b;
+      border-left: 1px solid #1b1b1b;
     }
 
-    .card {
-      min-height: 120px;
-      padding: 22px;
-      border-right: 1px solid #222;
-      border-bottom: 1px solid #222;
+    .metric-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .cell {
+      min-height: 105px;
+      padding: 20px;
+      border-right: 1px solid #1b1b1b;
+      border-bottom: 1px solid #1b1b1b;
     }
 
     .label {
       color: #666;
       font-size: 12px;
+      margin-bottom: 8px;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      margin-bottom: 10px;
     }
 
     .value {
+      color: #f5f5f5;
       font-size: 20px;
+      font-weight: 600;
       word-break: break-word;
     }
 
+    .value.small {
+      font-size: 15px;
+      font-weight: 400;
+    }
+
     .value a {
+      color: #ddd;
       text-decoration: underline;
-      text-decoration-color: #555;
+      text-decoration-color: #444;
       text-underline-offset: 3px;
+    }
+
+    .value a:hover {
+      color: #fff;
+      text-decoration-color: #fff;
+    }
+
+    .card {
+      border: 1px solid #1b1b1b;
+      padding: 28px;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      margin: 0 0 14px;
+      font-size: 18px;
+    }
+
+    .card p {
+      margin: 0;
+      color: #aaa;
+    }
+
+    .card ul {
+      margin: 14px 0 0;
+      padding-left: 20px;
+      color: #aaa;
+    }
+
+    .card li {
+      margin-bottom: 8px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 3px 8px;
+      border: 1px solid #333;
+      border-radius: 4px;
+      color: #aaa;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
     }
 
     .chains {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 7px;
+      margin-top: 12px;
     }
 
     .chain {
-      display: inline-block;
-      padding: 4px 9px;
-      border: 1px solid #333;
-      color: #bbb;
+      padding: 4px 8px;
+      border: 1px solid #292929;
+      color: #999;
+      border-radius: 4px;
       font-size: 12px;
     }
 
-    .wide {
-      grid-column: span 2;
+    .risk-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
     }
 
-    .full {
-      grid-column: span 4;
+    .risk-card {
+      border: 1px solid #1b1b1b;
+      padding: 22px;
     }
 
-    .text-block {
-      color: #aaa;
-      max-width: 850px;
-      font-size: 15px;
+    .risk-card h3 {
+      margin: 0 0 10px;
+      font-size: 14px;
     }
 
-    ul {
+    .risk-card p {
       margin: 0;
-      padding-left: 20px;
-      color: #aaa;
-    }
-
-    li {
-      margin: 7px 0;
-    }
-
-    .summary-box {
-      border: 1px solid #222;
-      padding: 25px;
-      color: #aaa;
-    }
-
-    .summary-status {
-      margin-bottom: 18px;
-    }
-
-    .status-ok {
-      color: #fff;
-    }
-
-    .sources {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
+      color: #999;
+      font-size: 14px;
     }
 
     .sources a {
-      color: #aaa;
-      text-decoration: underline;
-      text-underline-offset: 3px;
+      display: block;
+      color: #999;
+      padding: 8px 0;
+      border-bottom: 1px solid #151515;
+    }
+
+    .sources a:hover {
+      color: #fff;
+    }
+
+    .empty {
+      color: #666;
     }
 
     footer {
-      border-top: 1px solid #222;
-      margin-top: 100px;
-      padding-top: 30px;
+      padding: 40px 0 60px;
+      border-top: 1px solid #171717;
       color: #555;
       font-size: 13px;
     }
 
     @media (max-width: 800px) {
       nav {
-        padding: 18px 20px;
+        display: none;
       }
 
-      .nav-links {
-        gap: 15px;
+      .hero {
+        padding: 80px 0 50px;
       }
 
-      main {
-        padding: 55px 20px 80px;
+      .analyzer {
+        flex-direction: column;
       }
 
-      .grid {
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
+      .grid,
+      .metric-grid,
+      .risk-grid {
+        grid-template-columns: 1fr 1fr;
       }
 
-      .wide {
-        grid-column: span 2;
-      }
-
-      .full {
-        grid-column: span 2;
+      .two-col {
+        grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 520px) {
-      .nav-links {
-        display: none;
+      .container {
+        width: min(100% - 28px, 1120px);
       }
 
-      .grid {
+      .grid,
+      .metric-grid,
+      .risk-grid {
         grid-template-columns: 1fr;
       }
 
-      .wide,
-      .full {
-        grid-column: span 1;
-      }
-
-      .protocol-header {
-        display: block;
-      }
-
-      .protocol-category {
-        display: block;
-        margin-top: 6px;
+      h1 {
+        font-size: 42px;
       }
     }
   </style>
@@ -335,22 +394,23 @@
 
 <body>
 
-  <nav>
-    <div class="logo">BOBOSYN</div>
+<header>
+  <div class="container nav">
+    <a href="#" class="logo">BOBOSYN</a>
 
-    <div class="nav-links">
+    <nav>
       <a href="#overview">About</a>
       <a href="#research">Research</a>
       <a href="#risks">Risk</a>
-    </div>
-  </nav>
+    </nav>
+  </div>
+</header>
 
+<main>
 
-  <main>
+  <section class="hero">
+    <div class="container">
 
-    <!-- HERO -->
-
-    <div class="hero">
       <div class="eyebrow">
         Independent Web3 Research
       </div>
@@ -363,285 +423,147 @@
         Scout. Research. Understand.
       </div>
 
-      <div class="description">
+      <p class="subtitle">
         AI-powered Web3 protocol research.
-      </div>
+      </p>
 
-      <div class="analyze-row">
+      <div class="analyzer">
+        <input
+          id="protocolInput"
+          type="text"
+          placeholder="Enter a protocol"
+          autocomplete="off"
+        >
+
         <button id="analyzeBtn">
           Analyze
         </button>
-
-        <span id="analysisStatus">
-          Ready.
-        </span>
       </div>
+
+      <div id="message" class="message"></div>
+
     </div>
+  </section>
 
+  <div id="results" class="container hidden">
 
-    <!-- OVERVIEW -->
+    <div class="protocol-title">
+      <h2 id="protocolName">—</h2>
+      <p id="protocolMeta">—</p>
+    </div>
 
     <section id="overview">
 
-      <div class="protocol-header">
-        <h2 id="protocolName">
-          Aave V3
-        </h2>
-
-        <span
-          class="protocol-category"
-          id="protocolCategory"
-        >
-          Lending
-        </span>
-      </div>
-
-
-      <h2>
+      <div class="section-title">
         Protocol Overview
-      </h2>
+      </div>
 
       <div class="grid">
 
-        <div class="card">
-          <div class="label">
-            Category
-          </div>
-
-          <div
-            class="value"
-            id="overviewCategory"
-          >
-            —
-          </div>
+        <div class="cell">
+          <div class="label">Category</div>
+          <div class="value" id="category">—</div>
         </div>
 
-
-        <div class="card">
-          <div class="label">
-            Status
-          </div>
-
-          <div
-            class="value"
-            id="overviewStatus"
-          >
-            —
-          </div>
+        <div class="cell">
+          <div class="label">Status</div>
+          <div class="value" id="status">—</div>
         </div>
 
-
-        <div class="card wide">
-          <div class="label">
-            Website
-          </div>
-
-          <div
-            class="value"
-            id="overviewWebsite"
-          >
-            —
-          </div>
+        <div class="cell">
+          <div class="label">Website</div>
+          <div class="value small" id="website">—</div>
         </div>
 
-
-        <div class="card full">
-          <div class="label">
-            Chains
-          </div>
-
-          <div
-            class="value chains"
-            id="chains"
-          >
-            —
-          </div>
+        <div class="cell">
+          <div class="label">Chains</div>
+          <div class="chains" id="chains"></div>
         </div>
 
       </div>
-
     </section>
-
-
-    <!-- MARKET -->
 
     <section>
 
-      <h2>
+      <div class="section-title">
         Market
-      </h2>
+      </div>
 
       <div class="grid">
 
-        <div class="card">
-          <div class="label">
-            TVL
-          </div>
-
-          <div
-            class="value"
-            id="marketTvl"
-          >
-            —
-          </div>
+        <div class="cell">
+          <div class="label">TVL</div>
+          <div class="value" id="tvl">—</div>
         </div>
 
-
-        <div class="card">
-          <div class="label">
-            Token
-          </div>
-
-          <div
-            class="value"
-            id="marketToken"
-          >
-            —
-          </div>
+        <div class="cell">
+          <div class="label">Token</div>
+          <div class="value" id="token">—</div>
         </div>
 
-
-        <div class="card">
-          <div class="label">
-            Token Price
-          </div>
-
-          <div
-            class="value"
-            id="marketTokenPrice"
-          >
-            —
-          </div>
+        <div class="cell">
+          <div class="label">Token Price</div>
+          <div class="value" id="tokenPrice">—</div>
         </div>
 
-
-        <div class="card">
-          <div class="label">
-            24h Change
-          </div>
-
-          <div
-            class="value"
-            id="marketChange24h"
-          >
-            N/A
-          </div>
+        <div class="cell">
+          <div class="label">24h Change</div>
+          <div class="value" id="change24h">—</div>
         </div>
 
       </div>
-
     </section>
-
-
-    <!-- METRICS -->
 
     <section>
 
-      <h2>
+      <div class="section-title">
         Protocol Metrics
-      </h2>
+      </div>
 
-      <div class="grid">
+      <div class="grid metric-grid">
 
-        <div class="card">
-          <div class="label">
-            Fees 24h
-          </div>
-
-          <div
-            class="value"
-            id="fees24h"
-          >
-            —
-          </div>
+        <div class="cell">
+          <div class="label">Fees 24h</div>
+          <div class="value" id="fees24h">—</div>
         </div>
 
-
-        <div class="card">
-          <div class="label">
-            Fees 7d
-          </div>
-
-          <div
-            class="value"
-            id="fees7d"
-          >
-            —
-          </div>
+        <div class="cell">
+          <div class="label">Fees 7d</div>
+          <div class="value" id="fees7d">—</div>
         </div>
 
-
-        <div class="card">
-          <div class="label">
-            Fees 30d
-          </div>
-
-          <div
-            class="value"
-            id="fees30d"
-          >
-            —
-          </div>
+        <div class="cell">
+          <div class="label">Fees 30d</div>
+          <div class="value" id="fees30d">—</div>
         </div>
 
-
-        <div class="card">
-          <div class="label">
-            Revenue 24h
-          </div>
-
-          <div
-            class="value"
-            id="revenue24h"
-          >
-            —
-          </div>
+        <div class="cell">
+          <div class="label">Revenue 24h</div>
+          <div class="value" id="revenue24h">—</div>
         </div>
 
-
-        <div class="card">
-          <div class="label">
-            Revenue 7d
-          </div>
-
-          <div
-            class="value"
-            id="revenue7d"
-          >
-            —
-          </div>
+        <div class="cell">
+          <div class="label">Revenue 7d</div>
+          <div class="value" id="revenue7d">—</div>
         </div>
 
-
-        <div class="card">
-          <div class="label">
-            Revenue 30d
-          </div>
-
-          <div
-            class="value"
-            id="revenue30d"
-          >
-            —
-          </div>
+        <div class="cell">
+          <div class="label">Revenue 30d</div>
+          <div class="value" id="revenue30d">—</div>
         </div>
 
       </div>
-
     </section>
 
+    <section id="research">
 
-    <!-- HOW IT WORKS -->
-
-    <section>
-
-      <h2>
+      <div class="section-title">
         How It Works
-      </h2>
+      </div>
 
-      <div class="text-block">
+      <div class="card">
 
-        <h3>
+        <h3 id="howTitle">
           Protocol Mechanism
         </h3>
 
@@ -653,20 +575,15 @@
 
       </div>
 
-    </section>
-
-
-    <!-- BUSINESS MODEL -->
-
-    <section>
-
-      <h2>
+      <div class="section-title">
         Business Model
-      </h2>
+      </div>
 
-      <div class="text-block">
+      <div class="card">
 
-        <h3 id="businessTitle">
+        <div id="businessStatus"></div>
+
+        <h3 id="businessModel">
           —
         </h3>
 
@@ -674,194 +591,57 @@
           —
         </p>
 
-        <ul id="businessSources"></ul>
+        <ul id="revenueSources"></ul>
 
       </div>
 
-    </section>
-
-
-    <!-- USERS -->
-
-    <section>
-
-      <h2>
+      <div class="section-title">
         Users & Adoption
-      </h2>
+      </div>
 
-      <div class="grid">
+      <div class="card">
 
-        <div class="card wide">
+        <div id="usersStatus"></div>
 
-          <h3 id="usersTitle">
-            Primary Users
-          </h3>
+        <h3>
+          Primary Users
+        </h3>
 
-          <ul id="primaryUsers"></ul>
+        <ul id="primaryUsers"></ul>
 
-        </div>
+        <h3>
+          Use Cases
+        </h3>
 
+        <ul id="useCases"></ul>
 
-        <div class="card wide">
-
-          <h3>
-            Use Cases
-          </h3>
-
-          <ul id="useCases"></ul>
-
-        </div>
+        <p id="adoption"></p>
 
       </div>
 
-    </section>
-
-
-    <!-- COMPETITION -->
-
-    <section>
-
-      <h2>
+      <div class="section-title">
         Competitive Landscape
-      </h2>
-
-      <div class="grid">
-
-        <div class="card">
-
-          <h3 id="competitionTitle">
-            —
-          </h3>
-
-          <div class="label">
-            Competitors
-          </div>
-
-          <ul id="competitors"></ul>
-
-        </div>
-
-
-        <div class="card wide">
-
-          <h3>
-            Differentiation
-          </h3>
-
-          <p
-            class="text-block"
-            id="differentiation"
-          >
-            —
-          </p>
-
-        </div>
-
       </div>
 
-    </section>
+      <div class="card">
 
+        <div id="competitionStatus"></div>
 
-    <!-- RISK -->
+        <h3 id="competitionCategory">
+          —
+        </h3>
 
-    <section id="risks">
+        <h3>
+          Competitors
+        </h3>
 
-      <h2>
-        Risk Analysis
-      </h2>
+        <ul id="competitors"></ul>
 
-      <div class="grid">
+        <h3>
+          Differentiation
+        </h3>
 
-        <div class="card">
-
-          <div class="label">
-            Smart Contract
-          </div>
-
-          <div
-            class="text-block"
-            id="riskSmartContract"
-          >
-            —
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div class="label">
-            Protocol
-          </div>
-
-          <div
-            class="text-block"
-            id="riskProtocol"
-          >
-            —
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div class="label">
-            Token
-          </div>
-
-          <div
-            class="text-block"
-            id="riskToken"
-          >
-            —
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div class="label">
-            Dependencies
-          </div>
-
-          <div
-            class="text-block"
-            id="riskDependencies"
-          >
-            —
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- RESEARCH SUMMARY -->
-
-    <section>
-
-      <h2>
-        Research Summary
-      </h2>
-
-      <div class="summary-box">
-
-        <div class="summary-status">
-          Research Status
-
-          <strong
-            id="researchStatus"
-            class="status-ok"
-          >
-            —
-          </strong>
-        </div>
-
-        <p id="researchSummary">
+        <p id="differentiation">
           —
         </p>
 
@@ -869,336 +649,388 @@
 
     </section>
 
+    <section id="risks">
 
-    <!-- RESEARCH -->
+      <div class="section-title">
+        Risk Analysis
+      </div>
 
-    <section id="research">
+      <div class="risk-grid">
 
-      <h2>
-        Research
-      </h2>
-
-      <div class="grid">
-
-        <div class="card full">
-
+        <div class="risk-card">
           <h3>
-            Core Function
+            Smart Contract
           </h3>
-
-          <p
-            class="text-block"
-            id="researchCoreFunction"
-          >
+          <p id="riskSmartContract">
             —
           </p>
-
         </div>
 
-
-        <div class="card full">
-
+        <div class="risk-card">
           <h3>
-            Mechanism
+            Protocol
           </h3>
-
-          <p
-            class="text-block"
-            id="researchMechanism"
-          >
+          <p id="riskProtocol">
             —
           </p>
-
         </div>
 
-
-        <div class="card full">
-
+        <div class="risk-card">
           <h3>
-            Users
+            Token
           </h3>
-
-          <p
-            class="text-block"
-            id="researchUsers"
-          >
+          <p id="riskToken">
             —
           </p>
-
         </div>
 
-
-        <div class="card full">
-
+        <div class="risk-card">
           <h3>
-            Revenue
+            Dependencies
           </h3>
-
-          <p
-            class="text-block"
-            id="researchRevenue"
-          >
+          <p id="riskDependencies">
             —
           </p>
-
         </div>
+
+      </div>
+    </section>
+
+    <section>
+
+      <div class="section-title">
+        Research Summary
+      </div>
+
+      <div class="card">
+
+        <div class="label">
+          Research Status
+        </div>
+
+        <div class="value" id="researchStatus">
+          —
+        </div>
+
+        <p
+          id="researchSummary"
+          style="margin-top:16px;"
+        >
+          —
+        </p>
 
       </div>
 
     </section>
 
+    <section>
 
-    <!-- RISK SNAPSHOT -->
+      <div class="section-title">
+        Research
+      </div>
+
+      <div class="two-col">
+
+        <div class="card">
+          <h3>
+            Core Function
+          </h3>
+
+          <p id="coreFunction">
+            —
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>
+            Mechanism
+          </h3>
+
+          <p id="mechanism">
+            —
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>
+            Users
+          </h3>
+
+          <p id="researchUsers">
+            —
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>
+            Revenue
+          </h3>
+
+          <p id="researchRevenue">
+            —
+          </p>
+        </div>
+
+      </div>
+    </section>
 
     <section>
 
-      <h2>
+      <div class="section-title">
         Risk Snapshot
-      </h2>
+      </div>
 
       <div class="grid">
 
-        <div class="card">
-
+        <div class="cell">
           <div class="label">
             Smart Contract
           </div>
 
           <div
-            class="text-block"
+            class="value small"
             id="snapshotSmartContract"
           >
             —
           </div>
-
         </div>
 
-
-        <div class="card">
-
+        <div class="cell">
           <div class="label">
             Protocol
           </div>
 
           <div
-            class="text-block"
+            class="value small"
             id="snapshotProtocol"
           >
             —
           </div>
-
         </div>
 
-
-        <div class="card">
-
+        <div class="cell">
           <div class="label">
             Token
           </div>
 
           <div
-            class="text-block"
+            class="value small"
             id="snapshotToken"
           >
             —
           </div>
-
         </div>
 
-
-        <div class="card">
-
+        <div class="cell">
           <div class="label">
             Dependencies
           </div>
 
           <div
-            class="text-block"
+            class="value small"
             id="snapshotDependencies"
           >
             —
           </div>
-
         </div>
 
       </div>
-
     </section>
-
-
-    <!-- SOURCES -->
 
     <section>
 
-      <h2>
+      <div class="section-title">
         Sources
-      </h2>
+      </div>
 
       <div
-        class="sources"
+        class="card sources"
         id="sources"
       ></div>
 
     </section>
 
+  </div>
 
-    <footer>
-      Built by BOBOSYN
-    </footer>
+</main>
 
-  </main>
-
-
-  <script>
-    const API_URL =
-      "https://protocol-scout-api.superhelong.workers.dev/analyze";
-
-    const DEFAULT_SLUG =
-      "aave-v3";
+<footer>
+  <div class="container">
+    Built by BOBOSYN
+  </div>
+</footer>
 
 
-    /* =====================================================
-       DOM
-    ===================================================== */
+<script>
+  const API_URL =
+    "https://protocol-scout-api.superhelong.workers.dev/analyze";
 
-    function $(id) {
-      return document.getElementById(id);
+
+  const input =
+    document.getElementById(
+      "protocolInput"
+    );
+
+  const button =
+    document.getElementById(
+      "analyzeBtn"
+    );
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+  const results =
+    document.getElementById(
+      "results"
+    );
+
+
+  /*
+   * -------------------------------------------------------
+   * Basic helpers
+   * -------------------------------------------------------
+   */
+
+  function setText(
+    id,
+    value,
+    fallback = "—"
+  ) {
+    const element =
+      document.getElementById(id);
+
+    if (!element) {
+      return;
     }
 
-
-    function setText(
-      id,
-      value,
-      fallback = "—"
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
     ) {
-      const el = $(id);
-
-      if (!el) {
-        return;
-      }
-
-      if (
-        value === null ||
-        value === undefined ||
-        value === ""
-      ) {
-        el.textContent = fallback;
-        return;
-      }
-
-      el.textContent =
-        String(value);
+      element.textContent =
+        fallback;
+      return;
     }
 
-
-    function setList(
-      id,
-      items,
-      showEmpty = false
+    if (
+      typeof value === "object"
     ) {
-      const el = $(id);
-
-      if (!el) {
-        return;
-      }
-
-      el.innerHTML = "";
-
-      if (
-        !Array.isArray(items) ||
-        !items.length
-      ) {
-        if (showEmpty) {
-          const li =
-            document.createElement("li");
-
-          li.textContent =
-            "No data available";
-
-          el.appendChild(li);
-        }
-
-        return;
-      }
-
-      for (const item of items) {
-        if (
-          item === null ||
-          item === undefined ||
-          String(item).trim() === ""
-        ) {
-          continue;
-        }
-
-        const li =
-          document.createElement("li");
-
-        li.textContent =
-          String(item);
-
-        el.appendChild(li);
-      }
+      element.textContent =
+        fallback;
+      return;
     }
 
+    element.textContent =
+      String(value);
+  }
 
-    /* =====================================================
-       FORMAT
-    ===================================================== */
 
-    function formatUsd(value) {
-      if (
-        value === null ||
-        value === undefined ||
-        value === "" ||
-        !Number.isFinite(
-          Number(value)
-        )
-      ) {
-        return "—";
-      }
+  function formatUsd(
+    value
+  ) {
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) {
+      return "—";
+    }
 
-      const number =
-        Number(value);
+    const number =
+      Number(value);
 
-      if (
-        Math.abs(number) >=
-        1e9
-      ) {
-        return (
-          "$" +
-          (
-            number / 1e9
-          ).toFixed(2) +
-          "B"
-        );
-      }
+    if (
+      !Number.isFinite(number)
+    ) {
+      return "—";
+    }
 
-      if (
-        Math.abs(number) >=
-        1e6
-      ) {
-        return (
-          "$" +
-          (
-            number / 1e6
-          ).toFixed(2) +
-          "M"
-        );
-      }
+    if (
+      Math.abs(number) >= 1e12
+    ) {
+      return (
+        "$" +
+        (
+          number / 1e12
+        ).toFixed(2) +
+        "T"
+      );
+    }
 
-      if (
-        Math.abs(number) >=
-        1e3
-      ) {
-        return (
-          "$" +
-          (
-            number / 1e3
-          ).toFixed(2) +
-          "K"
-        );
-      }
+    if (
+      Math.abs(number) >= 1e9
+    ) {
+      return (
+        "$" +
+        (
+          number / 1e9
+        ).toFixed(2) +
+        "B"
+      );
+    }
 
+    if (
+      Math.abs(number) >= 1e6
+    ) {
+      return (
+        "$" +
+        (
+          number / 1e6
+        ).toFixed(2) +
+        "M"
+      );
+    }
+
+    if (
+      Math.abs(number) >= 1e3
+    ) {
+      return (
+        "$" +
+        (
+          number / 1e3
+        ).toFixed(2) +
+        "K"
+      );
+    }
+
+    return (
+      "$" +
+      number.toLocaleString(
+        "en-US",
+        {
+          maximumFractionDigits: 2
+        }
+      )
+    );
+  }
+
+
+  function formatPrice(
+    value
+  ) {
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) {
+      return "—";
+    }
+
+    const number =
+      Number(value);
+
+    if (
+      !Number.isFinite(number)
+    ) {
+      return "—";
+    }
+
+    if (
+      number >= 1000
+    ) {
       return (
         "$" +
         number.toLocaleString(
@@ -1210,154 +1042,154 @@
       );
     }
 
-
-    function formatPrice(value) {
-      if (
-        value === null ||
-        value === undefined ||
-        value === "" ||
-        !Number.isFinite(
-          Number(value)
-        )
-      ) {
-        return "—";
-      }
-
-      const number =
-        Number(value);
-
-      if (
-        number >= 1000
-      ) {
-        return (
-          "$" +
-          number.toLocaleString(
-            "en-US",
-            {
-              maximumFractionDigits: 2
-            }
-          )
-        );
-      }
-
-      if (
-        number >= 1
-      ) {
-        return (
-          "$" +
-          number.toFixed(2)
-        );
-      }
-
-      if (
-        number >= 0.01
-      ) {
-        return (
-          "$" +
-          number.toFixed(4)
-        );
-      }
-
+    if (
+      number >= 1
+    ) {
       return (
         "$" +
-        number.toPrecision(4)
+        number.toFixed(2)
       );
     }
 
-
-    function formatPercent(value) {
-      if (
-        value === null ||
-        value === undefined ||
-        value === "" ||
-        !Number.isFinite(
-          Number(value)
-        )
-      ) {
-        return "N/A";
-      }
-
-      const number =
-        Number(value);
-
-      const sign =
-        number > 0
-          ? "+"
-          : "";
-
-      return (
-        sign +
-        number.toFixed(2) +
-        "%"
-      );
-    }
-
-
-    /* =====================================================
-       CHAINS
-    ===================================================== */
-
-    function normalizeChains(value) {
-      if (!value) {
-        return [];
-      }
-
-      if (Array.isArray(value)) {
-        return value
-          .filter(
-            item =>
-              item !== null &&
-              item !== undefined &&
-              String(item).trim() !== ""
-          )
-          .map(
-            item =>
-              String(item).trim()
-          );
-      }
-
-      const text =
-        String(value).trim();
-
-      if (!text) {
-        return [];
-      }
-
-      /*
-        Compatibility fallback only.
-        Current Worker 1.6.0 already
-        returns an array.
-      */
-
-      return [
-        text
-      ];
-    }
-
-
-    function renderChains(
-      chains
+    if (
+      number >= 0.01
     ) {
-      const container =
-        $("chains");
+      return (
+        "$" +
+        number.toFixed(4)
+      );
+    }
 
-      if (!container) {
-        return;
-      }
+    return (
+      "$" +
+      number.toPrecision(4)
+    );
+  }
 
-      container.innerHTML = "";
 
-      const list =
-        normalizeChains(chains);
+  function formatPercent(
+    value
+  ) {
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) {
+      return "N/A";
+    }
 
-      if (!list.length) {
-        container.textContent =
-          "—";
+    const number =
+      Number(value);
 
-        return;
-      }
+    if (
+      !Number.isFinite(number)
+    ) {
+      return "N/A";
+    }
 
-      for (const chain of list) {
+    const sign =
+      number > 0
+        ? "+"
+        : "";
+
+    return (
+      sign +
+      number.toFixed(2) +
+      "%"
+    );
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * Website
+   * -------------------------------------------------------
+   */
+
+  function renderWebsite(
+    url
+  ) {
+    const element =
+      document.getElementById(
+        "website"
+      );
+
+    if (!element) {
+      return;
+    }
+
+    element.innerHTML = "";
+
+    if (
+      !url ||
+      typeof url !== "string"
+    ) {
+      element.textContent =
+        "—";
+      return;
+    }
+
+    const link =
+      document.createElement(
+        "a"
+      );
+
+    link.href =
+      url;
+
+    link.target =
+      "_blank";
+
+    link.rel =
+      "noopener noreferrer";
+
+    link.textContent =
+      url;
+
+    element.appendChild(
+      link
+    );
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * Chains
+   * -------------------------------------------------------
+   */
+
+  function renderChains(
+    chains
+  ) {
+    const container =
+      document.getElementById(
+        "chains"
+      );
+
+    if (!container) {
+      return;
+    }
+
+    container.innerHTML = "";
+
+    if (
+      !Array.isArray(chains) ||
+      chains.length === 0
+    ) {
+      container.textContent =
+        "—";
+      return;
+    }
+
+    chains.forEach(
+      chain => {
+        if (
+          !chain ||
+          typeof chain !== "string"
+        ) {
+          return;
+        }
+
         const span =
           document.createElement(
             "span"
@@ -1373,59 +1205,181 @@
           span
         );
       }
+    );
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * Lists
+   * -------------------------------------------------------
+   */
+
+  function setList(
+    id,
+    values,
+    showEmpty = true
+  ) {
+    const element =
+      document.getElementById(
+        id
+      );
+
+    if (!element) {
+      return;
     }
 
+    element.innerHTML = "";
 
-    /* =====================================================
-       SOURCES
-    ===================================================== */
-
-    function renderSources(
-      sources
+    if (
+      !Array.isArray(values) ||
+      values.length === 0
     ) {
-      const container =
-        $("sources");
+      if (showEmpty) {
+        const li =
+          document.createElement(
+            "li"
+          );
 
-      if (!container) {
-        return;
+        li.className =
+          "empty";
+
+        li.textContent =
+          "No data available";
+
+        element.appendChild(
+          li
+        );
       }
 
-      container.innerHTML = "";
+      return;
+    }
 
-      if (
-        !Array.isArray(sources) ||
-        !sources.length
-      ) {
-        return;
-      }
-
-      const seen =
-        new Set();
-
-      for (const source of sources) {
-        if (!source) {
-          continue;
+    values.forEach(
+      item => {
+        if (
+          item === null ||
+          item === undefined ||
+          item === ""
+        ) {
+          return;
         }
 
-        const name =
-          source.name ||
-          "Source";
+        const li =
+          document.createElement(
+            "li"
+          );
 
-        const url =
-          source.url ||
-          "";
+        li.textContent =
+          String(item);
 
-        if (!url) {
-          continue;
+        element.appendChild(
+          li
+        );
+      }
+    );
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * Status
+   * -------------------------------------------------------
+   */
+
+  function setStatus(
+    id,
+    value
+  ) {
+    const element =
+      document.getElementById(
+        id
+      );
+
+    if (!element) {
+      return;
+    }
+
+    element.innerHTML = "";
+
+    if (
+      !value
+    ) {
+      return;
+    }
+
+    const span =
+      document.createElement(
+        "span"
+      );
+
+    span.className =
+      "status";
+
+    span.textContent =
+      String(value);
+
+    element.appendChild(
+      span
+    );
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * Sources
+   * -------------------------------------------------------
+   */
+
+  function renderSources(
+    sources
+  ) {
+    const container =
+      document.getElementById(
+        "sources"
+      );
+
+    if (!container) {
+      return;
+    }
+
+    container.innerHTML = "";
+
+    if (
+      !Array.isArray(sources) ||
+      sources.length === 0
+    ) {
+      container.textContent =
+        "No sources available";
+
+      return;
+    }
+
+    const seen =
+      new Set();
+
+    sources.forEach(
+      source => {
+        if (
+          !source ||
+          !source.url
+        ) {
+          return;
         }
 
         const key =
-          name +
+          String(
+            source.name || ""
+          ) +
           "|" +
-          url;
+          String(
+            source.url
+          );
 
-        if (seen.has(key)) {
-          continue;
+        if (
+          seen.has(key)
+        ) {
+          return;
         }
 
         seen.add(key);
@@ -1436,7 +1390,7 @@
           );
 
         link.href =
-          url;
+          source.url;
 
         link.target =
           "_blank";
@@ -1445,603 +1399,722 @@
           "noopener noreferrer";
 
         link.textContent =
-          name;
+          source.name ||
+          source.url;
 
         container.appendChild(
           link
         );
       }
+    );
+
+    if (
+      container.children.length === 0
+    ) {
+      container.textContent =
+        "No sources available";
+    }
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * Research Revenue
+   * -------------------------------------------------------
+   */
+
+  function renderResearchRevenue(
+    revenue
+  ) {
+    const element =
+      document.getElementById(
+        "researchRevenue"
+      );
+
+    if (!element) {
+      return;
     }
 
-
-    /* =====================================================
-       RENDER
-    ===================================================== */
-
-    function renderResult(
-      data
+    if (
+      !revenue ||
+      typeof revenue !== "object"
     ) {
-      const protocol =
-        data.protocol || {};
+      element.textContent =
+        "—";
 
-      const overview =
-        data.overview || {};
+      return;
+    }
 
-      const market =
-        data.market || {};
+    if (
+      revenue.summary
+    ) {
+      element.textContent =
+        revenue.summary;
 
-      const metrics =
-        data.metrics || {};
+      return;
+    }
 
-      const fees =
-        metrics.fees || {};
+    const parts = [];
 
-      const revenue =
-        metrics.revenue || {};
-
-      const how =
-        data.howItWorks || {};
-
-      const business =
-        data.businessModel || {};
-
-      const users =
-        data.users || {};
-
-      const competition =
-        data.competition || {};
-
-      const risk =
-        data.risk || {};
-
-      const summary =
-        data.researchSummary || {};
-
-      const research =
-        data.research || {};
-
-
-      /* ---------------------------------------------------
-         Header
-      --------------------------------------------------- */
-
-      setText(
-        "protocolName",
-        protocol.name
-      );
-
-      setText(
-        "protocolCategory",
-        protocol.category
-      );
-
-
-      /* ---------------------------------------------------
-         Status
-      --------------------------------------------------- */
-
-      setText(
-        "analysisStatus",
-        "Analysis complete."
-      );
-
-
-      /* ---------------------------------------------------
-         Overview
-      --------------------------------------------------- */
-
-      setText(
-        "overviewCategory",
-        overview.category ||
-        protocol.category
-      );
-
-      setText(
-        "overviewStatus",
-        overview.status ||
-        protocol.status ||
-        "Live"
-      );
-
-
-      const website =
-        overview.website ||
-        protocol.website ||
-        "";
-
-      const websiteEl =
-        $("overviewWebsite");
-
-      if (websiteEl) {
-        websiteEl.innerHTML = "";
-
-        if (website) {
-          const link =
-            document.createElement(
-              "a"
-            );
-
-          link.href =
-            website;
-
-          link.target =
-            "_blank";
-
-          link.rel =
-            "noopener noreferrer";
-
-          link.textContent =
-            website;
-
-          websiteEl.appendChild(
-            link
-          );
-        } else {
-          websiteEl.textContent =
-            "—";
-        }
-      }
-
-
-      renderChains(
-        overview.chains ||
-        protocol.chains
-      );
-
-
-      /* ---------------------------------------------------
-         Market
-      --------------------------------------------------- */
-
-      setText(
-        "marketTvl",
-        formatUsd(
-          market.tvl
-        )
-      );
-
-      setText(
-        "marketToken",
-        market.token ||
-        protocol.symbol ||
-        "—"
-      );
-
-      setText(
-        "marketTokenPrice",
-        formatPrice(
-          market.tokenPrice
-        )
-      );
-
-      setText(
-        "marketChange24h",
-        formatPercent(
-          market.change24h
-        )
-      );
-
-
-      /* ---------------------------------------------------
-         Metrics
-      --------------------------------------------------- */
-
-      setText(
-        "fees24h",
-        formatUsd(
-          fees.daily
-        )
-      );
-
-      setText(
-        "fees7d",
-        formatUsd(
-          fees.weekly
-        )
-      );
-
-      setText(
-        "fees30d",
-        formatUsd(
-          fees.monthly
-        )
-      );
-
-      setText(
-        "revenue24h",
+    if (
+      revenue.daily !== null &&
+      revenue.daily !== undefined
+    ) {
+      parts.push(
+        "24h " +
         formatUsd(
           revenue.daily
         )
       );
+    }
 
-      setText(
-        "revenue7d",
+    if (
+      revenue.weekly !== null &&
+      revenue.weekly !== undefined
+    ) {
+      parts.push(
+        "7d " +
         formatUsd(
           revenue.weekly
         )
       );
+    }
 
-      setText(
-        "revenue30d",
+    if (
+      revenue.monthly !== null &&
+      revenue.monthly !== undefined
+    ) {
+      parts.push(
+        "30d " +
         formatUsd(
           revenue.monthly
         )
       );
+    }
+
+    element.textContent =
+      parts.length
+        ? parts.join(" · ")
+        : "—";
+  }
 
 
-      /* ---------------------------------------------------
-         How It Works
-      --------------------------------------------------- */
+  /*
+   * -------------------------------------------------------
+   * Render API response
+   *
+   * This matches Worker 1.6.0 exactly.
+   * -------------------------------------------------------
+   */
 
-      setText(
-        "howSummary",
-        how.summary ||
-        research.mechanism ||
-        research.coreFunction ||
-        "—"
-      );
+  function render(
+    data
+  ) {
+    const protocol =
+      data.protocol || {};
+
+    const overview =
+      data.overview || {};
+
+    const market =
+      data.market || {};
+
+    const metrics =
+      data.metrics || {};
+
+    const fees =
+      metrics.fees || {};
+
+    const revenue =
+      metrics.revenue || {};
+
+    const how =
+      data.howItWorks || {};
+
+    const business =
+      data.businessModel || {};
+
+    const users =
+      data.users || {};
+
+    const competition =
+      data.competition || {};
+
+    const risk =
+      data.risk || {};
+
+    const researchSummary =
+      data.researchSummary || {};
+
+    const research =
+      data.research || {};
+
+
+    /*
+     * -----------------------------------------------------
+     * Protocol Overview
+     * -----------------------------------------------------
+     */
+
+    setText(
+      "protocolName",
+      protocol.name
+    );
+
+    setText(
+      "protocolMeta",
+      protocol.category
+    );
+
+    setText(
+      "category",
+      overview.category ||
+      protocol.category
+    );
+
+    setText(
+      "status",
+      overview.status ||
+      protocol.status
+    );
+
+    renderWebsite(
+      overview.website ||
+      protocol.website
+    );
+
+    renderChains(
+      overview.chains ||
+      protocol.chains
+    );
+
+
+    /*
+     * -----------------------------------------------------
+     * Market
+     * -----------------------------------------------------
+     */
+
+    setText(
+      "tvl",
+      formatUsd(
+        market.tvl
+      )
+    );
+
+    setText(
+      "token",
+      market.token ||
+      protocol.symbol
+    );
+
+    setText(
+      "tokenPrice",
+      formatPrice(
+        market.tokenPrice
+      )
+    );
+
+    setText(
+      "change24h",
+      formatPercent(
+        market.change24h
+      )
+    );
+
+
+    /*
+     * -----------------------------------------------------
+     * Protocol Metrics
+     * -----------------------------------------------------
+     */
+
+    setText(
+      "fees24h",
+      formatUsd(
+        fees.daily
+      )
+    );
+
+    setText(
+      "fees7d",
+      formatUsd(
+        fees.weekly
+      )
+    );
+
+    setText(
+      "fees30d",
+      formatUsd(
+        fees.monthly
+      )
+    );
+
+    setText(
+      "revenue24h",
+      formatUsd(
+        revenue.daily
+      )
+    );
+
+    setText(
+      "revenue7d",
+      formatUsd(
+        revenue.weekly
+      )
+    );
+
+    setText(
+      "revenue30d",
+      formatUsd(
+        revenue.monthly
+      )
+    );
+
+
+    /*
+     * -----------------------------------------------------
+     * How It Works
+     * -----------------------------------------------------
+     */
+
+    setText(
+      "howTitle",
+      "Protocol Mechanism"
+    );
+
+    setText(
+      "howSummary",
+      how.summary
+    );
+
+    /*
+     * Worker 1.6.0 may return an empty steps array.
+     * In that case we intentionally show nothing.
+     */
+    setList(
+      "howSteps",
+      how.steps,
+      false
+    );
+
+
+    /*
+     * -----------------------------------------------------
+     * Business Model
+     * -----------------------------------------------------
+     */
+
+    setStatus(
+      "businessStatus",
+      business.status
+    );
+
+    setText(
+      "businessModel",
+      business.title
+    );
+
+    setText(
+      "businessExplanation",
+      business.explanation ||
+      business.revenueSource
+    );
+
+    /*
+     * Worker 1.6.0 uses revenueSource
+     * as a text field, not revenueSources array.
+     */
+    setList(
+      "revenueSources",
+      business.revenueSources,
+      false
+    );
+
+
+    /*
+     * -----------------------------------------------------
+     * Users & Adoption
+     * -----------------------------------------------------
+     */
+
+    setStatus(
+      "usersStatus",
+      users.status
+    );
+
+    setList(
+      "primaryUsers",
+      users.primaryUsers,
+      false
+    );
+
+    setList(
+      "useCases",
+      users.useCases,
+      false
+    );
+
+    setText(
+      "adoption",
+      users.summary
+    );
+
+
+    /*
+     * -----------------------------------------------------
+     * Competition
+     * -----------------------------------------------------
+     */
+
+    setStatus(
+      "competitionStatus",
+      competition.status
+    );
+
+    setText(
+      "competitionCategory",
+      competition.title
+    );
+
+    setList(
+      "competitors",
+      competition.competitors,
+      false
+    );
+
+    setText(
+      "differentiation",
+      competition.differentiation
+    );
+
+
+    /*
+     * -----------------------------------------------------
+     * Risk
+     * -----------------------------------------------------
+     */
+
+    setText(
+      "riskSmartContract",
+      risk.smartContract
+    );
+
+    setText(
+      "riskProtocol",
+      risk.protocol
+    );
+
+    setText(
+      "riskToken",
+      risk.token
+    );
+
+    setText(
+      "riskDependencies",
+      risk.dependencies
+    );
+
+
+    /*
+     * -----------------------------------------------------
+     * Research Summary
+     * -----------------------------------------------------
+     */
+
+    setText(
+      "researchStatus",
+      researchSummary.status
+    );
+
+    setText(
+      "researchSummary",
+      researchSummary.summary
+    );
+
+
+    /*
+     * -----------------------------------------------------
+     * Research
+     * -----------------------------------------------------
+     */
+
+    setText(
+      "coreFunction",
+      research.coreFunction
+    );
+
+    setText(
+      "mechanism",
+      research.mechanism
+    );
+
+    setText(
+      "researchUsers",
+      research.users
+    );
+
+    renderResearchRevenue(
+      research.revenue
+    );
+
+
+    /*
+     * -----------------------------------------------------
+     * Risk Snapshot
+     * -----------------------------------------------------
+     */
+
+    setText(
+      "snapshotSmartContract",
+      risk.smartContract
+    );
+
+    setText(
+      "snapshotProtocol",
+      risk.protocol
+    );
+
+    setText(
+      "snapshotToken",
+      risk.token
+    );
+
+    setText(
+      "snapshotDependencies",
+      risk.dependencies
+    );
+
+
+    /*
+     * -----------------------------------------------------
+     * Sources
+     * -----------------------------------------------------
+     */
+
+    renderSources(
+      data.sources
+    );
+
+
+    /*
+     * Show results
+     * -----------------------------------------------------
+     */
+
+    results.classList.remove(
+      "hidden"
+    );
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * Analyze
+   * -------------------------------------------------------
+   */
+
+  async function analyze() {
+
+    const protocol =
+      input.value.trim();
+
+    if (!protocol) {
+
+      message.textContent =
+        "Please enter a protocol.";
+
+      message.className =
+        "message error";
+
+      input.focus();
+
+      return;
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+      "Analyzing...";
+
+
+    results.classList.add(
+      "hidden"
+    );
+
+
+    message.textContent =
+      "Analyzing " +
+      protocol +
+      "...";
+
+    message.className =
+      "message";
+
+
+    try {
 
       /*
-        IMPORTANT:
-        Empty steps = no bullet at all.
-      */
+       * Worker 1.6.0 accepts slug.
+       *
+       * Example:
+       * Aave V3 -> aave-v3
+       */
 
-      setList(
-        "howSteps",
-        how.steps,
-        false
-      );
-
-
-      /* ---------------------------------------------------
-         Business
-      --------------------------------------------------- */
-
-      setText(
-        "businessTitle",
-        business.title ||
-        protocol.category ||
-        "—"
-      );
-
-      setText(
-        "businessExplanation",
-        business.explanation ||
-        business.revenueSource ||
-        "—"
-      );
-
-      setList(
-        "businessSources",
-        business.revenueSources,
-        false
-      );
+      let slug =
+        protocol
+          .trim()
+          .toLowerCase();
 
 
-      /* ---------------------------------------------------
-         Users
-      --------------------------------------------------- */
+      /*
+       * Normalize common input forms.
+       */
 
-      setText(
-        "usersTitle",
-        users.title ||
-        "Primary Users"
-      );
+      const knownSlugs = {
+        "aave": "aave-v3",
+        "aave v3": "aave-v3",
+        "aave-v3": "aave-v3"
+      };
 
-      setList(
-        "primaryUsers",
-        users.primaryUsers,
-        false
-      );
-
-      setList(
-        "useCases",
-        users.useCases,
-        false
-      );
-
-
-      /* ---------------------------------------------------
-         Competition
-      --------------------------------------------------- */
-
-      setText(
-        "competitionTitle",
-        competition.title ||
-        protocol.category ||
-        "—"
-      );
-
-      setList(
-        "competitors",
-        competition.competitors,
-        false
-      );
-
-      setText(
-        "differentiation",
-        competition.differentiation ||
-        "—"
-      );
-
-
-      /* ---------------------------------------------------
-         Risk
-      --------------------------------------------------- */
-
-      setText(
-        "riskSmartContract",
-        risk.smartContract ||
-        "—"
-      );
-
-      setText(
-        "riskProtocol",
-        risk.protocol ||
-        "—"
-      );
-
-      setText(
-        "riskToken",
-        risk.token ||
-        "—"
-      );
-
-      setText(
-        "riskDependencies",
-        risk.dependencies ||
-        "—"
-      );
-
-
-      /* ---------------------------------------------------
-         Research Summary
-      --------------------------------------------------- */
-
-      setText(
-        "researchStatus",
-        summary.status ||
-        "ok"
-      );
-
-      setText(
-        "researchSummary",
-        summary.summary ||
-        "—"
-      );
-
-
-      /* ---------------------------------------------------
-         Research
-      --------------------------------------------------- */
-
-      setText(
-        "researchCoreFunction",
-        research.coreFunction ||
-        protocol.description ||
-        "—"
-      );
-
-      setText(
-        "researchMechanism",
-        research.mechanism ||
-        how.summary ||
-        "—"
-      );
-
-      setText(
-        "researchUsers",
-        research.users ||
-        users.summary ||
-        "—"
-      );
-
-
-      const researchRevenue =
-        research.revenue || {};
-
-      let revenueSummary =
-        researchRevenue.summary ||
-        "";
 
       if (
-        !revenueSummary
+        knownSlugs[slug]
       ) {
-        const parts = [];
-
-        if (
-          researchRevenue.daily !==
-          null &&
-          researchRevenue.daily !==
-          undefined
-        ) {
-          parts.push(
-            "24h " +
-            formatUsd(
-              researchRevenue.daily
-            )
-          );
-        }
-
-        if (
-          researchRevenue.weekly !==
-          null &&
-          researchRevenue.weekly !==
-          undefined
-        ) {
-          parts.push(
-            "7d " +
-            formatUsd(
-              researchRevenue.weekly
-            )
-          );
-        }
-
-        if (
-          researchRevenue.monthly !==
-          null &&
-          researchRevenue.monthly !==
-          undefined
-        ) {
-          parts.push(
-            "30d " +
-            formatUsd(
-              researchRevenue.monthly
-            )
-          );
-        }
-
-        revenueSummary =
-          parts.join(" · ");
+        slug =
+          knownSlugs[slug];
       }
 
-      setText(
-        "researchRevenue",
-        revenueSummary ||
-        "—"
+
+      const url =
+        API_URL +
+        "?slug=" +
+        encodeURIComponent(
+          slug
+        ) +
+        "&t=" +
+        Date.now();
+
+
+      const response =
+        await fetch(
+          url,
+          {
+            method: "GET",
+
+            headers: {
+              "Accept":
+                "application/json"
+            },
+
+            cache: "no-store"
+          }
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if (
+        !response.ok
+      ) {
+        throw new Error(
+          data?.error ||
+          `HTTP ${response.status}`
+        );
+      }
+
+
+      if (
+        !data ||
+        !data.ok
+      ) {
+        throw new Error(
+          data?.error ||
+          "Analysis failed"
+        );
+      }
+
+
+      render(
+        data
       );
 
 
-      /* ---------------------------------------------------
-         Risk Snapshot
-      --------------------------------------------------- */
+      message.textContent =
+        "Analysis complete.";
 
-      setText(
-        "snapshotSmartContract",
-        risk.smartContract ||
-        "—"
-      );
+      message.className =
+        "message success";
 
-      setText(
-        "snapshotProtocol",
-        risk.protocol ||
-        "—"
-      );
 
-      setText(
-        "snapshotToken",
-        risk.token ||
-        "—"
-      );
+      results.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
 
-      setText(
-        "snapshotDependencies",
-        risk.dependencies ||
-        "—"
+
+    } catch (error) {
+
+      console.error(
+        "Protocol Scout error:",
+        error
       );
 
 
-      /* ---------------------------------------------------
-         Sources
-      --------------------------------------------------- */
-
-      renderSources(
-        data.sources
+      results.classList.add(
+        "hidden"
       );
+
+
+      message.textContent =
+        "Error: " +
+        (
+          error?.message ||
+          "Failed to fetch"
+        );
+
+      message.className =
+        "message error";
+
+
+    } finally {
+
+      button.disabled = false;
+
+      button.textContent =
+        "Analyze";
     }
+  }
 
 
-    /* =====================================================
-       API
-    ===================================================== */
+  /*
+   * -------------------------------------------------------
+   * Events
+   * -------------------------------------------------------
+   */
 
-    async function analyze(
-      slug = DEFAULT_SLUG
-    ) {
-      const button =
-        $("analyzeBtn");
+  button.addEventListener(
+    "click",
+    analyze
+  );
 
-      if (button) {
-        button.disabled = true;
-        button.textContent =
-          "Analyzing...";
+
+  input.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key === "Enter"
+      ) {
+        analyze();
       }
 
-      try {
-        const response =
-          await fetch(
-            API_URL +
-            "?slug=" +
-            encodeURIComponent(slug) +
-            "&t=" +
-            Date.now(),
-            {
-              method: "GET",
-              cache: "no-store"
-            }
-          );
-
-        if (!response.ok) {
-          throw new Error(
-            "API " +
-            response.status
-          );
-        }
-
-        const data =
-          await response.json();
-
-        if (!data?.ok) {
-          throw new Error(
-            data?.error ||
-            "Analysis failed"
-          );
-        }
-
-        renderResult(
-          data
-        );
-
-      } catch (error) {
-        console.error(
-          "Protocol Scout error:",
-          error
-        );
-
-        setText(
-          "analysisStatus",
-          "Analysis failed."
-        );
-
-      } finally {
-        if (button) {
-          button.disabled = false;
-          button.textContent =
-            "Analyze";
-        }
-      }
     }
-
-
-    /* =====================================================
-       INIT
-    ===================================================== */
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      () => {
-
-        const button =
-          $("analyzeBtn");
-
-        if (button) {
-          button.addEventListener(
-            "click",
-            () => {
-              analyze(
-                DEFAULT_SLUG
-              );
-            }
-          );
-        }
-
-        analyze(
-          DEFAULT_SLUG
-        );
-
-      }
-    );
-  </script>
+  );
+</script>
 
 </body>
 </html>
