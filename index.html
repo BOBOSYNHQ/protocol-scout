@@ -19,7 +19,7 @@
       margin: 0;
       background: #000;
       color: #fff;
-      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
       line-height: 1.6;
     }
 
@@ -28,42 +28,33 @@
       text-decoration: none;
     }
 
-    .container {
-      width: min(1120px, calc(100% - 40px));
-      margin: 0 auto;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
     header {
+      border-bottom: 1px solid #1a1a1a;
       position: sticky;
       top: 0;
-      z-index: 20;
-      border-bottom: 1px solid #222;
       background: rgba(0, 0, 0, 0.92);
       backdrop-filter: blur(12px);
+      z-index: 20;
     }
 
-    nav {
-      width: min(1120px, calc(100% - 40px));
-      height: 72px;
+    .nav {
+      max-width: 1180px;
       margin: 0 auto;
+      padding: 18px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
     .brand {
-      font-size: 18px;
       font-weight: 800;
-      letter-spacing: 0.04em;
+      letter-spacing: -0.03em;
+      font-size: 18px;
     }
 
     .nav-links {
       display: flex;
-      gap: 28px;
+      gap: 24px;
       color: #999;
       font-size: 14px;
     }
@@ -72,79 +63,71 @@
       color: #fff;
     }
 
-    main {
-      padding-bottom: 100px;
-    }
-
     .hero {
-      padding: 110px 0 90px;
-      text-align: center;
-      border-bottom: 1px solid #181818;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 100px 24px 80px;
     }
 
     .eyebrow {
       color: #777;
-      font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
+      font-size: 12px;
       margin-bottom: 18px;
     }
 
     h1 {
-      margin: 0;
       font-size: clamp(42px, 7vw, 76px);
       line-height: 1;
-      letter-spacing: -0.05em;
+      letter-spacing: -0.06em;
+      margin: 0 0 18px;
     }
 
     .tagline {
-      margin-top: 24px;
-      font-size: 24px;
-      color: #ddd;
+      font-size: 22px;
       font-weight: 600;
+      margin-bottom: 8px;
     }
 
     .subtitle {
-      max-width: 620px;
-      margin: 16px auto 34px;
       color: #888;
       font-size: 16px;
+      max-width: 620px;
     }
 
     .analyzer {
-      max-width: 620px;
-      margin: 0 auto;
+      margin-top: 42px;
       display: flex;
-      gap: 10px;
+      gap: 12px;
+      max-width: 680px;
     }
 
     .analyzer input {
       flex: 1;
       min-width: 0;
-      height: 52px;
-      padding: 0 16px;
-      border: 1px solid #333;
+      background: #080808;
+      border: 1px solid #292929;
+      color: #fff;
+      padding: 15px 17px;
       border-radius: 8px;
       outline: none;
-      background: #0b0b0b;
-      color: #fff;
       font-size: 15px;
     }
 
     .analyzer input:focus {
-      border-color: #666;
+      border-color: #555;
     }
 
     .analyzer button {
-      height: 52px;
-      padding: 0 24px;
-      border: 1px solid #fff;
-      border-radius: 8px;
       background: #fff;
       color: #000;
-      font-size: 15px;
+      border: 0;
+      border-radius: 8px;
+      padding: 0 24px;
       font-weight: 700;
       cursor: pointer;
+      font-size: 14px;
     }
 
     .analyzer button:hover {
@@ -157,20 +140,33 @@
     }
 
     .message {
-      min-height: 24px;
-      margin-top: 16px;
-      color: #888;
-      font-size: 14px;
+      margin-top: 12px;
+      color: #777;
+      font-size: 13px;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+    }
+
+    .hidden {
+      display: none;
     }
 
     .section {
-      padding: 72px 0 0;
+      border-top: 1px solid #1a1a1a;
+      padding: 58px 0;
+      scroll-margin-top: 90px;
     }
 
     .section-title {
-      margin-bottom: 26px;
-      font-size: 28px;
-      letter-spacing: -0.03em;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #777;
+      margin-bottom: 28px;
     }
 
     .protocol-header {
@@ -178,14 +174,14 @@
       align-items: flex-end;
       justify-content: space-between;
       gap: 20px;
-      margin-bottom: 34px;
+      margin-bottom: 38px;
     }
 
     .protocol-name {
-      margin: 0;
-      font-size: 42px;
+      font-size: 38px;
       line-height: 1.1;
       letter-spacing: -0.04em;
+      font-weight: 700;
     }
 
     .protocol-meta {
@@ -196,171 +192,172 @@
     .grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: #222;
-      border: 1px solid #222;
+      gap: 14px;
     }
 
     .card {
-      background: #000;
-      padding: 24px;
-      min-height: 130px;
+      background: #070707;
+      border: 1px solid #191919;
+      border-radius: 10px;
+      padding: 22px;
     }
 
     .label {
       color: #666;
       font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 10px;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
     }
 
     .value {
-      font-size: 18px;
-      font-weight: 600;
+      font-size: 16px;
+      color: #eee;
       word-break: break-word;
     }
 
-    .value a {
-      text-decoration: underline;
-      text-underline-offset: 3px;
+    .value strong {
+      color: #fff;
     }
 
     .chains {
-      display: flex !important;
+      display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
+      gap: 7px;
+      align-items: flex-start;
     }
 
     .chain {
-      display: inline-flex !important;
-      align-items: center;
-      width: fit-content;
-      padding: 5px 9px;
-      border: 1px solid #2a2a2a;
+      display: inline-block;
+      border: 1px solid #292929;
+      background: #0b0b0b;
       border-radius: 999px;
+      padding: 4px 9px;
       color: #bbb;
-      background: #080808;
       font-size: 12px;
-      line-height: 1.2;
+      line-height: 1.4;
       white-space: nowrap;
-      word-break: normal;
     }
 
     .metric-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: #222;
-      border: 1px solid #222;
+      gap: 14px;
     }
 
     .metric {
-      background: #000;
-      padding: 28px 24px;
+      background: #070707;
+      border: 1px solid #191919;
+      border-radius: 10px;
+      padding: 24px;
     }
 
-    .metric .number {
-      font-size: 30px;
+    .metric .metric-value {
+      font-size: 28px;
       font-weight: 700;
       letter-spacing: -0.03em;
-    }
-
-    .metric .label {
-      margin-bottom: 8px;
     }
 
     .two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 14px;
     }
 
-    .panel {
-      border: 1px solid #222;
+    .content-card {
+      background: #070707;
+      border: 1px solid #191919;
+      border-radius: 10px;
       padding: 28px;
-      background: #050505;
     }
 
-    .panel h3 {
+    .content-card h3 {
       margin: 0 0 14px;
       font-size: 20px;
+      letter-spacing: -0.02em;
     }
 
-    .panel p {
-      margin: 0;
+    .content-card p {
       color: #aaa;
+      margin: 0;
     }
 
-    .panel ul {
-      margin: 14px 0 0;
+    ul {
+      margin: 12px 0 0;
       padding-left: 20px;
       color: #aaa;
     }
 
-    .panel li {
+    li {
       margin: 6px 0;
     }
 
     .risk-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: #222;
-      border: 1px solid #222;
+      gap: 14px;
     }
 
-    .risk-item {
-      background: #000;
-      padding: 26px;
-    }
-
-    .risk-item h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-    }
-
-    .risk-item p {
-      margin: 0;
-      color: #aaa;
-    }
-
-    .sources {
+    .source-list {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
 
     .source {
-      display: inline-flex;
-      padding: 8px 12px;
-      border: 1px solid #2a2a2a;
-      border-radius: 999px;
-      color: #bbb;
+      border: 1px solid #242424;
+      background: #080808;
+      padding: 9px 13px;
+      border-radius: 7px;
+      color: #aaa;
       font-size: 13px;
     }
 
     .source:hover {
       color: #fff;
-      border-color: #555;
+      border-color: #444;
     }
 
     footer {
-      border-top: 1px solid #181818;
-      padding: 40px 0;
-      color: #666;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 40px 24px 70px;
+      border-top: 1px solid #1a1a1a;
+      color: #555;
       font-size: 13px;
-      text-align: center;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 850px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .metric-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .two-col,
+      .risk-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .nav {
+        padding: 15px 18px;
+      }
+
       .nav-links {
-        gap: 16px;
+        gap: 12px;
+        font-size: 12px;
       }
 
       .hero {
-        padding: 80px 0 70px;
+        padding: 70px 18px 60px;
+      }
+
+      .container {
+        padding: 0 18px 70px;
       }
 
       .analyzer {
@@ -368,22 +365,11 @@
       }
 
       .analyzer button {
-        width: 100%;
+        height: 48px;
       }
 
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
+      .grid,
       .metric-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .two-col {
-        grid-template-columns: 1fr;
-      }
-
-      .risk-grid {
         grid-template-columns: 1fr;
       }
 
@@ -392,477 +378,456 @@
         flex-direction: column;
       }
     }
-
-    @media (max-width: 520px) {
-      .container,
-      nav {
-        width: min(100% - 28px, 1120px);
-      }
-
-      .nav-links {
-        font-size: 12px;
-        gap: 12px;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .protocol-name {
-        font-size: 34px;
-      }
-    }
   </style>
 </head>
 
 <body>
 
 <header>
-  <nav>
+  <div class="nav">
     <a class="brand" href="#">BOBOSYN</a>
 
-    <div class="nav-links">
+    <nav class="nav-links">
       <a href="#overview">About</a>
       <a href="#research">Research</a>
       <a href="#risks">Risk</a>
+    </nav>
+
+    <div style="color:#666;font-size:12px;">
+      Independent Web3 Research
     </div>
-  </nav>
+  </div>
 </header>
 
-<main>
+<section class="hero">
 
-  <section class="hero">
-    <div class="container">
+  <div class="eyebrow">BOBOSYN Protocol Scout</div>
 
-      <div class="eyebrow">Independent Web3 Research</div>
+  <h1>BOBOSYN Protocol Scout</h1>
 
-      <h1>BOBOSYN Protocol Scout</h1>
+  <div class="tagline">
+    Scout. Research. Understand.
+  </div>
 
-      <div class="tagline">
-        Scout. Research. Understand.
+  <div class="subtitle">
+    AI-powered Web3 protocol research.
+  </div>
+
+  <div class="analyzer">
+    <input
+      id="protocolInput"
+      type="text"
+      placeholder="Enter a protocol"
+      autocomplete="off"
+    >
+
+    <button id="analyzeBtn">
+      Analyze
+    </button>
+  </div>
+
+  <div id="message" class="message"></div>
+
+</section>
+
+
+<div id="results" class="container hidden">
+
+  <div class="protocol-header">
+    <div>
+      <div id="protocolName" class="protocol-name">—</div>
+      <div id="protocolMeta" class="protocol-meta"></div>
+    </div>
+  </div>
+
+
+  <!-- Protocol Overview -->
+  <section id="overview" class="section">
+
+    <div class="section-title">
+      Protocol Overview
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="label">Category</div>
+        <div id="category" class="value"></div>
       </div>
 
-      <div class="subtitle">
-        AI-powered Web3 protocol research.
+      <div class="card">
+        <div class="label">Status</div>
+        <div id="status" class="value"></div>
       </div>
 
-      <div class="analyzer">
-        <input
-          id="protocolInput"
-          type="text"
-          placeholder="Enter a protocol"
-          autocomplete="off"
-        >
-
-        <button id="analyzeBtn">
-          Analyze
-        </button>
+      <div class="card">
+        <div class="label">Website</div>
+        <div id="website" class="value"></div>
       </div>
 
-      <div id="message" class="message"></div>
+      <div class="card">
+        <div class="label">Chains</div>
+        <div id="chains" class="value chains"></div>
+      </div>
 
     </div>
+
   </section>
 
 
-  <div id="results" class="container hidden">
+  <!-- Market -->
+  <section class="section">
 
-    <!-- Protocol Header -->
-    <section class="section">
-      <div class="protocol-header">
+    <div class="section-title">
+      Market
+    </div>
 
-        <div>
-          <h2 id="protocolName" class="protocol-name">—</h2>
-        </div>
+    <div class="grid">
 
-        <div id="protocolMeta" class="protocol-meta"></div>
-
-      </div>
-    </section>
-
-
-    <!-- Overview -->
-    <section id="overview" class="section">
-
-      <h2 class="section-title">
-        Protocol Overview
-      </h2>
-
-      <div class="grid">
-
-        <div class="card">
-          <div class="label">Category</div>
-          <div id="category" class="value">—</div>
-        </div>
-
-        <div class="card">
-          <div class="label">Status</div>
-          <div id="status" class="value">—</div>
-        </div>
-
-        <div class="card">
-          <div class="label">Website</div>
-          <div id="website" class="value">—</div>
-        </div>
-
-        <div class="card">
-          <div class="label">Chains</div>
-          <div id="chains" class="value chains"></div>
-        </div>
-
+      <div class="card">
+        <div class="label">TVL</div>
+        <div id="tvl" class="value"></div>
       </div>
 
-    </section>
-
-
-    <!-- Market -->
-    <section class="section">
-
-      <h2 class="section-title">
-        Market
-      </h2>
-
-      <div class="metric-grid">
-
-        <div class="metric">
-          <div class="label">TVL</div>
-          <div id="tvl" class="number">—</div>
-        </div>
-
-        <div class="metric">
-          <div class="label">Token</div>
-          <div id="token" class="number">—</div>
-        </div>
-
-        <div class="metric">
-          <div class="label">Token Price</div>
-          <div id="tokenPrice" class="number">—</div>
-        </div>
-
-        <div class="metric">
-          <div class="label">24h Change</div>
-          <div id="change24h" class="number">—</div>
-        </div>
-
+      <div class="card">
+        <div class="label">Token</div>
+        <div id="token" class="value"></div>
       </div>
 
-    </section>
-
-
-    <!-- Metrics -->
-    <section class="section">
-
-      <h2 class="section-title">
-        Protocol Metrics
-      </h2>
-
-      <div class="metric-grid">
-
-        <div class="metric">
-          <div class="label">Fees 24h</div>
-          <div id="fees24h" class="number">—</div>
-        </div>
-
-        <div class="metric">
-          <div class="label">Fees 7d</div>
-          <div id="fees7d" class="number">—</div>
-        </div>
-
-        <div class="metric">
-          <div class="label">Fees 30d</div>
-          <div id="fees30d" class="number">—</div>
-        </div>
-
-        <div class="metric">
-          <div class="label">Revenue 24h</div>
-          <div id="revenue24h" class="number">—</div>
-        </div>
-
-        <div class="metric">
-          <div class="label">Revenue 7d</div>
-          <div id="revenue7d" class="number">—</div>
-        </div>
-
-        <div class="metric">
-          <div class="label">Revenue 30d</div>
-          <div id="revenue30d" class="number">—</div>
-        </div>
-
+      <div class="card">
+        <div class="label">Token Price</div>
+        <div id="tokenPrice" class="value"></div>
       </div>
 
-    </section>
+      <div class="card">
+        <div class="label">24h Change</div>
+        <div id="change24h" class="value"></div>
+      </div>
+
+    </div>
+
+  </section>
 
 
-    <!-- How It Works -->
-    <section class="section">
+  <!-- Metrics -->
+  <section class="section">
 
-      <h2 class="section-title">
-        How It Works
-      </h2>
+    <div class="section-title">
+      Protocol Metrics
+    </div>
 
-      <div class="panel">
+    <div class="metric-grid">
 
-        <h3 id="howTitle">
-          Protocol Mechanism
+      <div class="metric">
+        <div class="label">Fees 24h</div>
+        <div id="fees24h" class="metric-value"></div>
+      </div>
+
+      <div class="metric">
+        <div class="label">Fees 7d</div>
+        <div id="fees7d" class="metric-value"></div>
+      </div>
+
+      <div class="metric">
+        <div class="label">Fees 30d</div>
+        <div id="fees30d" class="metric-value"></div>
+      </div>
+
+      <div class="metric">
+        <div class="label">Revenue 24h</div>
+        <div id="revenue24h" class="metric-value"></div>
+      </div>
+
+      <div class="metric">
+        <div class="label">Revenue 7d</div>
+        <div id="revenue7d" class="metric-value"></div>
+      </div>
+
+      <div class="metric">
+        <div class="label">Revenue 30d</div>
+        <div id="revenue30d" class="metric-value"></div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- How It Works -->
+  <section class="section">
+
+    <div class="section-title">
+      How It Works
+    </div>
+
+    <div class="content-card">
+
+      <h3 id="howTitle">Protocol Mechanism</h3>
+
+      <p id="howSummary"></p>
+
+      <ul id="howSteps"></ul>
+
+    </div>
+
+  </section>
+
+
+  <!-- Business Model -->
+  <section class="section">
+
+    <div class="section-title">
+      Business Model
+    </div>
+
+    <div class="content-card">
+
+      <h3 id="businessStatus"></h3>
+
+      <div
+        id="businessModel"
+        class="label"
+        style="margin-top:10px;"
+      ></div>
+
+      <p id="businessExplanation"></p>
+
+      <ul id="revenueSources"></ul>
+
+    </div>
+
+  </section>
+
+
+  <!-- Users -->
+  <section class="section">
+
+    <div class="section-title">
+      Users & Adoption
+    </div>
+
+    <div class="two-col">
+
+      <div class="content-card">
+
+        <h3 id="usersStatus">
+          Primary Users
         </h3>
 
-        <p id="howSummary"></p>
-
-        <ul id="howSteps"></ul>
+        <ul id="primaryUsers"></ul>
 
       </div>
 
-    </section>
+      <div class="content-card">
 
-
-    <!-- Business Model -->
-    <section class="section">
-
-      <h2 class="section-title">
-        Business Model
-      </h2>
-
-      <div class="panel">
-
-        <h3 id="businessStatus"></h3>
-
-        <p id="businessModel"></p>
-
-        <p id="businessExplanation" style="margin-top: 14px;"></p>
-
-        <ul id="revenueSources"></ul>
-
-      </div>
-
-    </section>
-
-
-    <!-- Users -->
-    <section class="section">
-
-      <h2 class="section-title">
-        Users & Adoption
-      </h2>
-
-      <div class="two-col">
-
-        <div class="panel">
-
-          <h3 id="usersStatus">
-            Primary Users
-          </h3>
-
-          <ul id="primaryUsers"></ul>
-
-        </div>
-
-        <div class="panel">
-
-          <h3>
-            Use Cases
-          </h3>
-
-          <ul id="useCases"></ul>
-
-        </div>
-
-      </div>
-
-      <div class="panel" style="margin-top: 20px;">
-
-        <p id="adoption"></p>
-
-      </div>
-
-    </section>
-
-
-    <!-- Competition -->
-    <section class="section">
-
-      <h2 class="section-title">
-        Competitive Landscape
-      </h2>
-
-      <div class="panel">
-
-        <h3 id="competitionStatus"></h3>
-
-        <h3 id="competitionCategory" style="margin-top: 22px;">
-          Competitors
+        <h3>
+          Use Cases
         </h3>
 
-        <ul id="competitors"></ul>
-
-        <h3 style="margin-top: 26px;">
-          Differentiation
-        </h3>
-
-        <p id="differentiation"></p>
+        <ul id="useCases"></ul>
 
       </div>
 
-    </section>
+    </div>
+
+    <div
+      id="adoption"
+      style="margin-top:14px;"
+      class="content-card"
+    ></div>
+
+  </section>
 
 
-    <!-- Risk -->
-    <section id="risks" class="section">
+  <!-- Competition -->
+  <section class="section">
 
-      <h2 class="section-title">
-        Risk Analysis
-      </h2>
+    <div class="section-title">
+      Competitive Landscape
+    </div>
 
-      <div class="risk-grid">
+    <div class="content-card">
 
-        <div class="risk-item">
-          <h3>Smart Contract</h3>
-          <p id="riskSmartContract">—</p>
-        </div>
+      <h3 id="competitionStatus"></h3>
 
-        <div class="risk-item">
-          <h3>Protocol</h3>
-          <p id="riskProtocol">—</p>
-        </div>
+      <div
+        id="competitionCategory"
+        class="label"
+      ></div>
 
-        <div class="risk-item">
-          <h3>Token</h3>
-          <p id="riskToken">—</p>
-        </div>
+      <h3 style="margin-top:26px;">
+        Competitors
+      </h3>
 
-        <div class="risk-item">
-          <h3>Dependencies</h3>
-          <p id="riskDependencies">—</p>
-        </div>
+      <ul id="competitors"></ul>
 
+      <h3 style="margin-top:26px;">
+        Differentiation
+      </h3>
+
+      <p id="differentiation"></p>
+
+    </div>
+
+  </section>
+
+
+  <!-- Risk -->
+  <section id="risks" class="section">
+
+    <div class="section-title">
+      Risk Analysis
+    </div>
+
+    <div class="risk-grid">
+
+      <div class="content-card">
+        <h3>Smart Contract</h3>
+        <p id="riskSmartContract"></p>
       </div>
 
-    </section>
+      <div class="content-card">
+        <h3>Protocol</h3>
+        <p id="riskProtocol"></p>
+      </div>
+
+      <div class="content-card">
+        <h3>Token</h3>
+        <p id="riskToken"></p>
+      </div>
+
+      <div class="content-card">
+        <h3>Dependencies</h3>
+        <p id="riskDependencies"></p>
+      </div>
+
+    </div>
+
+  </section>
 
 
-    <!-- Research Summary -->
-    <section class="section">
+  <!-- Research Summary -->
+  <section class="section">
 
-      <h2 class="section-title">
-        Research Summary
-      </h2>
+    <div class="section-title">
+      Research Summary
+    </div>
 
-      <div class="panel">
+    <div class="content-card">
+
+      <div class="label">
+        Research Status
+      </div>
+
+      <h3 id="researchStatus"></h3>
+
+      <p id="researchSummary"></p>
+
+    </div>
+
+  </section>
+
+
+  <!-- Research -->
+  <section id="research" class="section">
+
+    <div class="section-title">
+      Research
+    </div>
+
+    <div class="two-col">
+
+      <div class="content-card">
 
         <div class="label">
-          Research Status
+          Core Function
         </div>
 
-        <h3 id="researchStatus"></h3>
-
-        <p id="researchSummary"></p>
+        <h3 id="coreFunction"></h3>
 
       </div>
 
-    </section>
+      <div class="content-card">
 
-
-    <!-- Research -->
-    <section id="research" class="section">
-
-      <h2 class="section-title">
-        Research
-      </h2>
-
-      <div class="two-col">
-
-        <div class="panel">
-
-          <h3>
-            Core Function
-          </h3>
-
-          <p id="coreFunction"></p>
-
+        <div class="label">
+          Mechanism
         </div>
 
-        <div class="panel">
-
-          <h3>
-            Mechanism
-          </h3>
-
-          <p id="mechanism"></p>
-
-        </div>
-
-        <div class="panel">
-
-          <h3>
-            Users
-          </h3>
-
-          <p id="researchUsers"></p>
-
-        </div>
-
-        <div class="panel">
-
-          <h3>
-            Revenue
-          </h3>
-
-          <p id="researchRevenue"></p>
-
-        </div>
+        <p id="mechanism"></p>
 
       </div>
 
-    </section>
+      <div class="content-card">
 
-
-    <!-- Risk Snapshot -->
-    <section class="section">
-
-      <h2 class="section-title">
-        Risk Snapshot
-      </h2>
-
-      <div class="risk-grid">
-
-        <div class="risk-item">
-          <h3>Smart Contract</h3>
-          <p id="snapshotSmartContract">—</p>
+        <div class="label">
+          Users
         </div>
 
-        <div class="risk-item">
-          <h3>Protocol</h3>
-          <p id="snapshotProtocol">—</p>
-        </div>
-
-        <div class="risk-item">
-          <h3>Token</h3>
-          <p id="snapshotToken">—</p>
-        </div>
-
-        <div class="risk-item">
-          <h3>Dependencies</h3>
-          <p id="snapshotDependencies">—</p>
-        </div>
+        <p id="researchUsers"></p>
 
       </div>
 
-    </section>
+      <div class="content-card">
+
+        <div class="label">
+          Revenue
+        </div>
+
+        <p id="researchRevenue"></p>
+
+      </div>
+
+    </div>
+
+  </section>
 
 
-    <!-- Sources -->
-    <section class="section">
+  <!-- Risk Snapshot -->
+  <section class="section">
 
-      <h2 class="section-title">
-        Sources
-      </h2>
+    <div class="section-title">
+      Risk Snapshot
+    </div>
 
-      <div id="sources" class="sources"></div>
+    <div class="risk-grid">
 
-    </section>
+      <div class="content-card">
+        <h3>Smart Contract</h3>
+        <p id="snapshotSmartContract"></p>
+      </div>
 
-  </div>
+      <div class="content-card">
+        <h3>Protocol</h3>
+        <p id="snapshotProtocol"></p>
+      </div>
 
-</main>
+      <div class="content-card">
+        <h3>Token</h3>
+        <p id="snapshotToken"></p>
+      </div>
+
+      <div class="content-card">
+        <h3>Dependencies</h3>
+        <p id="snapshotDependencies"></p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Sources -->
+  <section class="section">
+
+    <div class="section-title">
+      Sources
+    </div>
+
+    <div id="sources" class="source-list"></div>
+
+  </section>
+
+</div>
 
 
 <footer>
@@ -876,418 +841,501 @@
     "https://protocol-scout-api.superhelong.workers.dev/analyze";
 
 
-  const input =
-    document.getElementById("protocolInput");
-
-  const button =
-    document.getElementById("analyzeBtn");
-
-  const message =
-    document.getElementById("message");
-
-  const results =
-    document.getElementById("results");
+  const $ = (id) => document.getElementById(id);
 
 
-  function isEmpty(value) {
+  function safe(value, fallback = "") {
 
-    return (
+    if (
       value === null ||
       value === undefined ||
       value === ""
-    );
+    ) {
+      return fallback;
+    }
 
+    return String(value);
   }
 
 
   function isPlaceholder(value) {
 
-    if (value === null || value === undefined) {
+    if (
+      value === null ||
+      value === undefined
+    ) {
       return true;
     }
 
-    const text =
-      String(value).trim();
+    const text = String(value).trim();
 
     return (
       text === "" ||
       text === "-" ||
-      text === "—"
+      text === "—" ||
+      text === "–"
     );
+  }
+
+
+  function cleanArray(value) {
+
+    if (!Array.isArray(value)) {
+      return [];
+    }
+
+    return value
+      .flat(Infinity)
+      .map(item => String(item).trim())
+      .filter(item => !isPlaceholder(item));
 
   }
 
 
-  function safe(value, fallback = "—") {
+  function setText(id, value, fallback = "") {
 
-    if (isPlaceholder(value)) {
-      return fallback;
-    }
+    const el = $(id);
 
-    return value;
-
-  }
-
-
-  function formatCurrency(value) {
-
-    if (
-      value === null ||
-      value === undefined ||
-      value === "" ||
-      Number.isNaN(Number(value))
-    ) {
-      return "—";
-    }
-
-    const number =
-      Number(value);
-
-    return number.toLocaleString(
-      "en-US",
-      {
-        style: "currency",
-        currency: "USD",
-        maximumFractionDigits: 2
-      }
-    );
-
-  }
-
-
-  function formatCompactCurrency(value) {
-
-    if (
-      value === null ||
-      value === undefined ||
-      value === "" ||
-      Number.isNaN(Number(value))
-    ) {
-      return "—";
-    }
-
-    const number =
-      Number(value);
-
-    if (number >= 1e9) {
-      return "$" +
-        (number / 1e9).toFixed(2) +
-        "B";
-    }
-
-    if (number >= 1e6) {
-      return "$" +
-        (number / 1e6).toFixed(2) +
-        "M";
-    }
-
-    if (number >= 1e3) {
-      return "$" +
-        (number / 1e3).toFixed(2) +
-        "K";
-    }
-
-    return "$" +
-      number.toFixed(2);
-
-  }
-
-
-  function formatTokenPrice(value) {
-
-    if (
-      value === null ||
-      value === undefined ||
-      value === "" ||
-      Number.isNaN(Number(value))
-    ) {
-      return "—";
-    }
-
-    const number =
-      Number(value);
-
-    return number.toLocaleString(
-      "en-US",
-      {
-        style: "currency",
-        currency: "USD",
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      }
-    );
-
-  }
-
-
-  function formatChange(value) {
-
-    if (
-      value === null ||
-      value === undefined ||
-      value === "" ||
-      Number.isNaN(Number(value))
-    ) {
-      return "N/A";
-    }
-
-    const number =
-      Number(value);
-
-    return (
-      (number > 0 ? "+" : "") +
-      number.toFixed(2) +
-      "%"
-    );
-
-  }
-
-
-  function normalizeSlug(value) {
-
-    const text =
-      String(value || "")
-        .trim()
-        .toLowerCase();
-
-    if (!text) {
-      return "";
-    }
-
-    const aliases = {
-
-      "aave": "aave-v3",
-
-      "aave v3": "aave-v3",
-
-      "aave-v3": "aave-v3"
-
-    };
-
-    return aliases[text] || text;
-
-  }
-
-
-  function setText(
-    id,
-    value,
-    fallback = "—"
-  ) {
-
-    const element =
-      document.getElementById(id);
-
-    if (!element) {
+    if (!el) {
       return;
     }
 
-    if (isPlaceholder(value)) {
-
-      element.textContent =
-        fallback;
-
-      return;
-    }
-
-    element.textContent =
-      String(value);
+    el.textContent = safe(value, fallback);
 
   }
 
 
-  function clearIfEmpty(
-    id
-  ) {
+  function setList(id, values) {
 
-    const element =
-      document.getElementById(id);
+    const el = $(id);
 
-    if (!element) {
+    if (!el) {
       return;
     }
 
-    if (
-      isPlaceholder(
-        element.textContent
-      )
-    ) {
-      element.textContent = "";
-    }
+    el.innerHTML = "";
 
-  }
+    const items = cleanArray(values);
 
-
-  function setList(
-    id,
-    items
-  ) {
-
-    const element =
-      document.getElementById(id);
-
-    if (!element) {
+    if (!items.length) {
+      el.style.display = "none";
       return;
     }
 
-    element.innerHTML = "";
+    el.style.display = "";
 
-    if (!Array.isArray(items)) {
-      return;
-    }
+    items.forEach(item => {
 
-    items
-      .filter(item =>
-        !isPlaceholder(item)
-      )
-      .forEach(item => {
+      const li = document.createElement("li");
 
-        const li =
-          document.createElement("li");
+      li.textContent = item;
 
-        li.textContent =
-          String(item);
-
-        element.appendChild(li);
-
-      });
-
-  }
-
-
-  function renderChains(
-    chains
-  ) {
-
-    const element =
-      document.getElementById("chains");
-
-    if (!element) {
-      return;
-    }
-
-    element.innerHTML = "";
-
-    if (
-      !Array.isArray(chains) ||
-      chains.length === 0
-    ) {
-
-      element.textContent =
-        "—";
-
-      return;
-
-    }
-
-    element.style.display =
-      "flex";
-
-    element.style.flexWrap =
-      "wrap";
-
-    element.style.gap =
-      "8px";
-
-    chains.forEach(chain => {
-
-      if (
-        chain === null ||
-        chain === undefined ||
-        String(chain).trim() === "" ||
-        String(chain).trim() === "-" ||
-        String(chain).trim() === "—"
-      ) {
-        return;
-      }
-
-      const span =
-        document.createElement("span");
-
-      span.className =
-        "chain";
-
-      span.style.display =
-        "inline-flex";
-
-      span.style.width =
-        "fit-content";
-
-      span.textContent =
-        String(chain);
-
-      element.appendChild(
-        span
-      );
+      el.appendChild(li);
 
     });
 
   }
 
 
-  function renderWebsite(
-    url
-  ) {
+  function formatMoney(value) {
 
-    const element =
-      document.getElementById("website");
-
-    if (!element) {
-      return;
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) {
+      return "N/A";
     }
 
-    element.innerHTML = "";
+    const num = Number(value);
 
-    if (isPlaceholder(url)) {
-
-      element.textContent =
-        "—";
-
-      return;
-
+    if (!Number.isFinite(num)) {
+      return String(value);
     }
 
-    const link =
-      document.createElement("a");
+    if (Math.abs(num) >= 1e9) {
+      return "$" + (num / 1e9).toFixed(2) + "B";
+    }
 
-    link.href =
-      String(url);
+    if (Math.abs(num) >= 1e6) {
+      return "$" + (num / 1e6).toFixed(2) + "M";
+    }
 
-    link.target =
-      "_blank";
+    if (Math.abs(num) >= 1e3) {
+      return "$" + (num / 1e3).toFixed(2) + "K";
+    }
 
-    link.rel =
-      "noopener noreferrer";
-
-    link.textContent =
-      String(url);
-
-    element.appendChild(
-      link
+    return "$" + num.toLocaleString(
+      undefined,
+      {
+        maximumFractionDigits: 2
+      }
     );
 
   }
 
 
-  function renderSources(
-    sources
-  ) {
+  function formatPrice(value) {
 
-    const element =
-      document.getElementById("sources");
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) {
+      return "N/A";
+    }
 
-    if (!element) {
+    const num = Number(value);
+
+    if (!Number.isFinite(num)) {
+      return String(value);
+    }
+
+    if (num >= 100) {
+      return "$" + num.toFixed(2);
+    }
+
+    if (num >= 1) {
+      return "$" + num.toFixed(2);
+    }
+
+    return "$" + num.toFixed(4);
+
+  }
+
+
+  /*
+   * Normalize chain names.
+   *
+   * Worker 1.6.0 normally returns an array.
+   * This function also protects the frontend if a string
+   * or accidentally concatenated string is returned.
+   */
+  function normalizeChains(value) {
+
+    if (Array.isArray(value)) {
+
+      return cleanArray(value)
+        .map(chain => chain.replace(/-borrowed$/i, "").trim())
+        .filter(Boolean);
+
+    }
+
+
+    if (
+      value === null ||
+      value === undefined
+    ) {
+      return [];
+    }
+
+
+    let text = String(value).trim();
+
+    if (!text) {
+      return [];
+    }
+
+
+    /*
+     * Normal separators.
+     */
+    if (
+      text.includes(",") ||
+      text.includes("|") ||
+      text.includes("\n") ||
+      text.includes(";")
+    ) {
+
+      return text
+        .split(/[,|;\n]+/)
+        .map(item => item.trim())
+        .filter(Boolean)
+        .map(item => item.replace(/-borrowed$/i, "").trim())
+        .filter(Boolean);
+
+    }
+
+
+    /*
+     * Defensive recovery for concatenated chain names.
+     */
+    const knownChains = [
+      "Ethereum",
+      "Arbitrum",
+      "Optimism",
+      "Base",
+      "Polygon",
+      "Avalanche",
+      "Fantom",
+      "Binance",
+      "BSC",
+      "Celo",
+      "Scroll",
+      "Linea",
+      "zkSync Era",
+      "Sonic",
+      "Soneium",
+      "Plasma",
+      "Monad",
+      "Metis",
+      "X Layer",
+      "Mantle",
+      "Gnosis",
+      "xDai",
+      "MegaETH",
+      "Blast",
+      "Mode",
+      "Zora",
+      "Fraxtal",
+      "Boba",
+      "Cronos",
+      "Moonbeam",
+      "Moonriver",
+      "Kava",
+      "Aurora",
+      "Harmony",
+      "Manta",
+      "Taiko",
+      "Berachain"
+    ];
+
+    const escaped = knownChains
+      .sort((a, b) => b.length - a.length)
+      .map(name =>
+        name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      );
+
+    const regex = new RegExp(
+      escaped.join("|"),
+      "gi"
+    );
+
+    const matches = text.match(regex);
+
+    if (matches && matches.length) {
+
+      const normalized = [];
+
+      matches.forEach(match => {
+
+        const canonical =
+          knownChains.find(
+            name =>
+              name.toLowerCase() ===
+              match.toLowerCase()
+          );
+
+        if (
+          canonical &&
+          !normalized.includes(canonical)
+        ) {
+          normalized.push(canonical);
+        }
+
+      });
+
+      if (normalized.length) {
+        return normalized;
+      }
+
+    }
+
+
+    return [text];
+
+  }
+
+
+  function renderChains(value) {
+
+    const el = $("chains");
+
+    if (!el) {
       return;
     }
 
-    element.innerHTML = "";
+    el.innerHTML = "";
+
+    const chains = normalizeChains(value);
+
+    if (!chains.length) {
+      el.style.display = "none";
+      return;
+    }
+
+    el.style.display = "flex";
+    el.className = "value chains";
+
+    chains.forEach(chain => {
+
+      const span =
+        document.createElement("span");
+
+      span.className = "chain";
+      span.textContent = chain;
+
+      el.appendChild(span);
+
+    });
+
+  }
+
+
+  function renderWebsite(value) {
+
+    const el = $("website");
+
+    if (!el) {
+      return;
+    }
+
+    el.innerHTML = "";
+
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) {
+      el.textContent = "N/A";
+      return;
+    }
+
+    const url = String(value).trim();
+
+    if (!url) {
+      el.textContent = "N/A";
+      return;
+    }
+
+    let href = url;
+
+    if (
+      !href.startsWith("http://") &&
+      !href.startsWith("https://")
+    ) {
+      href = "https://" + href;
+    }
+
+    const a =
+      document.createElement("a");
+
+    a.href = href;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+
+    const strong =
+      document.createElement("strong");
+
+    strong.textContent = url;
+
+    a.appendChild(strong);
+
+    el.appendChild(a);
+
+  }
+
+
+  function renderHowItWorks(how) {
+
+    const data = how || {};
+
+    setText(
+      "howTitle",
+      data.title,
+      "Protocol Mechanism"
+    );
+
+    setText(
+      "howSummary",
+      data.summary,
+      ""
+    );
+
+    const steps =
+      cleanArray(data.steps);
+
+    const list =
+      $("howSteps");
+
+    if (!list) {
+      return;
+    }
+
+    list.innerHTML = "";
+
+    if (!steps.length) {
+      list.style.display = "none";
+      return;
+    }
+
+    list.style.display = "";
+
+    steps.forEach(step => {
+
+      const li =
+        document.createElement("li");
+
+      li.textContent = step;
+
+      list.appendChild(li);
+
+    });
+
+  }
+
+
+  function renderBusinessModel(business) {
+
+    const data = business || {};
+
+    /*
+     * The Worker already uses "title" for the business model,
+     * e.g. "Lending".
+     *
+     * Therefore we do not duplicate it in businessModel.
+     */
+    setText(
+      "businessStatus",
+      data.title,
+      ""
+    );
+
+    setText(
+      "businessModel",
+      "",
+      ""
+    );
+
+    setText(
+      "businessExplanation",
+      data.explanation,
+      ""
+    );
+
+    setList(
+      "revenueSources",
+      data.revenueSource
+    );
+
+  }
+
+
+  function renderSources(sources) {
+
+    const el = $("sources");
+
+    if (!el) {
+      return;
+    }
+
+    el.innerHTML = "";
 
     if (!Array.isArray(sources)) {
       return;
     }
 
-    const seen =
-      new Set();
+    const seen = new Set();
 
     sources.forEach(source => {
 
@@ -1298,15 +1346,10 @@
       let name = "";
       let url = "";
 
-      if (
-        typeof source === "string"
-      ) {
+      if (typeof source === "string") {
 
-        name =
-          source;
-
-        url =
-          source;
+        name = source;
+        url = source;
 
       } else {
 
@@ -1318,24 +1361,21 @@
 
         url =
           source.url ||
-          source.link ||
+          source.href ||
           "";
 
       }
 
-      if (
-        isPlaceholder(name) &&
-        isPlaceholder(url)
-      ) {
+      name = String(name).trim();
+      url = String(url).trim();
+
+      if (!name && !url) {
         return;
       }
 
       const key =
-        (
-          name +
-          "|" +
-          url
-        ).toLowerCase();
+        url.toLowerCase() ||
+        name.toLowerCase();
 
       if (seen.has(key)) {
         return;
@@ -1343,64 +1383,57 @@
 
       seen.add(key);
 
-      const link =
+      const item =
         document.createElement("a");
 
-      link.className =
-        "source";
-
-      link.target =
-        "_blank";
-
-      link.rel =
-        "noopener noreferrer";
-
-      link.textContent =
-        name || url;
+      item.className = "source";
 
       if (url) {
-        link.href =
-          url;
+
+        let href = url;
+
+        if (
+          !href.startsWith("http://") &&
+          !href.startsWith("https://")
+        ) {
+          href = "https://" + href;
+        }
+
+        item.href = href;
+        item.target = "_blank";
+        item.rel = "noopener noreferrer";
+
       }
 
-      element.appendChild(
-        link
-      );
+      item.textContent =
+        name || url;
+
+      el.appendChild(item);
 
     });
 
   }
 
 
-  function renderResearchRevenue(
-    revenue
-  ) {
+  function renderResearchRevenue(revenue) {
 
-    const element =
-      document.getElementById(
-        "researchRevenue"
-      );
+    const el = $("researchRevenue");
 
-    if (!element) {
+    if (!el) {
       return;
     }
 
     if (!revenue) {
-
-      element.textContent =
-        "—";
-
+      el.textContent = "";
       return;
-
     }
 
     if (
-      !isPlaceholder(
-        revenue.summary
-      )
+      revenue.summary &&
+      !isPlaceholder(revenue.summary)
     ) {
 
-      element.textContent =
+      el.textContent =
         revenue.summary;
 
       return;
@@ -1409,264 +1442,52 @@
 
     const parts = [];
 
-    if (
-      revenue.daily !== null &&
-      revenue.daily !== undefined
-    ) {
+    if (!isPlaceholder(revenue.daily)) {
 
       parts.push(
         "24h " +
-        formatCurrency(
-          revenue.daily
-        )
+        formatMoney(revenue.daily)
       );
 
     }
 
-    if (
-      revenue.weekly !== null &&
-      revenue.weekly !== undefined
-    ) {
+    if (!isPlaceholder(revenue.weekly)) {
 
       parts.push(
         "7d " +
-        formatCurrency(
-          revenue.weekly
-        )
+        formatMoney(revenue.weekly)
       );
 
     }
 
-    if (
-      revenue.monthly !== null &&
-      revenue.monthly !== undefined
-    ) {
+    if (!isPlaceholder(revenue.monthly)) {
 
       parts.push(
         "30d " +
-        formatCurrency(
-          revenue.monthly
-        )
+        formatMoney(revenue.monthly)
       );
 
     }
 
-    element.textContent =
-      parts.length
-        ? parts.join(" · ")
-        : "—";
+    el.textContent =
+      parts.join(" · ");
 
   }
 
 
-  function renderHowItWorks(
-    how
-  ) {
-
-    const summary =
-      how?.summary;
-
-    setText(
-      "howSummary",
-      summary,
-      ""
-    );
-
-    const steps =
-      Array.isArray(how?.steps)
-        ? how.steps
-        : [];
-
-    setList(
-      "howSteps",
-      steps
-    );
-
-    clearIfEmpty(
-      "howSummary"
-    );
-
-  }
-
-
-  function renderBusinessModel(
-    business
-  ) {
-
-    setText(
-      "businessStatus",
-      business?.title,
-      ""
-    );
-
-    setText(
-      "businessModel",
-      business?.explanation,
-      ""
-    );
-
-    const revenueSources =
-      Array.isArray(
-        business?.revenueSource
-      )
-        ? business.revenueSource
-        : [];
-
-    setList(
-      "revenueSources",
-      revenueSources
-    );
-
-    clearIfEmpty(
-      "businessStatus"
-    );
-
-    clearIfEmpty(
-      "businessModel"
-    );
-
-    clearIfEmpty(
-      "businessExplanation"
-    );
-
-  }
-
-
-  function renderUsers(
-    users
-  ) {
-
-    setText(
-      "usersStatus",
-      users?.title,
-      "Primary Users"
-    );
-
-    setList(
-      "primaryUsers",
-      users?.primaryUsers
-    );
-
-    setList(
-      "useCases",
-      users?.useCases
-    );
-
-    setText(
-      "adoption",
-      users?.summary,
-      ""
-    );
-
-    clearIfEmpty(
-      "adoption"
-    );
-
-  }
-
-
-  function renderCompetition(
-    competition
-  ) {
-
-    setText(
-      "competitionStatus",
-      competition?.title,
-      ""
-    );
-
-    setText(
-      "competitionCategory",
-      "Competitors"
-    );
-
-    setList(
-      "competitors",
-      competition?.competitors
-    );
-
-    setText(
-      "differentiation",
-      competition?.differentiation,
-      ""
-    );
-
-    clearIfEmpty(
-      "competitionStatus"
-    );
-
-    clearIfEmpty(
-      "differentiation"
-    );
-
-  }
-
-
-  function renderRisk(
-    risk
-  ) {
-
-    setText(
-      "riskSmartContract",
-      risk?.smartContract
-    );
-
-    setText(
-      "riskProtocol",
-      risk?.protocol
-    );
-
-    setText(
-      "riskToken",
-      risk?.token
-    );
-
-    setText(
-      "riskDependencies",
-      risk?.dependencies
-    );
-
-    setText(
-      "snapshotSmartContract",
-      risk?.smartContract
-    );
-
-    setText(
-      "snapshotProtocol",
-      risk?.protocol
-    );
-
-    setText(
-      "snapshotToken",
-      risk?.token
-    );
-
-    setText(
-      "snapshotDependencies",
-      risk?.dependencies
-    );
-
-  }
-
-
-  function renderData(
-    data
-  ) {
+  function render(data) {
 
     const protocol =
       data.protocol || {};
+
+    const overview =
+      data.overview || {};
 
     const market =
       data.market || {};
 
     const metrics =
       data.metrics || {};
-
-    const fees =
-      metrics.fees || {};
-
-    const revenue =
-      metrics.revenue || {};
 
     const how =
       data.howItWorks || {};
@@ -1683,18 +1504,20 @@
     const risk =
       data.risk || {};
 
-    const researchSummary =
+    const summary =
       data.researchSummary || {};
 
     const research =
       data.research || {};
 
 
-    /* Protocol */
-
+    /*
+     * Protocol
+     */
     setText(
       "protocolName",
-      protocol.name
+      protocol.name,
+      "Unknown Protocol"
     );
 
     setText(
@@ -1703,172 +1526,240 @@
       ""
     );
 
+
+    /*
+     * Overview
+     */
     setText(
       "category",
-      protocol.category
+      overview.category ||
+      protocol.category,
+      "N/A"
     );
 
     setText(
       "status",
-      protocol.status
+      overview.status ||
+      protocol.status,
+      "N/A"
     );
 
     renderWebsite(
+      overview.website ||
       protocol.website
     );
 
     renderChains(
+      overview.chains ||
       protocol.chains
     );
 
 
-    /* Market */
-
+    /*
+     * Market
+     */
     setText(
       "tvl",
-      formatCompactCurrency(
-        market.tvl
-      )
+      formatMoney(market.tvl),
+      "N/A"
     );
 
     setText(
       "token",
-      market.token
+      market.token,
+      "N/A"
     );
 
     setText(
       "tokenPrice",
-      formatTokenPrice(
-        market.tokenPrice
-      )
+      formatPrice(market.tokenPrice),
+      "N/A"
     );
 
     setText(
       "change24h",
-      formatChange(
-        market.change24h
-      )
+      market.change24h === null ||
+      market.change24h === undefined
+        ? "N/A"
+        : String(market.change24h),
+      "N/A"
     );
 
 
-    /* Metrics */
+    /*
+     * Metrics
+     */
+    const fees =
+      metrics.fees || {};
+
+    const revenue =
+      metrics.revenue || {};
 
     setText(
       "fees24h",
-      formatCompactCurrency(
-        fees.daily
-      )
+      formatMoney(fees.daily),
+      "N/A"
     );
 
     setText(
       "fees7d",
-      formatCompactCurrency(
-        fees.weekly
-      )
+      formatMoney(fees.weekly),
+      "N/A"
     );
 
     setText(
       "fees30d",
-      formatCompactCurrency(
-        fees.monthly
-      )
+      formatMoney(fees.monthly),
+      "N/A"
     );
 
     setText(
       "revenue24h",
-      formatCompactCurrency(
-        revenue.daily
-      )
+      formatMoney(revenue.daily),
+      "N/A"
     );
 
     setText(
       "revenue7d",
-      formatCompactCurrency(
-        revenue.weekly
-      )
+      formatMoney(revenue.weekly),
+      "N/A"
     );
 
     setText(
       "revenue30d",
-      formatCompactCurrency(
-        revenue.monthly
-      )
+      formatMoney(revenue.monthly),
+      "N/A"
     );
 
 
-    /* How It Works */
+    /*
+     * How It Works
+     */
+    renderHowItWorks(how);
 
-    renderHowItWorks(
-      how
+
+    /*
+     * Business Model
+     */
+    renderBusinessModel(business);
+
+
+    /*
+     * Users
+     */
+    setText(
+      "usersStatus",
+      users.title,
+      "Primary Users"
     );
 
-
-    /* Business */
-
-    renderBusinessModel(
-      business
+    setList(
+      "primaryUsers",
+      users.primaryUsers
     );
 
-
-    /* Users */
-
-    renderUsers(
-      users
+    setList(
+      "useCases",
+      users.useCases
     );
-
-
-    /* Competition */
-
-    renderCompetition(
-      competition
-    );
-
-
-    /* Risk */
-
-    renderRisk(
-      risk
-    );
-
-
-    /* Research Summary */
 
     setText(
+      "adoption",
+      users.summary,
+      ""
+    );
+
+
+    /*
+     * Competition
+     */
+    setText(
+      "competitionStatus",
+      competition.title,
+      ""
+    );
+
+    setText(
+      "competitionCategory",
+      competition.category,
+      ""
+    );
+
+    setList(
+      "competitors",
+      competition.competitors
+    );
+
+    setText(
+      "differentiation",
+      competition.differentiation,
+      ""
+    );
+
+
+    /*
+     * Risk
+     */
+    setText(
+      "riskSmartContract",
+      risk.smartContract,
+      ""
+    );
+
+    setText(
+      "riskProtocol",
+      risk.protocol,
+      ""
+    );
+
+    setText(
+      "riskToken",
+      risk.token,
+      ""
+    );
+
+    setText(
+      "riskDependencies",
+      risk.dependencies,
+      ""
+    );
+
+
+    /*
+     * Research Summary
+     */
+    setText(
       "researchStatus",
-      researchSummary.status,
+      summary.status,
       ""
     );
 
     setText(
       "researchSummary",
-      researchSummary.summary,
+      summary.summary,
       ""
     );
 
-    clearIfEmpty(
-      "researchStatus"
-    );
 
-    clearIfEmpty(
-      "researchSummary"
-    );
-
-
-    /* Research */
-
+    /*
+     * Research
+     */
     setText(
       "coreFunction",
-      research.coreFunction
+      research.coreFunction,
+      ""
     );
 
     setText(
       "mechanism",
-      research.mechanism
+      research.mechanism,
+      ""
     );
 
     setText(
       "researchUsers",
-      research.users
+      research.users,
+      ""
     );
 
     renderResearchRevenue(
@@ -1876,8 +1767,37 @@
     );
 
 
-    /* Sources */
+    /*
+     * Risk Snapshot
+     */
+    setText(
+      "snapshotSmartContract",
+      risk.smartContract,
+      ""
+    );
 
+    setText(
+      "snapshotProtocol",
+      risk.protocol,
+      ""
+    );
+
+    setText(
+      "snapshotToken",
+      risk.token,
+      ""
+    );
+
+    setText(
+      "snapshotDependencies",
+      risk.dependencies,
+      ""
+    );
+
+
+    /*
+     * Sources
+     */
     renderSources(
       data.sources
     );
@@ -1885,32 +1805,63 @@
   }
 
 
+  function normalizeInput(value) {
+
+    let slug =
+      String(value || "")
+        .trim()
+        .toLowerCase();
+
+    if (!slug) {
+      return "";
+    }
+
+    const aliases = {
+      "aave": "aave-v3",
+      "aave v3": "aave-v3",
+      "aave-v3": "aave-v3"
+    };
+
+    return aliases[slug] || slug;
+
+  }
+
+
   async function analyze() {
 
-    const raw =
-      input.value.trim();
+    const input =
+      $("protocolInput");
 
-    if (!raw) {
+    const button =
+      $("analyzeBtn");
+
+    const message =
+      $("message");
+
+    const results =
+      $("results");
+
+
+    const slug =
+      normalizeInput(input.value);
+
+
+    if (!slug) {
 
       message.textContent =
         "Please enter a protocol.";
+
+      results.classList.add("hidden");
 
       return;
 
     }
 
-    const slug =
-      normalizeSlug(raw);
 
-    button.disabled =
-      true;
+    button.disabled = true;
 
     message.textContent =
-      "Analyzing...";
-
-    results.classList.add(
-      "hidden"
-    );
+      "Analyzing " + slug + "…";
 
 
     try {
@@ -1918,21 +1869,16 @@
       const url =
         API_URL +
         "?slug=" +
-        encodeURIComponent(
-          slug
-        ) +
+        encodeURIComponent(slug) +
         "&t=" +
         Date.now();
 
 
       const response =
-        await fetch(
-          url,
-          {
-            method: "GET",
-            cache: "no-store"
-          }
-        );
+        await fetch(url, {
+          method: "GET",
+          cache: "no-store"
+        });
 
 
       if (!response.ok) {
@@ -1949,28 +1895,22 @@
         await response.json();
 
 
-      if (!data.ok) {
+      if (!data || data.ok !== true) {
 
         throw new Error(
-          data.error ||
+          data?.error ||
           "Analysis failed."
         );
 
       }
 
 
-      renderData(
-        data
-      );
+      render(data);
 
+      results.classList.remove("hidden");
 
       message.textContent =
         "Analysis complete.";
-
-
-      results.classList.remove(
-        "hidden"
-      );
 
 
       setTimeout(() => {
@@ -1980,49 +1920,45 @@
           block: "start"
         });
 
-      }, 50);
+      }, 80);
 
 
     } catch (error) {
 
-      console.error(
-        error
-      );
+      console.error(error);
+
+      results.classList.add("hidden");
 
       message.textContent =
-        error.message ||
-        "Something went wrong.";
+        "Analysis failed. Please try again.";
 
     } finally {
 
-      button.disabled =
-        false;
+      button.disabled = false;
 
     }
 
   }
 
 
-  button.addEventListener(
-    "click",
-    analyze
-  );
+  $("analyzeBtn")
+    .addEventListener(
+      "click",
+      analyze
+    );
 
 
-  input.addEventListener(
-    "keydown",
-    event => {
+  $("protocolInput")
+    .addEventListener(
+      "keydown",
+      event => {
 
-      if (
-        event.key === "Enter"
-      ) {
-
-        analyze();
+        if (event.key === "Enter") {
+          analyze();
+        }
 
       }
-
-    }
-  );
+    );
 
 </script>
 
