@@ -1,31 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>BOBOSYN Protocol Scout</title>
 
-  <meta
-    name="description"
-    content="BOBOSYN Protocol Scout — AI-powered Web3 protocol research."
-  />
-
   <style>
-    :root {
-      --bg: #0a0a0a;
-      --bg-soft: #111111;
-      --card: #141414;
-      --card-hover: #191919;
-      --text: #f5f5f5;
-      --muted: #8b8b8b;
-      --muted-2: #666666;
-      --line: #252525;
-      --accent: #ffffff;
-      --danger: #ff6b6b;
-      --success: #62d39b;
-    }
-
     * {
       box-sizing: border-box;
     }
@@ -36,18 +21,15 @@
 
     body {
       margin: 0;
-      background: var(--bg);
-      color: var(--text);
+      background: #050505;
+      color: #f5f5f5;
       font-family:
         Inter,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
-        Roboto,
-        Helvetica,
-        Arial,
         sans-serif;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     a {
@@ -63,334 +45,299 @@
     header {
       position: sticky;
       top: 0;
-      z-index: 50;
-      border-bottom: 1px solid var(--line);
-      background: rgba(10, 10, 10, 0.92);
-      backdrop-filter: blur(14px);
+      z-index: 20;
+      background: rgba(5, 5, 5, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #181818;
     }
 
     .nav {
-      min-height: 72px;
+      height: 70px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
     }
 
     .brand {
-      font-size: 18px;
       font-weight: 800;
       letter-spacing: -0.04em;
-    }
-
-    .brand span {
-      color: var(--muted);
-      font-weight: 500;
+      font-size: 18px;
     }
 
     .nav-links {
       display: flex;
-      gap: 24px;
-      color: var(--muted);
+      gap: 28px;
+      color: #8c8c8c;
       font-size: 14px;
     }
 
     .nav-links a:hover {
-      color: var(--text);
+      color: #fff;
     }
 
     .hero {
-      padding: 110px 0 70px;
-      text-align: center;
+      padding: 110px 0 80px;
+      border-bottom: 1px solid #151515;
     }
 
     .eyebrow {
-      display: inline-block;
-      margin-bottom: 18px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.16em;
+      color: #777;
+      font-size: 13px;
       text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 18px;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(46px, 8vw, 86px);
-      line-height: 0.96;
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 0.98;
       letter-spacing: -0.065em;
     }
 
     .tagline {
-      max-width: 680px;
-      margin: 26px auto 0;
-      color: var(--muted);
-      font-size: 18px;
+      margin-top: 24px;
+      font-size: 22px;
+      color: #bdbdbd;
+    }
+
+    .description {
+      margin-top: 8px;
+      color: #666;
+      font-size: 16px;
     }
 
     .analyzer {
-      max-width: 800px;
-      margin: 48px auto 0;
-    }
-
-    .input-row {
+      margin-top: 42px;
       display: flex;
       gap: 10px;
-      padding: 8px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--card);
+      max-width: 700px;
     }
 
     input {
       flex: 1;
       min-width: 0;
-      padding: 15px 16px;
-      border: 0;
-      outline: 0;
-      background: transparent;
-      color: var(--text);
-      font-size: 16px;
+      height: 52px;
+      padding: 0 16px;
+      border: 1px solid #2a2a2a;
+      background: #0b0b0b;
+      color: #fff;
+      outline: none;
+      border-radius: 6px;
+      font-size: 15px;
     }
 
-    input::placeholder {
-      color: var(--muted-2);
+    input:focus {
+      border-color: #555;
     }
 
     button {
-      min-height: 50px;
-      padding: 0 25px;
+      height: 52px;
+      padding: 0 24px;
       border: 0;
-      border-radius: 10px;
-      background: var(--text);
+      background: #fff;
       color: #000;
-      font-size: 15px;
-      font-weight: 750;
+      border-radius: 6px;
       cursor: pointer;
-      transition:
-        opacity 0.2s ease,
-        transform 0.2s ease;
+      font-weight: 700;
+      font-size: 14px;
     }
 
     button:hover {
       opacity: 0.88;
     }
 
-    button:active {
-      transform: scale(0.98);
-    }
-
-    button:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-      transform: none;
-    }
-
     .status {
-      min-height: 24px;
-      margin-top: 16px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .error-box {
-      display: none;
-      margin-top: 16px;
-      padding: 16px 18px;
-      border: 1px solid rgba(255, 107, 107, 0.3);
-      border-radius: 12px;
-      background: rgba(255, 107, 107, 0.06);
-      color: var(--danger);
-      text-align: left;
-      white-space: pre-wrap;
-      word-break: break-word;
+      margin-top: 14px;
+      color: #666;
       font-size: 13px;
+      min-height: 22px;
     }
 
-    .results {
-      display: none;
-      padding: 25px 0 90px;
+    main {
+      padding: 70px 0;
     }
 
-    .protocol-header {
-      margin-bottom: 24px;
-      padding: 30px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--card);
+    section {
+      padding: 58px 0;
+      border-bottom: 1px solid #151515;
+    }
+
+    section:last-child {
+      border-bottom: 0;
+    }
+
+    .section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: #666;
+      margin-bottom: 28px;
+    }
+
+    .protocol-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      align-items: flex-start;
     }
 
     .protocol-name {
-      margin: 0;
-      font-size: clamp(30px, 4vw, 48px);
-      line-height: 1.05;
+      font-size: 42px;
+      line-height: 1;
       letter-spacing: -0.05em;
+      margin: 0;
     }
 
     .protocol-description {
-      margin: 12px 0 0;
-      color: var(--muted);
-    }
-
-    .meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 20px;
+      margin-top: 14px;
+      color: #8c8c8c;
+      max-width: 720px;
     }
 
     .badge {
       display: inline-flex;
-      align-items: center;
-      min-height: 30px;
-      padding: 5px 10px;
-      border: 1px solid var(--line);
+      border: 1px solid #2a2a2a;
+      padding: 7px 11px;
       border-radius: 999px;
-      background: #101010;
-      color: var(--muted);
+      color: #aaa;
       font-size: 12px;
-    }
-
-    .section {
-      margin-top: 20px;
-      padding: 28px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--card);
-    }
-
-    .section h2 {
-      margin: 0 0 20px;
-      font-size: 21px;
-      letter-spacing: -0.035em;
+      white-space: nowrap;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+      gap: 14px;
     }
 
-    .metric {
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: #101010;
+    .grid-4 {
+      display: grid;
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+      gap: 14px;
     }
 
-    .metric-label {
-      color: var(--muted);
+    .card {
+      border: 1px solid #191919;
+      background: #090909;
+      padding: 22px;
+      border-radius: 8px;
+    }
+
+    .card-label {
+      color: #666;
       font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
-    .metric-value {
-      margin-top: 6px;
-      color: var(--text);
-      font-size: 19px;
+    .card-value {
+      margin-top: 9px;
+      font-size: 22px;
       font-weight: 700;
       word-break: break-word;
     }
 
-    .two-col {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 28px;
-    }
-
-    .subsection {
-      margin-top: 18px;
-    }
-
-    .subsection:first-child {
-      margin-top: 0;
-    }
-
-    .subsection-title {
-      margin-bottom: 7px;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 750;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .content {
-      color: #d7d7d7;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    .content a {
-      text-decoration: underline;
-    }
-
-    .list-item {
-      margin: 6px 0;
-    }
-
-    .risk-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .risk {
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: #101010;
-    }
-
-    .risk-label {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .risk-value {
-      margin-top: 6px;
-      color: var(--text);
+    .card-value.small {
       font-size: 15px;
-      font-weight: 650;
+      font-weight: 500;
+      color: #bbb;
     }
 
-    .summary {
-      color: #dedede;
-      font-size: 17px;
-      line-height: 1.75;
+    .long-card {
+      border: 1px solid #191919;
+      background: #090909;
+      padding: 26px;
+      border-radius: 8px;
+      margin-bottom: 14px;
     }
 
-    .footer {
-      padding: 45px 0 70px;
-      color: var(--muted);
-      text-align: center;
+    .long-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .long-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .long-text {
+      color: #aaa;
+      white-space: pre-wrap;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      color: #aaa;
+    }
+
+    li {
+      margin: 7px 0;
+    }
+
+    .muted {
+      color: #666;
+    }
+
+    .positive {
+      color: #cfcfcf;
+    }
+
+    .negative {
+      color: #aaa;
+    }
+
+    .evidence-label {
+      display: inline-block;
+      margin-top: 22px;
+      margin-bottom: 8px;
+      color: #666;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .source-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .source-link {
+      color: #888;
       font-size: 13px;
+      word-break: break-all;
+    }
+
+    .source-link:hover {
+      color: #fff;
+    }
+
+    footer {
+      padding: 70px 0;
+      color: #555;
+      font-size: 13px;
+    }
+
+    .hidden {
+      display: none !important;
     }
 
     @media (max-width: 850px) {
       .grid,
-      .risk-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .two-col {
+      .grid-4 {
         grid-template-columns: 1fr;
       }
-    }
 
-    @media (max-width: 620px) {
-      .container {
-        width: min(100% - 24px, 1180px);
+      .protocol-head {
+        flex-direction: column;
       }
 
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        padding: 70px 0 45px;
-      }
-
-      .input-row {
+      .analyzer {
         flex-direction: column;
       }
 
@@ -398,14 +345,8 @@
         width: 100%;
       }
 
-      .grid,
-      .risk-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .section,
-      .protocol-header {
-        padding: 20px;
+      .nav-links {
+        gap: 14px;
       }
     }
   </style>
@@ -415,8 +356,12 @@
 
 <header>
   <div class="container nav">
-    <a class="brand" href="#">
-      BOBOSYN<span> Protocol Scout</span>
+
+    <a
+      class="brand"
+      href="#"
+    >
+      BOBOSYN Protocol Scout
     </a>
 
     <nav class="nav-links">
@@ -424,1104 +369,915 @@
       <a href="#research">Research</a>
       <a href="#risks">Risk</a>
     </nav>
+
   </div>
 </header>
 
-<main>
+<div class="container">
 
-  <section class="hero">
-    <div class="container">
+  <div class="hero">
 
-      <div class="eyebrow">
-        Independent Web3 Research
-      </div>
-
-      <h1>
-        BOBOSYN<br />
-        Protocol Scout
-      </h1>
-
-      <p class="tagline">
-        Scout. Research. Understand.
-        <br />
-        AI-powered Web3 protocol research.
-      </p>
-
-      <div class="analyzer">
-
-        <div class="input-row">
-          <input
-            id="protocolInput"
-            type="text"
-            placeholder="Enter a protocol name or URL..."
-            autocomplete="off"
-            spellcheck="false"
-          />
-
-          <button
-            id="analyzeButton"
-            type="button"
-          >
-            Analyze
-          </button>
-        </div>
-
-        <div
-          id="status"
-          class="status"
-        ></div>
-
-        <div
-          id="errorBox"
-          class="error-box"
-        ></div>
-
-      </div>
+    <div class="eyebrow">
+      Independent Web3 Research
     </div>
-  </section>
 
-  <section
-    id="results"
-    class="results"
-  >
+    <h1>
+      BOBOSYN<br>
+      Protocol Scout
+    </h1>
 
-    <div class="container">
+    <div class="tagline">
+      Scout. Research. Understand.
+    </div>
 
-      <div class="protocol-header">
+    <div class="description">
+      AI-powered Web3 protocol research.
+    </div>
 
-        <h2
-          id="protocolName"
-          class="protocol-name"
-        >
-          Protocol
-        </h2>
+    <div class="analyzer">
 
-        <p
-          id="protocolDescription"
-          class="protocol-description"
-        ></p>
-
-        <div
-          id="protocolMeta"
-          class="meta"
-        ></div>
-
-      </div>
-
-      <!-- Protocol Overview -->
-      <section
-        id="overview"
-        class="section"
+      <input
+        id="protocolInput"
+        type="text"
+        placeholder="Enter a protocol, e.g. Aave"
+        value="Aave"
       >
 
-        <h2>Protocol Overview</h2>
-
-        <div class="grid">
-
-          <div class="metric">
-            <div class="metric-label">
-              Category
-            </div>
-
-            <div
-              id="category"
-              class="metric-value"
-            >
-              N/A
-            </div>
-          </div>
-
-          <div class="metric">
-            <div class="metric-label">
-              Status
-            </div>
-
-            <div
-              id="statusValue"
-              class="metric-value"
-            >
-              N/A
-            </div>
-          </div>
-
-          <div class="metric">
-            <div class="metric-label">
-              Website
-            </div>
-
-            <div
-              id="website"
-              class="metric-value"
-            >
-              N/A
-            </div>
-          </div>
-
-          <div class="metric">
-            <div class="metric-label">
-              Chains
-            </div>
-
-            <div
-              id="chains"
-              class="metric-value"
-            >
-              N/A
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- Market -->
-      <section class="section">
-
-        <h2>Market</h2>
-
-        <div class="grid">
-
-          <div class="metric">
-            <div class="metric-label">
-              TVL
-            </div>
-
-            <div
-              id="tvl"
-              class="metric-value"
-            >
-              N/A
-            </div>
-          </div>
-
-          <div class="metric">
-            <div class="metric-label">
-              Token
-            </div>
-
-            <div
-              id="token"
-              class="metric-value"
-            >
-              N/A
-            </div>
-          </div>
-
-          <div class="metric">
-            <div class="metric-label">
-              Token Price
-            </div>
-
-            <div
-              id="tokenPrice"
-              class="metric-value"
-            >
-              N/A
-            </div>
-          </div>
-
-          <div class="metric">
-            <div class="metric-label">
-              24h Change
-            </div>
-
-            <div
-              id="tokenChange"
-              class="metric-value"
-            >
-              N/A
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- Protocol Metrics -->
-      <section class="section">
-
-        <h2>Protocol Metrics</h2>
-
-        <div class="grid">
-
-          <div class="metric">
-            <div class="metric-label">
-              Fees 24h
-            </div>
-
-            <div
-              id="fees24h"
-              class="metric-value"
-            >
-              N/A
-            </div>
-          </div>
-
-          <div class="metric">
-            <div class="metric-label">
-              Fees 7d
-            </div>
-
-            <div
-              id="fees7d"
-              class="metric-value"
-            >
-              N/A
-            </div>
-          </div>
-
-          <div class="metric">
-            <div class="metric-label">
-              Fees 30d
-            </div>
-
-            <div
-              id="fees30d"
-              class="metric-value"
-            >
-              N/A
-            </div>
-          </div>
-
-          <div class="metric">
-            <div class="metric-label">
-              Revenue 24h
-            </div>
-
-            <div
-              id="revenue24h"
-              class="metric-value"
-            >
-              N/A
-            </div>
-          </div>
-
-        </div>
-
-        <div
-          class="grid"
-          style="margin-top: 10px;"
-        >
-
-          <div class="metric">
-            <div class="metric-label">
-              Revenue 7d
-            </div>
-
-            <div
-              id="revenue7d"
-              class="metric-value"
-            >
-              N/A
-            </div>
-          </div>
-
-          <div class="metric">
-            <div class="metric-label">
-              Revenue 30d
-            </div>
-
-            <div
-              id="revenue30d"
-              class="metric-value"
-            >
-              N/A
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- How It Works -->
-      <section class="section">
-
-        <h2>How It Works</h2>
-
-        <div
-          id="howItWorks"
-          class="content"
-        >
-          Research data pending
-        </div>
-
-      </section>
-
-      <!-- Business Model -->
-      <section class="section">
-
-        <h2>Business Model</h2>
-
-        <div class="two-col">
-
-          <div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Status
-              </div>
-
-              <div
-                id="businessStatus"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Model
-              </div>
-
-              <div
-                id="businessModel"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-          </div>
-
-          <div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Revenue Sources
-              </div>
-
-              <div
-                id="revenueSources"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Explanation
-              </div>
-
-              <div
-                id="businessExplanation"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      <!-- Users & Adoption -->
-      <section class="section">
-
-        <h2>Users & Adoption</h2>
-
-        <div class="two-col">
-
-          <div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Status
-              </div>
-
-              <div
-                id="usersStatus"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Primary Users
-              </div>
-
-              <div
-                id="primaryUsers"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-          </div>
-
-          <div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Use Cases
-              </div>
-
-              <div
-                id="useCases"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Adoption
-              </div>
-
-              <div
-                id="adoption"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      <!-- Competitive Landscape -->
-      <section class="section">
-
-        <h2>Competitive Landscape</h2>
-
-        <div class="two-col">
-
-          <div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Status
-              </div>
-
-              <div
-                id="competitionStatus"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Category
-              </div>
-
-              <div
-                id="competitionCategory"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-          </div>
-
-          <div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Competitors
-              </div>
-
-              <div
-                id="competitors"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Differentiation
-              </div>
-
-              <div
-                id="differentiation"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      <!-- Risk Analysis -->
-      <section
-        id="risks"
-        class="section"
+      <button
+        id="analyzeButton"
       >
+        Analyze
+      </button>
 
-        <h2>Risk Analysis</h2>
+    </div>
 
-        <div class="two-col">
+    <div
+      id="status"
+      class="status"
+    ></div>
 
-          <div>
+  </div>
 
-            <div class="subsection">
+  <main id="result">
 
-              <div class="subsection-title">
-                Status
-              </div>
+    <section id="overview">
 
-              <div
-                id="riskStatus"
-                class="content"
-              >
-                N/A
-              </div>
+      <div class="protocol-head">
 
-            </div>
+        <div>
 
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Smart Contract
-              </div>
-
-              <div
-                id="smartContractRisk"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-          </div>
-
-          <div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Protocol
-              </div>
-
-              <div
-                id="protocolRisk"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Token
-              </div>
-
-              <div
-                id="tokenRisk"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Dependencies
-              </div>
-
-              <div
-                id="dependenciesRisk"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      <!-- Research Summary -->
-      <section
-        id="research"
-        class="section"
-      >
-
-        <h2>Research Summary</h2>
-
-        <div class="subsection">
-
-          <div class="subsection-title">
-            Research Status
-          </div>
-
-          <div
-            id="researchStatus"
-            class="content"
+          <h2
+            id="protocolName"
+            class="protocol-name"
           >
-            N/A
-          </div>
-
-        </div>
-
-        <div class="subsection">
+            Aave V3
+          </h2>
 
           <div
-            id="summary"
-            class="content summary"
+            id="protocolDescription"
+            class="protocol-description"
           >
             Research data pending
           </div>
 
         </div>
 
-      </section>
-
-      <!-- Research -->
-      <section class="section">
-
-        <h2>Research</h2>
-
-        <div class="two-col">
-
-          <div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Core Function
-              </div>
-
-              <div
-                id="coreFunction"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Mechanism
-              </div>
-
-              <div
-                id="mechanism"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-          </div>
-
-          <div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Users
-              </div>
-
-              <div
-                id="researchUsers"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-            <div class="subsection">
-
-              <div class="subsection-title">
-                Revenue
-              </div>
-
-              <div
-                id="researchRevenue"
-                class="content"
-              >
-                N/A
-              </div>
-
-            </div>
-
-          </div>
-
+        <div
+          id="protocolBadge"
+          class="badge"
+        >
+          —
         </div>
-      </section>
 
-      <!-- Risk Snapshot -->
-      <section class="section">
+      </div>
 
-        <h2>Risk Snapshot</h2>
+    </section>
 
-        <div class="risk-grid">
+    <section>
 
-          <div class="risk">
+      <div class="section-title">
+        Protocol Overview
+      </div>
 
-            <div class="risk-label">
-              Smart Contract
-            </div>
+      <div class="grid">
 
-            <div
-              id="snapshotSmartContract"
-              class="risk-value"
-            >
-              N/A
-            </div>
-
+        <div class="card">
+          <div class="card-label">
+            Category
           </div>
 
-          <div class="risk">
-
-            <div class="risk-label">
-              Protocol
-            </div>
-
-            <div
-              id="snapshotProtocol"
-              class="risk-value"
-            >
-              N/A
-            </div>
-
+          <div
+            id="category"
+            class="card-value"
+          >
+            N/A
           </div>
-
-          <div class="risk">
-
-            <div class="risk-label">
-              Token
-            </div>
-
-            <div
-              id="snapshotToken"
-              class="risk-value"
-            >
-              N/A
-            </div>
-
-          </div>
-
-          <div class="risk">
-
-            <div class="risk-label">
-              Dependencies
-            </div>
-
-            <div
-              id="snapshotDependencies"
-              class="risk-value"
-            >
-              N/A
-            </div>
-
-          </div>
-
         </div>
-      </section>
 
-    </div>
-  </section>
+        <div class="card">
+          <div class="card-label">
+            Status
+          </div>
 
-</main>
+          <div
+            id="protocolStatus"
+            class="card-value"
+          >
+            N/A
+          </div>
+        </div>
 
-<footer class="footer">
-  <div class="container">
+        <div class="card">
+          <div class="card-label">
+            Website
+          </div>
+
+          <div
+            id="website"
+            class="card-value small"
+          >
+            N/A
+          </div>
+        </div>
+
+      </div>
+
+      <div class="long-card">
+
+        <div class="long-title">
+          Chains
+        </div>
+
+        <div
+          id="chains"
+          class="long-text"
+        >
+          N/A
+        </div>
+
+      </div>
+
+    </section>
+
+    <section>
+
+      <div class="section-title">
+        Market
+      </div>
+
+      <div class="grid-4">
+
+        <div class="card">
+          <div class="card-label">
+            TVL
+          </div>
+
+          <div
+            id="tvl"
+            class="card-value"
+          >
+            N/A
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">
+            Token
+          </div>
+
+          <div
+            id="token"
+            class="card-value"
+          >
+            N/A
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">
+            Token Price
+          </div>
+
+          <div
+            id="tokenPrice"
+            class="card-value"
+          >
+            N/A
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">
+            24h Change
+          </div>
+
+          <div
+            id="priceChange24h"
+            class="card-value"
+          >
+            N/A
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section>
+
+      <div class="section-title">
+        Protocol Metrics
+      </div>
+
+      <div class="grid-4">
+
+        <div class="card">
+          <div class="card-label">
+            Fees 24h
+          </div>
+
+          <div
+            id="fees24h"
+            class="card-value"
+          >
+            N/A
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">
+            Fees 7d
+          </div>
+
+          <div
+            id="fees7d"
+            class="card-value"
+          >
+            N/A
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">
+            Fees 30d
+          </div>
+
+          <div
+            id="fees30d"
+            class="card-value"
+          >
+            N/A
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">
+            Revenue 24h
+          </div>
+
+          <div
+            id="revenue24h"
+            class="card-value"
+          >
+            N/A
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">
+            Revenue 7d
+          </div>
+
+          <div
+            id="revenue7d"
+            class="card-value"
+          >
+            N/A
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">
+            Revenue 30d
+          </div>
+
+          <div
+            id="revenue30d"
+            class="card-value"
+          >
+            N/A
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section>
+
+      <div class="section-title">
+        How It Works
+      </div>
+
+      <div class="long-card">
+
+        <div
+          id="howItWorksSummary"
+          class="long-text"
+        >
+          Research data pending
+        </div>
+
+        <div
+          id="howItWorksSteps"
+          style="margin-top:20px;"
+        ></div>
+
+        <div
+          id="howItWorksEvidence"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <section>
+
+      <div class="section-title">
+        Business Model
+      </div>
+
+      <div class="long-card">
+
+        <div class="card-label">
+          Status
+        </div>
+
+        <div
+          id="businessStatus"
+          class="card-value small"
+        >
+          N/A
+        </div>
+
+        <div
+          class="evidence-label"
+        >
+          Model
+        </div>
+
+        <div
+          id="businessModel"
+          class="long-text"
+        >
+          N/A
+        </div>
+
+        <div
+          class="evidence-label"
+        >
+          Revenue Sources
+        </div>
+
+        <div
+          id="businessRevenue"
+        ></div>
+
+        <div
+          class="evidence-label"
+        >
+          Explanation
+        </div>
+
+        <div
+          id="businessExplanation"
+          class="long-text"
+        >
+          N/A
+        </div>
+
+        <div
+          id="businessEvidence"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <section>
+
+      <div class="section-title">
+        Users & Adoption
+      </div>
+
+      <div class="long-card">
+
+        <div class="card-label">
+          Status
+        </div>
+
+        <div
+          id="usersStatus"
+          class="card-value small"
+        >
+          N/A
+        </div>
+
+        <div
+          class="evidence-label"
+        >
+          Primary Users
+        </div>
+
+        <div
+          id="primaryUsers"
+        ></div>
+
+        <div
+          class="evidence-label"
+        >
+          Use Cases
+        </div>
+
+        <div
+          id="useCases"
+        ></div>
+
+        <div
+          class="evidence-label"
+        >
+          Adoption
+        </div>
+
+        <div
+          id="adoption"
+          class="long-text"
+        >
+          N/A
+        </div>
+
+        <div
+          id="usersEvidence"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <section>
+
+      <div class="section-title">
+        Competitive Landscape
+      </div>
+
+      <div class="long-card">
+
+        <div class="card-label">
+          Status
+        </div>
+
+        <div
+          id="competitionStatus"
+          class="card-value small"
+        >
+          N/A
+        </div>
+
+        <div
+          class="evidence-label"
+        >
+          Category
+        </div>
+
+        <div
+          id="competitionCategory"
+          class="long-text"
+        >
+          N/A
+        </div>
+
+        <div
+          class="evidence-label"
+        >
+          Competitors
+        </div>
+
+        <div
+          id="competitors"
+        ></div>
+
+        <div
+          class="evidence-label"
+        >
+          Differentiation
+        </div>
+
+        <div
+          id="differentiation"
+          class="long-text"
+        >
+          N/A
+        </div>
+
+        <div
+          id="competitionEvidence"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <section id="risks">
+
+      <div class="section-title">
+        Risk Analysis
+      </div>
+
+      <div class="long-card">
+
+        <div class="card-label">
+          Status
+        </div>
+
+        <div
+          id="riskStatus"
+          class="card-value small"
+        >
+          N/A
+        </div>
+
+        <div class="evidence-label">
+          Smart Contract
+        </div>
+
+        <div
+          id="riskSmartContract"
+          class="long-text"
+        >
+          N/A
+        </div>
+
+        <div class="evidence-label">
+          Protocol
+        </div>
+
+        <div
+          id="riskProtocol"
+          class="long-text"
+        >
+          N/A
+        </div>
+
+        <div class="evidence-label">
+          Token
+        </div>
+
+        <div
+          id="riskToken"
+          class="long-text"
+        >
+          N/A
+        </div>
+
+        <div class="evidence-label">
+          Dependencies
+        </div>
+
+        <div
+          id="riskDependencies"
+        ></div>
+
+        <div
+          id="riskEvidence"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <section>
+
+      <div class="section-title">
+        Research Summary
+      </div>
+
+      <div class="long-card">
+
+        <div class="card-label">
+          Research Status
+        </div>
+
+        <div
+          id="summaryStatus"
+          class="card-value small"
+        >
+          N/A
+        </div>
+
+        <div
+          id="researchSummary"
+          class="long-text"
+          style="margin-top:18px;"
+        >
+          N/A
+        </div>
+
+        <div
+          id="keyFindings"
+        ></div>
+
+        <div
+          id="whatMatters"
+        ></div>
+
+        <div
+          id="whatToWatch"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <section id="research">
+
+      <div class="section-title">
+        Research
+      </div>
+
+      <div class="long-card">
+
+        <div class="evidence-label">
+          Core Function
+        </div>
+
+        <div
+          id="coreFunction"
+          class="long-text"
+        >
+          N/A
+        </div>
+
+        <div class="evidence-label">
+          Mechanism
+        </div>
+
+        <div
+          id="mechanism"
+          class="long-text"
+        >
+          N/A
+        </div>
+
+        <div class="evidence-label">
+          Users
+        </div>
+
+        <div
+          id="researchUsers"
+        ></div>
+
+        <div class="evidence-label">
+          Revenue
+        </div>
+
+        <div
+          id="researchRevenue"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <section>
+
+      <div class="section-title">
+        Risk Snapshot
+      </div>
+
+      <div class="grid">
+
+        <div class="long-card">
+          <div class="long-title">
+            Smart Contract
+          </div>
+
+          <div
+            id="snapshotSmartContract"
+            class="long-text"
+          >
+            N/A
+          </div>
+        </div>
+
+        <div class="long-card">
+          <div class="long-title">
+            Protocol
+          </div>
+
+          <div
+            id="snapshotProtocol"
+            class="long-text"
+          >
+            N/A
+          </div>
+        </div>
+
+        <div class="long-card">
+          <div class="long-title">
+            Token
+          </div>
+
+          <div
+            id="snapshotToken"
+            class="long-text"
+          >
+            N/A
+          </div>
+        </div>
+
+      </div>
+
+      <div class="long-card">
+
+        <div class="long-title">
+          Dependencies
+        </div>
+
+        <div
+          id="snapshotDependencies"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <section>
+
+      <div class="section-title">
+        Sources
+      </div>
+
+      <div class="long-card">
+
+        <div
+          id="sources"
+          class="source-list"
+        >
+          N/A
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
     Built by BOBOSYN
-  </div>
-</footer>
+  </footer>
+
+</div>
 
 <script>
-  /*
-   * BOBOSYN Protocol Scout
-   * Frontend version: 0.9.2
-   *
-   * API endpoint:
-   * Cloudflare Worker
-   */
-
   const API_URL =
     "https://protocol-scout-api.superhelong.workers.dev/analyze";
 
-  const input =
-    document.getElementById("protocolInput");
+  const $ = (id) =>
+    document.getElementById(id);
 
-  const button =
-    document.getElementById("analyzeButton");
-
-  const status =
-    document.getElementById("status");
-
-  const errorBox =
-    document.getElementById("errorBox");
-
-  const results =
-    document.getElementById("results");
-
-
-  function byId(id) {
-    return document.getElementById(id);
-  }
-
-
-  function setText(id, value) {
-    const el = byId(id);
-
-    if (!el) {
-      return;
-    }
-
+  function safeText(value, fallback = "N/A") {
     if (
       value === null ||
       value === undefined ||
       value === ""
     ) {
-      el.textContent = "N/A";
-      return;
+      return fallback;
     }
 
-    if (Array.isArray(value)) {
-      if (value.length === 0) {
-        el.textContent = "N/A";
-        return;
-      }
-
-      el.textContent =
-        value.join(", ");
-
-      return;
-    }
-
-    /*
-     * Objects should not normally be displayed directly.
-     * This fallback prevents [object Object].
-     */
     if (
       typeof value === "object"
     ) {
-      if (
-        value.symbol !== undefined
-      ) {
-        el.textContent =
-          String(value.symbol);
+      return fallback;
+    }
 
-        return;
-      }
+    return String(value);
+  }
 
-      el.textContent =
-        JSON.stringify(
-          value,
-          null,
-          2
-        );
+  function setText(id, value, fallback = "N/A") {
+    const element = $(id);
 
+    if (!element) {
       return;
     }
 
-    el.textContent =
-      String(value);
+    element.textContent =
+      safeText(
+        value,
+        fallback
+      );
   }
-
 
   function setList(id, value) {
-    const el = byId(id);
+    const element = $(id);
 
-    if (!el) {
+    if (!element) {
       return;
     }
 
-    el.innerHTML = "";
+    element.innerHTML = "";
 
-    if (
-      value === null ||
-      value === undefined ||
-      value === ""
+    let items = [];
+
+    if (Array.isArray(value)) {
+      items = value;
+    } else if (
+      value !== null &&
+      value !== undefined &&
+      value !== ""
     ) {
-      el.textContent = "N/A";
+      items = [value];
+    }
+
+    items = items
+      .filter(
+        (item) =>
+          item !== null &&
+          item !== undefined &&
+          item !== ""
+      )
+      .map((item) =>
+        typeof item === "object"
+          ? ""
+          : String(item)
+      )
+      .filter(Boolean);
+
+    if (!items.length) {
+      element.innerHTML =
+        '<div class="muted">N/A</div>';
+
       return;
     }
 
-    /*
-     * If the Worker gives us:
-     *
-     * {
-     *   primaryUsers: [],
-     *   useCases: [],
-     *   adoption: ""
-     * }
-     *
-     * do not stringify the object.
-     *
-     * This also keeps the frontend compatible with
-     * older Worker response formats.
-     */
-    if (
-      typeof value === "object" &&
-      !Array.isArray(value)
-    ) {
-      if (
-        Array.isArray(
-          value.primaryUsers
-        )
-      ) {
-        value =
-          value.primaryUsers;
-      } else if (
-        Array.isArray(
-          value.useCases
-        )
-      ) {
-        value =
-          value.useCases;
-      } else {
-        value =
-          Object.values(value)
-            .filter(
-              (item) =>
-                typeof item === "string"
-            );
-      }
-    }
-
-    const items =
-      Array.isArray(value)
-        ? value
-        : [value];
-
-    if (items.length === 0) {
-      el.textContent = "N/A";
-      return;
-    }
+    const ul =
+      document.createElement("ul");
 
     items.forEach((item) => {
+      const li =
+        document.createElement("li");
 
-      if (
-        item === null ||
-        item === undefined ||
-        item === ""
-      ) {
-        return;
-      }
+      li.textContent = item;
 
-      const div =
-        document.createElement("div");
-
-      div.className =
-        "list-item";
-
-      div.textContent =
-        String(item);
-
-      el.appendChild(div);
+      ul.appendChild(li);
     });
 
-    if (!el.textContent.trim()) {
-      el.textContent = "N/A";
-    }
+    element.appendChild(ul);
   }
 
-
-  function formatMoney(value) {
+  function formatUSD(value) {
+    const n =
+      Number(value);
 
     if (
-      value === null ||
-      value === undefined ||
-      value === "" ||
-      value === "N/A"
+      !Number.isFinite(n)
     ) {
       return "N/A";
     }
 
     if (
-      typeof value === "string"
-    ) {
-      return value;
-    }
-
-    const number =
-      Number(value);
-
-    if (
-      !Number.isFinite(number)
-    ) {
-      return String(value);
-    }
-
-    if (
-      Math.abs(number) >=
-      1_000_000_000
+      Math.abs(n) >=
+      1000000000
     ) {
       return (
         "$" +
         (
-          number /
-          1_000_000_000
+          n / 1000000000
         ).toFixed(2) +
         "B"
       );
     }
 
     if (
-      Math.abs(number) >=
-      1_000_000
+      Math.abs(n) >=
+      1000000
     ) {
       return (
         "$" +
         (
-          number /
-          1_000_000
+          n / 1000000
         ).toFixed(2) +
         "M"
       );
     }
 
     if (
-      Math.abs(number) >=
-      1_000
+      Math.abs(n) >=
+      1000
     ) {
       return (
         "$" +
         (
-          number /
-          1_000
+          n / 1000
         ).toFixed(2) +
         "K"
       );
@@ -1529,1181 +1285,704 @@
 
     return (
       "$" +
-      number.toFixed(2)
+      n.toLocaleString(
+        undefined,
+        {
+          maximumFractionDigits:
+            2
+        }
+      )
     );
   }
 
-
   function formatPrice(value) {
-
-    if (
-      value === null ||
-      value === undefined ||
-      value === "" ||
-      value === "N/A"
-    ) {
-      return "N/A";
-    }
-
-    const number =
+    const n =
       Number(value);
 
     if (
-      !Number.isFinite(number)
+      !Number.isFinite(n)
     ) {
-      return String(value);
-    }
-
-    if (
-      number >= 1000
-    ) {
-      return (
-        "$" +
-        number.toLocaleString(
-          "en-US",
-          {
-            maximumFractionDigits: 2
-          }
-        )
-      );
-    }
-
-    if (
-      number >= 1
-    ) {
-      return (
-        "$" +
-        number.toFixed(2)
-      );
+      return "N/A";
     }
 
     return (
       "$" +
-      number.toPrecision(4)
+      n.toLocaleString(
+        undefined,
+        {
+          maximumFractionDigits:
+            6
+        }
+      )
     );
   }
 
-
   function formatPercent(value) {
+    const n =
+      Number(value);
 
     if (
-      value === null ||
-      value === undefined ||
-      value === "" ||
-      value === "N/A"
+      !Number.isFinite(n)
     ) {
       return "N/A";
     }
 
-    const number =
-      Number(value);
-
-    if (
-      !Number.isFinite(number)
-    ) {
-      return String(value);
-    }
-
-    const prefix =
-      number > 0
+    const sign =
+      n > 0
         ? "+"
         : "";
 
     return (
-      prefix +
-      number.toFixed(2) +
+      sign +
+      n.toFixed(2) +
       "%"
     );
   }
 
-
-  function clearError() {
-
-    errorBox.style.display =
-      "none";
-
-    errorBox.textContent =
-      "";
-  }
-
-
-  function showError(message) {
-
-    errorBox.textContent =
-      message;
-
-    errorBox.style.display =
-      "block";
-  }
-
-
-  function getNested(
-    object,
-    paths
+  function renderEvidence(
+    containerId,
+    observed,
+    analysis,
+    inference
   ) {
+    const container =
+      $(containerId);
 
-    for (
-      const path of paths
+    if (!container) {
+      return;
+    }
+
+    container.innerHTML = "";
+
+    function addBlock(
+      title,
+      items
     ) {
-
-      const parts =
-        path.split(".");
-
-      let current =
-        object;
-
-      for (
-        const part of parts
+      if (
+        !Array.isArray(items) ||
+        !items.length
       ) {
+        return;
+      }
 
-        if (
-          current === null ||
-          current === undefined ||
-          typeof current !==
-            "object" ||
-          !(part in current)
-        ) {
-          current =
-            undefined;
-          break;
+      const label =
+        document.createElement(
+          "div"
+        );
+
+      label.className =
+        "evidence-label";
+
+      label.textContent =
+        title;
+
+      container.appendChild(
+        label
+      );
+
+      const ul =
+        document.createElement(
+          "ul"
+        );
+
+      items.forEach(
+        (item) => {
+          const li =
+            document.createElement(
+              "li"
+            );
+
+          li.textContent =
+            String(item);
+
+          ul.appendChild(li);
         }
+      );
 
-        current =
-          current[part];
+      container.appendChild(
+        ul
+      );
+    }
+
+    addBlock(
+      "Observed",
+      observed
+    );
+
+    addBlock(
+      "Analysis",
+      analysis
+    );
+
+    addBlock(
+      "Inference",
+      inference
+    );
+  }
+
+  function renderSources(
+    sources
+  ) {
+    const container =
+      $("sources");
+
+    if (!container) {
+      return;
+    }
+
+    container.innerHTML = "";
+
+    const urls = [];
+
+    function collect(value) {
+      if (
+        typeof value ===
+        "string"
+      ) {
+        urls.push(value);
+        return;
       }
 
       if (
-        current !== undefined &&
-        current !== null &&
-        current !== ""
+        Array.isArray(value)
       ) {
-        return current;
+        value.forEach(
+          collect
+        );
+        return;
+      }
+
+      if (
+        value &&
+        typeof value ===
+          "object"
+      ) {
+        Object.values(value)
+          .forEach(
+            collect
+          );
       }
     }
 
-    return null;
-  }
-
-
-  function normalizeArray(
-    value
-  ) {
-
-    if (
-      value === null ||
-      value === undefined
-    ) {
-      return [];
-    }
-
-    if (
-      Array.isArray(value)
-    ) {
-      return value;
-    }
-
-    return [value];
-  }
-
-
-  function resetResults() {
-
-    const ids = [
-
-      "category",
-      "statusValue",
-      "website",
-      "chains",
-
-      "tvl",
-      "token",
-      "tokenPrice",
-      "tokenChange",
-
-      "fees24h",
-      "fees7d",
-      "fees30d",
-
-      "revenue24h",
-      "revenue7d",
-      "revenue30d",
-
-      "businessStatus",
-      "businessModel",
-      "revenueSources",
-      "businessExplanation",
-
-      "usersStatus",
-      "primaryUsers",
-      "useCases",
-      "adoption",
-
-      "competitionStatus",
-      "competitionCategory",
-      "competitors",
-      "differentiation",
-
-      "riskStatus",
-      "smartContractRisk",
-      "protocolRisk",
-      "tokenRisk",
-      "dependenciesRisk",
-
-      "researchStatus",
-      "coreFunction",
-      "mechanism",
-      "researchUsers",
-      "researchRevenue",
-
-      "snapshotSmartContract",
-      "snapshotProtocol",
-      "snapshotToken",
-      "snapshotDependencies"
-    ];
-
-    ids.forEach(
-      (id) => {
-        setText(
-          id,
-          "N/A"
-        );
-      }
-    );
-
-    setText(
-      "howItWorks",
-      "Research data pending"
-    );
-
-    setText(
-      "summary",
-      "Research data pending"
-    );
-  }
-
-
-  function renderResult(
-    response
-  ) {
-
-    const data =
-      response?.data ||
-      response?.result ||
-      response;
-
-    const protocol =
-      data?.protocol ||
-      data?.protocolData ||
-      {};
-
-    const market =
-      data?.market ||
-      data?.marketData ||
-      {};
-
-    const metrics =
-      data?.metrics ||
-      data?.protocolMetrics ||
-      {};
-
-    const research =
-      data?.research ||
-      data?.ai ||
-      {};
-
-
-    const howItWorks =
-      research?.howItWorks ||
-      data?.howItWorks ||
-      {};
-
-    const business =
-      research?.businessModel ||
-      data?.businessModel ||
-      {};
-
-    const users =
-      research?.users ||
-      data?.users ||
-      {};
-
-    const competition =
-      research?.competition ||
-      data?.competition ||
-      {};
-
-    const risks =
-      research?.risks ||
-      data?.risks ||
-      {};
-
-    const summary =
-      research?.summary ||
-      data?.summary ||
-      {};
-
-
-    /*
-     * Protocol
-     */
-
-    const protocolName =
-      getNested(
-        protocol,
-        [
-          "name",
-          "protocol",
-          "title"
-        ]
-      ) ||
-      getNested(
-        data,
-        [
-          "name",
-          "protocolName"
-        ]
-      ) ||
-      "Protocol";
-
-
-    const description =
-      getNested(
-        protocol,
-        [
-          "description",
-          "summary"
-        ]
-      ) ||
-      getNested(
-        data,
-        [
-          "description"
-        ]
-      ) ||
-      "";
-
-
-    setText(
-      "protocolName",
-      protocolName
-    );
-
-    setText(
-      "protocolDescription",
-      description
-    );
-
-
-    const meta =
-      byId(
-        "protocolMeta"
-      );
-
-    meta.innerHTML = "";
-
-
-    const category =
-      getNested(
-        protocol,
-        [
-          "category",
-          "categoryName"
-        ]
-      ) ||
-      getNested(
-        data,
-        [
-          "category"
-        ]
-      );
-
-
-    const protocolStatus =
-      getNested(
-        protocol,
-        [
-          "status"
-        ]
-      ) ||
-      getNested(
-        data,
-        [
-          "status"
-        ]
-      );
-
-
-    if (category) {
-
-      const badge =
-        document.createElement(
-          "div"
-        );
-
-      badge.className =
-        "badge";
-
-      badge.textContent =
-        category;
-
-      meta.appendChild(
-        badge
-      );
-    }
-
-
-    if (protocolStatus) {
-
-      const badge =
-        document.createElement(
-          "div"
-        );
-
-      badge.className =
-        "badge";
-
-      badge.textContent =
-        protocolStatus;
-
-      meta.appendChild(
-        badge
-      );
-    }
-
-
-    setText(
-      "category",
-      category
-    );
-
-    setText(
-      "statusValue",
-      protocolStatus
-    );
-
-
-    /*
-     * Website
-     */
-
-    const website =
-      getNested(
-        protocol,
-        [
-          "website",
-          "url"
-        ]
-      ) ||
-      getNested(
-        data,
-        [
-          "website"
-        ]
-      );
-
-
-    const websiteEl =
-      byId("website");
-
-
-    if (
-      website &&
-      /^https?:\/\//i.test(
-        String(website)
-      )
-    ) {
-
-      websiteEl.innerHTML = "";
-
-      const link =
-        document.createElement(
-          "a"
-        );
-
-      link.href =
-        website;
-
-      link.target =
-        "_blank";
-
-      link.rel =
-        "noopener noreferrer";
-
-      link.textContent =
-        website;
-
-      websiteEl.appendChild(
-        link
-      );
-
-    } else {
-
-      setText(
-        "website",
-        website
-      );
-    }
-
-
-    /*
-     * Chains
-     */
-
-    const chains =
-      getNested(
-        protocol,
-        [
-          "chains"
-        ]
-      ) ||
-      getNested(
-        data,
-        [
-          "chains"
-        ]
-      );
-
-    setText(
-      "chains",
-      chains
-    );
-
-
-    /*
-     * Market
-     */
-
-    const tvl =
-      getNested(
-        market,
-        [
-          "tvl"
-        ]
-      ) ??
-      getNested(
-        data,
-        [
-          "tvl"
-        ]
-      );
-
-
-    setText(
-      "tvl",
-      formatMoney(tvl)
-    );
-
-
-    /*
-     * IMPORTANT:
-     *
-     * Worker v0.8.6 returns:
-     *
-     * market.token = {
-     *   symbol: "AAVE",
-     *   price: 139.31,
-     *   change24h: null
-     * }
-     *
-     * Older versions could return:
-     *
-     * data.token = "AAVE"
-     *
-     * This frontend supports both.
-     */
-
-    const tokenObject =
-      market?.token &&
-      typeof market.token ===
-        "object"
-        ? market.token
-        : null;
-
-
-    let tokenSymbol =
-      tokenObject?.symbol ||
-      getNested(
-        market,
-        [
-          "tokenSymbol"
-        ]
-      ) ||
-      getNested(
-        data,
-        [
-          "token"
-        ]
-      );
-
-
-    /*
-     * If data.token itself is an object,
-     * extract symbol instead of printing
-     * the complete object.
-     */
-
-    if (
-      tokenSymbol &&
-      typeof tokenSymbol ===
-        "object"
-    ) {
-      tokenSymbol =
-        tokenSymbol.symbol ||
-        tokenSymbol.name ||
-        "";
-    }
-
-
-    const tokenPrice =
-      tokenObject?.price ??
-      getNested(
-        market,
-        [
-          "tokenPrice"
-        ]
-      ) ??
-      getNested(
-        data,
-        [
-          "tokenPrice"
-        ]
-      );
-
-
-    const tokenChange =
-      tokenObject?.change24h ??
-      getNested(
-        market,
-        [
-          "tokenChange24h"
-        ]
-      ) ??
-      getNested(
-        data,
-        [
-          "tokenChange24h"
-        ]
-      );
-
-
-    setText(
-      "token",
-      tokenSymbol
-    );
-
-
-    setText(
-      "tokenPrice",
-      formatPrice(tokenPrice)
-    );
-
-
-    setText(
-      "tokenChange",
-      formatPercent(tokenChange)
-    );
-
-
-    /*
-     * Protocol Metrics
-     */
-
-    const fees24h =
-      getNested(
-        metrics,
-        [
-          "fees24h"
-        ]
-      ) ??
-      getNested(
-        data,
-        [
-          "fees24h"
-        ]
-      );
-
-
-    const fees7d =
-      getNested(
-        metrics,
-        [
-          "fees7d"
-        ]
-      ) ??
-      getNested(
-        data,
-        [
-          "fees7d"
-        ]
-      );
-
-
-    const fees30d =
-      getNested(
-        metrics,
-        [
-          "fees30d"
-        ]
-      ) ??
-      getNested(
-        data,
-        [
-          "fees30d"
-        ]
-      );
-
-
-    const revenue24h =
-      getNested(
-        metrics,
-        [
-          "revenue24h"
-        ]
-      ) ??
-      getNested(
-        data,
-        [
-          "revenue24h"
-        ]
-      );
-
-
-    const revenue7d =
-      getNested(
-        metrics,
-        [
-          "revenue7d"
-        ]
-      ) ??
-      getNested(
-        data,
-        [
-          "revenue7d"
-        ]
-      );
-
-
-    const revenue30d =
-      getNested(
-        metrics,
-        [
-          "revenue30d"
-        ]
-      ) ??
-      getNested(
-        data,
-        [
-          "revenue30d"
-        ]
-      );
-
-
-    setText(
-      "fees24h",
-      formatMoney(fees24h)
-    );
-
-    setText(
-      "fees7d",
-      formatMoney(fees7d)
-    );
-
-    setText(
-      "fees30d",
-      formatMoney(fees30d)
-    );
-
-    setText(
-      "revenue24h",
-      formatMoney(revenue24h)
-    );
-
-    setText(
-      "revenue7d",
-      formatMoney(revenue7d)
-    );
-
-    setText(
-      "revenue30d",
-      formatMoney(revenue30d)
-    );
-
-
-    /*
-     * How It Works
-     */
-
-    const howText =
-      howItWorks?.explanation ||
-      howItWorks?.mechanism ||
-      howItWorks?.coreFunction ||
-      (
-        typeof howItWorks ===
-        "string"
-          ? howItWorks
-          : ""
-      ) ||
-      getNested(
-        data,
-        [
-          "howItWorks"
-        ]
-      ) ||
-      "Research data pending";
-
-
-    setText(
-      "howItWorks",
-      howText
-    );
-
-
-    /*
-     * Business Model
-     */
-
-    setText(
-      "businessStatus",
-      business?.status ||
-        data?.businessStatus ||
-        "N/A"
-    );
-
-
-    setText(
-      "businessModel",
-      business?.model ||
-        data?.businessModel ||
-        "N/A"
-    );
-
-
-    const revenueSources =
-      normalizeArray(
-        business?.revenueSources ||
-        data?.revenueSources
-      );
-
-
-    setList(
-      "revenueSources",
-      revenueSources
-    );
-
-
-    setText(
-      "businessExplanation",
-      business?.explanation ||
-        data?.businessExplanation ||
-        "N/A"
-    );
-
-
-    /*
-     * Users & Adoption
-     */
-
-    setText(
-      "usersStatus",
-      users?.status ||
-        data?.usersStatus ||
-        "N/A"
-    );
-
-
-    /*
-     * IMPORTANT:
-     *
-     * research.users is an object:
-     *
-     * {
-     *   status,
-     *   primaryUsers,
-     *   useCases,
-     *   adoption
-     * }
-     *
-     * Therefore we must NOT pass
-     * research.users directly to setList().
-     */
-
-    const primaryUsers =
-      users?.primaryUsers ||
-      data?.primaryUsers ||
-      [];
-
-
-    const useCases =
-      users?.useCases ||
-      data?.useCases ||
-      [];
-
-
-    const adoption =
-      users?.adoption ||
-      data?.adoption ||
-      "N/A";
-
-
-    setList(
-      "primaryUsers",
-      primaryUsers
-    );
-
-
-    setList(
-      "useCases",
-      useCases
-    );
-
-
-    setText(
-      "adoption",
-      adoption
-    );
-
-
-    /*
-     * Competition
-     */
-
-    setText(
-      "competitionStatus",
-      competition?.status ||
-        data?.competitionStatus ||
-        "N/A"
-    );
-
-
-    setText(
-      "competitionCategory",
-      competition?.category ||
-        data?.competitionCategory ||
-        category ||
-        "N/A"
-    );
-
-
-    setList(
-      "competitors",
-      competition?.competitors ||
-        data?.competitors ||
-        []
-    );
-
-
-    setText(
-      "differentiation",
-      competition?.differentiation ||
-        data?.differentiation ||
-        "N/A"
-    );
-
-
-    /*
-     * Risks
-     */
-
-    setText(
-      "riskStatus",
-      risks?.status ||
-        data?.riskStatus ||
-        "N/A"
-    );
-
-
-    const smartContractRisk =
-      risks?.smartContract ||
-      data?.smartContractRisk ||
-      "N/A";
-
-
-    const protocolRisk =
-      risks?.protocol ||
-      data?.protocolRisk ||
-      "N/A";
-
-
-    const tokenRisk =
-      risks?.token ||
-      data?.tokenRisk ||
-      "N/A";
-
-
-    const dependenciesRisk =
-      risks?.dependencies ||
-      data?.dependenciesRisk ||
-      "N/A";
-
-
-    setText(
-      "smartContractRisk",
-      smartContractRisk
-    );
-
-
-    setText(
-      "protocolRisk",
-      protocolRisk
-    );
-
-
-    setText(
-      "tokenRisk",
-      tokenRisk
-    );
-
-
-    setText(
-      "dependenciesRisk",
-      dependenciesRisk
-    );
-
-
-    /*
-     * Research Summary
-     */
-
-    setText(
-      "researchStatus",
-      summary?.status ||
-        research?.status ||
-        data?.researchStatus ||
-        "N/A"
-    );
-
-
-    setText(
-      "summary",
-      summary?.text ||
-        (
-          typeof summary ===
-          "string"
-            ? summary
-            : ""
-        ) ||
-        data?.summaryText ||
-        "Research data pending"
-    );
-
-
-    /*
-     * Research
-     */
-
-    setText(
-      "coreFunction",
-      research?.coreFunction ||
-        data?.coreFunction ||
-        howItWorks?.coreFunction ||
-        "N/A"
-    );
-
-
-    setText(
-      "mechanism",
-      research?.mechanism ||
-        data?.mechanism ||
-        howItWorks?.mechanism ||
-        "N/A"
-    );
-
-
-    /*
-     * Prefer researchUsers array.
-     * This avoids passing research.users object.
-     */
-
-    const researchUsers =
-      research?.researchUsers ||
-      data?.researchUsers ||
-      primaryUsers;
-
-
-    setList(
-      "researchUsers",
-      researchUsers
-    );
-
-
-    const researchRevenue =
-      research?.revenue ||
-      data?.revenue ||
-      revenueSources;
-
-
-    setList(
-      "researchRevenue",
-      researchRevenue
-    );
-
-
-    /*
-     * Risk Snapshot
-     */
-
-    setText(
-      "snapshotSmartContract",
-      smartContractRisk
-    );
-
-
-    setText(
-      "snapshotProtocol",
-      protocolRisk
-    );
-
-
-    setText(
-      "snapshotToken",
-      tokenRisk
-    );
-
-
-    setText(
-      "snapshotDependencies",
-      dependenciesRisk
-    );
-
-
-    results.style.display =
-      "block";
-
-    results.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }
-
-
-  async function analyze() {
-
-    const value =
-      input.value.trim();
-
-    if (!value) {
-
-      showError(
-        "Please enter a protocol name or URL."
-      );
+    collect(sources);
+
+    const unique =
+      [
+        ...new Set(
+          urls.filter(Boolean)
+        )
+      ];
+
+    if (!unique.length) {
+      container.innerHTML =
+        '<div class="muted">N/A</div>';
 
       return;
     }
 
+    unique.forEach(
+      (url) => {
+        const a =
+          document.createElement(
+            "a"
+          );
 
-    clearError();
+        a.className =
+          "source-link";
 
-    button.disabled =
-      true;
+        a.href = url;
 
-    status.textContent =
+        a.target =
+          "_blank";
+
+        a.rel =
+          "noopener noreferrer";
+
+        a.textContent =
+          url;
+
+        container.appendChild(
+          a
+        );
+      }
+    );
+  }
+
+  function renderData(data) {
+    const protocol =
+      data.protocol || {};
+
+    const market =
+      data.market || {};
+
+    const metrics =
+      data.metrics || {};
+
+    const research =
+      data.research || {};
+
+    const risk =
+      data.risk || {};
+
+    setText(
+      "protocolName",
+      protocol.name
+    );
+
+    setText(
+      "protocolDescription",
+      protocol.description
+    );
+
+    setText(
+      "protocolBadge",
+      protocol.status
+    );
+
+    setText(
+      "category",
+      protocol.category
+    );
+
+    setText(
+      "protocolStatus",
+      protocol.status
+    );
+
+    const website =
+      $("website");
+
+    if (
+      website &&
+      protocol.website
+    ) {
+      website.innerHTML =
+        "";
+
+      const a =
+        document.createElement(
+          "a"
+        );
+
+      a.href =
+        protocol.website;
+
+      a.target =
+        "_blank";
+
+      a.rel =
+        "noopener noreferrer";
+
+      a.textContent =
+        protocol.website;
+
+      website.appendChild(
+        a
+      );
+    } else {
+      setText(
+        "website",
+        "N/A"
+      );
+    }
+
+    setText(
+      "chains",
+      Array.isArray(
+        protocol.chains
+      )
+        ? protocol.chains.join(
+            ", "
+          )
+        : "N/A"
+    );
+
+    setText(
+      "tvl",
+      formatUSD(
+        market.tvl ??
+        metrics.tvl
+      )
+    );
+
+    setText(
+      "token",
+      market.token ||
+        metrics.token ||
+        "N/A"
+    );
+
+    setText(
+      "tokenPrice",
+      formatPrice(
+        market.tokenPrice
+      )
+    );
+
+    setText(
+      "priceChange24h",
+      formatPercent(
+        market.priceChange24h
+      )
+    );
+
+    setText(
+      "fees24h",
+      formatUSD(
+        metrics.fees24h
+      )
+    );
+
+    setText(
+      "fees7d",
+      formatUSD(
+        metrics.fees7d
+      )
+    );
+
+    setText(
+      "fees30d",
+      formatUSD(
+        metrics.fees30d
+      )
+    );
+
+    setText(
+      "revenue24h",
+      formatUSD(
+        metrics.revenue24h
+      )
+    );
+
+    setText(
+      "revenue7d",
+      formatUSD(
+        metrics.revenue7d
+      )
+    );
+
+    setText(
+      "revenue30d",
+      formatUSD(
+        metrics.revenue30d
+      )
+    );
+
+    /*
+      HOW IT WORKS
+    */
+
+    const how =
+      research.howItWorks ||
+      {};
+
+    setText(
+      "howItWorksSummary",
+      how.summary ||
+        research.mechanism
+    );
+
+    setList(
+      "howItWorksSteps",
+      how.steps
+    );
+
+    renderEvidence(
+      "howItWorksEvidence",
+      how.observed,
+      how.analysis,
+      how.inference
+    );
+
+    /*
+      BUSINESS MODEL
+    */
+
+    const business =
+      research.businessModel ||
+      {};
+
+    setText(
+      "businessStatus",
+      business.status
+    );
+
+    setText(
+      "businessModel",
+      business.model
+    );
+
+    setList(
+      "businessRevenue",
+      business.revenueSources
+    );
+
+    setText(
+      "businessExplanation",
+      business.explanation
+    );
+
+    renderEvidence(
+      "businessEvidence",
+      business.observed,
+      business.analysis,
+      business.inference
+    );
+
+    /*
+      USERS
+    */
+
+    const users =
+      research.users ||
+      {};
+
+    setText(
+      "usersStatus",
+      users.status
+    );
+
+    setList(
+      "primaryUsers",
+      users.primaryUsers
+    );
+
+    setList(
+      "useCases",
+      users.useCases
+    );
+
+    setText(
+      "adoption",
+      users.adoption
+    );
+
+    renderEvidence(
+      "usersEvidence",
+      users.observed,
+      users.analysis,
+      users.inference
+    );
+
+    /*
+      COMPETITION
+    */
+
+    const competition =
+      research.competitiveLandscape ||
+      {};
+
+    setText(
+      "competitionStatus",
+      competition.status
+    );
+
+    setText(
+      "competitionCategory",
+      competition.category
+    );
+
+    setList(
+      "competitors",
+      competition.competitors
+    );
+
+    setText(
+      "differentiation",
+      competition.differentiation
+    );
+
+    renderEvidence(
+      "competitionEvidence",
+      competition.observed,
+      competition.analysis,
+      competition.inference
+    );
+
+    /*
+      RISKS
+    */
+
+    setText(
+      "riskStatus",
+      risk.status
+    );
+
+    setText(
+      "riskSmartContract",
+      risk.smartContract
+    );
+
+    setText(
+      "riskProtocol",
+      risk.protocol
+    );
+
+    setText(
+      "riskToken",
+      risk.token
+    );
+
+    setList(
+      "riskDependencies",
+      risk.dependencies
+    );
+
+    const riskResearch =
+      research.risks ||
+      {};
+
+    renderEvidence(
+      "riskEvidence",
+      riskResearch.observed,
+      riskResearch.analysis,
+      riskResearch.inference
+    );
+
+    /*
+      SUMMARY
+    */
+
+    const summary =
+      research.summary ||
+      {};
+
+    const brief =
+      research.researchBrief ||
+      {};
+
+    setText(
+      "summaryStatus",
+      brief.status ||
+        summary.status
+    );
+
+    setText(
+      "researchSummary",
+      summary.text
+    );
+
+    setList(
+      "keyFindings",
+      brief.keyFindings
+    );
+
+    if (
+      brief.whatMatters
+    ) {
+      const box =
+        document.createElement(
+          "div"
+        );
+
+      box.className =
+        "long-card";
+
+      box.style.marginTop =
+        "14px";
+
+      box.innerHTML =
+        `<div class="long-title">What Matters</div>
+         <div class="long-text"></div>`;
+
+      box
+        .querySelector(
+          ".long-text"
+        )
+        .textContent =
+        brief.whatMatters;
+
+      $("whatMatters")
+        .innerHTML = "";
+
+      $("whatMatters")
+        .appendChild(box);
+    }
+
+    setList(
+      "whatToWatch",
+      brief.whatToWatch
+    );
+
+    /*
+      RESEARCH
+    */
+
+    setText(
+      "coreFunction",
+      research.coreFunction
+    );
+
+    setText(
+      "mechanism",
+      research.mechanism
+    );
+
+    setList(
+      "researchUsers",
+      users.primaryUsers
+    );
+
+    setList(
+      "researchRevenue",
+      business.revenueSources
+    );
+
+    /*
+      RISK SNAPSHOT
+    */
+
+    setText(
+      "snapshotSmartContract",
+      risk.smartContract
+    );
+
+    setText(
+      "snapshotProtocol",
+      risk.protocol
+    );
+
+    setText(
+      "snapshotToken",
+      risk.token
+    );
+
+    setList(
+      "snapshotDependencies",
+      risk.dependencies
+    );
+
+    /*
+      SOURCES
+    */
+
+    renderSources(
+      data.sources
+    );
+  }
+
+  async function analyze() {
+    const input =
+      $("protocolInput")
+        .value
+        .trim();
+
+    if (!input) {
+      $("status")
+        .textContent =
+        "Please enter a protocol.";
+
+      return;
+    }
+
+    $("status")
+      .textContent =
       "Analyzing...";
 
-    resetResults();
-
+    $("analyzeButton")
+      .disabled = true;
 
     try {
-
       const response =
         await fetch(
           API_URL,
@@ -2717,101 +1996,63 @@
 
             body:
               JSON.stringify({
-                input: value
+                input
               })
           }
         );
 
-
-      const raw =
-        await response.text();
-
-
-      let data;
-
-      try {
-
-        data =
-          JSON.parse(raw);
-
-      } catch {
-
-        throw new Error(
-          "API returned invalid JSON:\n\n" +
-          raw.slice(0, 2000)
-        );
-      }
-
+      const data =
+        await response.json();
 
       if (
-        !response.ok
+        !response.ok ||
+        !data.success
       ) {
-
         throw new Error(
-          data?.error ||
-          `HTTP ${response.status}`
+          data.error ||
+          "Analysis failed"
         );
       }
 
+      renderData(data);
 
-      if (
-        data?.ok === false
-      ) {
-
-        throw new Error(
-          data?.error ||
-          "Unable to analyze protocol."
-        );
-      }
-
-
-      renderResult(data);
-
-      status.textContent =
+      $("status")
+        .textContent =
         "Analysis complete.";
-
     } catch (error) {
+      console.error(error);
 
-      console.error(
-        "Protocol Scout error:",
-        error
-      );
-
-      status.textContent =
-        "Analysis failed.";
-
-      showError(
-        error?.message ||
-        "Unable to analyze protocol."
-      );
-
+      $("status")
+        .textContent =
+        `Error: ${
+          error.message
+        }`;
     } finally {
-
-      button.disabled =
-        false;
+      $("analyzeButton")
+        .disabled = false;
     }
   }
 
+  $("analyzeButton")
+    .addEventListener(
+      "click",
+      analyze
+    );
 
-  button.addEventListener(
-    "click",
-    analyze
-  );
-
-
-  input.addEventListener(
-    "keydown",
-    (event) => {
-
-      if (
-        event.key ===
-        "Enter"
-      ) {
-        analyze();
+  $("protocolInput")
+    .addEventListener(
+      "keydown",
+      (event) => {
+        if (
+          event.key ===
+          "Enter"
+        ) {
+          analyze();
+        }
       }
+    );
 
-    }
-  );
+  analyze();
 </script>
 
 </body>
