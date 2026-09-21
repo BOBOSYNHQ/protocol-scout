@@ -227,14 +227,16 @@
     }
 
     .chains {
-      display: flex;
+      display: flex !important;
       flex-wrap: wrap;
       gap: 8px;
+      align-items: center;
     }
 
     .chain {
-      display: inline-flex;
+      display: inline-flex !important;
       align-items: center;
+      width: fit-content;
       padding: 5px 9px;
       border: 1px solid #2a2a2a;
       border-radius: 999px;
@@ -243,6 +245,7 @@
       font-size: 12px;
       line-height: 1.2;
       white-space: nowrap;
+      word-break: normal;
     }
 
     .metric-grid {
@@ -472,9 +475,7 @@
           <h2 id="protocolName" class="protocol-name">—</h2>
         </div>
 
-        <div id="protocolMeta" class="protocol-meta">
-          —
-        </div>
+        <div id="protocolMeta" class="protocol-meta"></div>
 
       </div>
     </section>
@@ -506,7 +507,7 @@
 
         <div class="card">
           <div class="label">Chains</div>
-          <div id="chains" class="value chains">—</div>
+          <div id="chains" class="value chains"></div>
         </div>
 
       </div>
@@ -605,9 +606,7 @@
           Protocol Mechanism
         </h3>
 
-        <p id="howSummary">
-          —
-        </p>
+        <p id="howSummary"></p>
 
         <ul id="howSteps"></ul>
 
@@ -625,17 +624,11 @@
 
       <div class="panel">
 
-        <h3 id="businessStatus">
-          —
-        </h3>
+        <h3 id="businessStatus"></h3>
 
-        <p id="businessModel">
-          —
-        </p>
+        <p id="businessModel"></p>
 
-        <p id="businessExplanation" style="margin-top: 14px;">
-          —
-        </p>
+        <p id="businessExplanation" style="margin-top: 14px;"></p>
 
         <ul id="revenueSources"></ul>
 
@@ -677,9 +670,7 @@
 
       <div class="panel" style="margin-top: 20px;">
 
-        <p id="adoption">
-          —
-        </p>
+        <p id="adoption"></p>
 
       </div>
 
@@ -695,9 +686,7 @@
 
       <div class="panel">
 
-        <h3 id="competitionStatus">
-          —
-        </h3>
+        <h3 id="competitionStatus"></h3>
 
         <h3 id="competitionCategory" style="margin-top: 22px;">
           Competitors
@@ -709,9 +698,7 @@
           Differentiation
         </h3>
 
-        <p id="differentiation">
-          —
-        </p>
+        <p id="differentiation"></p>
 
       </div>
 
@@ -765,13 +752,9 @@
           Research Status
         </div>
 
-        <h3 id="researchStatus">
-          —
-        </h3>
+        <h3 id="researchStatus"></h3>
 
-        <p id="researchSummary">
-          —
-        </p>
+        <p id="researchSummary"></p>
 
       </div>
 
@@ -793,9 +776,7 @@
             Core Function
           </h3>
 
-          <p id="coreFunction">
-            —
-          </p>
+          <p id="coreFunction"></p>
 
         </div>
 
@@ -805,9 +786,7 @@
             Mechanism
           </h3>
 
-          <p id="mechanism">
-            —
-          </p>
+          <p id="mechanism"></p>
 
         </div>
 
@@ -817,9 +796,7 @@
             Users
           </h3>
 
-          <p id="researchUsers">
-            —
-          </p>
+          <p id="researchUsers"></p>
 
         </div>
 
@@ -829,9 +806,7 @@
             Revenue
           </h3>
 
-          <p id="researchRevenue">
-            —
-          </p>
+          <p id="researchRevenue"></p>
 
         </div>
 
@@ -914,17 +889,43 @@
     document.getElementById("results");
 
 
-  function safe(value, fallback = "—") {
+  function isEmpty(value) {
 
-    if (
+    return (
       value === null ||
       value === undefined ||
       value === ""
-    ) {
+    );
+
+  }
+
+
+  function isPlaceholder(value) {
+
+    if (value === null || value === undefined) {
+      return true;
+    }
+
+    const text =
+      String(value).trim();
+
+    return (
+      text === "" ||
+      text === "-" ||
+      text === "—"
+    );
+
+  }
+
+
+  function safe(value, fallback = "—") {
+
+    if (isPlaceholder(value)) {
       return fallback;
     }
 
     return value;
+
   }
 
 
@@ -939,7 +940,8 @@
       return "—";
     }
 
-    const number = Number(value);
+    const number =
+      Number(value);
 
     return number.toLocaleString(
       "en-US",
@@ -949,6 +951,7 @@
         maximumFractionDigits: 2
       }
     );
+
   }
 
 
@@ -963,21 +966,30 @@
       return "—";
     }
 
-    const number = Number(value);
+    const number =
+      Number(value);
 
     if (number >= 1e9) {
-      return "$" + (number / 1e9).toFixed(2) + "B";
+      return "$" +
+        (number / 1e9).toFixed(2) +
+        "B";
     }
 
     if (number >= 1e6) {
-      return "$" + (number / 1e6).toFixed(2) + "M";
+      return "$" +
+        (number / 1e6).toFixed(2) +
+        "M";
     }
 
     if (number >= 1e3) {
-      return "$" + (number / 1e3).toFixed(2) + "K";
+      return "$" +
+        (number / 1e3).toFixed(2) +
+        "K";
     }
 
-    return "$" + number.toFixed(2);
+    return "$" +
+      number.toFixed(2);
+
   }
 
 
@@ -992,7 +1004,8 @@
       return "—";
     }
 
-    const number = Number(value);
+    const number =
+      Number(value);
 
     return number.toLocaleString(
       "en-US",
@@ -1003,6 +1016,7 @@
         maximumFractionDigits: 2
       }
     );
+
   }
 
 
@@ -1017,13 +1031,15 @@
       return "N/A";
     }
 
-    const number = Number(value);
+    const number =
+      Number(value);
 
     return (
       (number > 0 ? "+" : "") +
       number.toFixed(2) +
       "%"
     );
+
   }
 
 
@@ -1040,22 +1056,24 @@
 
     const aliases = {
 
-      "aave":
-        "aave-v3",
+      "aave": "aave-v3",
 
-      "aave v3":
-        "aave-v3",
+      "aave v3": "aave-v3",
 
-      "aave-v3":
-        "aave-v3"
+      "aave-v3": "aave-v3"
 
     };
 
     return aliases[text] || text;
+
   }
 
 
-  function setText(id, value, fallback = "—") {
+  function setText(
+    id,
+    value,
+    fallback = "—"
+  ) {
 
     const element =
       document.getElementById(id);
@@ -1064,12 +1082,46 @@
       return;
     }
 
+    if (isPlaceholder(value)) {
+
+      element.textContent =
+        fallback;
+
+      return;
+    }
+
     element.textContent =
-      safe(value, fallback);
+      String(value);
+
   }
 
 
-  function setList(id, items) {
+  function clearIfEmpty(
+    id
+  ) {
+
+    const element =
+      document.getElementById(id);
+
+    if (!element) {
+      return;
+    }
+
+    if (
+      isPlaceholder(
+        element.textContent
+      )
+    ) {
+      element.textContent = "";
+    }
+
+  }
+
+
+  function setList(
+    id,
+    items
+  ) {
 
     const element =
       document.getElementById(id);
@@ -1086,9 +1138,7 @@
 
     items
       .filter(item =>
-        item !== null &&
-        item !== undefined &&
-        String(item).trim() !== ""
+        !isPlaceholder(item)
       )
       .forEach(item => {
 
@@ -1101,10 +1151,13 @@
         element.appendChild(li);
 
       });
+
   }
 
 
-  function renderChains(chains) {
+  function renderChains(
+    chains
+  ) {
 
     const element =
       document.getElementById("chains");
@@ -1115,19 +1168,35 @@
 
     element.innerHTML = "";
 
-    if (!Array.isArray(chains) || chains.length === 0) {
+    if (
+      !Array.isArray(chains) ||
+      chains.length === 0
+    ) {
 
-      element.textContent = "—";
+      element.textContent =
+        "—";
 
       return;
+
     }
+
+    element.style.display =
+      "flex";
+
+    element.style.flexWrap =
+      "wrap";
+
+    element.style.gap =
+      "8px";
 
     chains.forEach(chain => {
 
       if (
         chain === null ||
         chain === undefined ||
-        String(chain).trim() === ""
+        String(chain).trim() === "" ||
+        String(chain).trim() === "-" ||
+        String(chain).trim() === "—"
       ) {
         return;
       }
@@ -1135,19 +1204,30 @@
       const span =
         document.createElement("span");
 
-      span.className = "chain";
+      span.className =
+        "chain";
+
+      span.style.display =
+        "inline-flex";
+
+      span.style.width =
+        "fit-content";
 
       span.textContent =
         String(chain);
 
-      element.appendChild(span);
+      element.appendChild(
+        span
+      );
 
     });
 
   }
 
 
-  function renderWebsite(url) {
+  function renderWebsite(
+    url
+  ) {
 
     const element =
       document.getElementById("website");
@@ -1158,27 +1238,40 @@
 
     element.innerHTML = "";
 
-    if (!url) {
+    if (isPlaceholder(url)) {
 
-      element.textContent = "—";
+      element.textContent =
+        "—";
 
       return;
+
     }
 
     const link =
       document.createElement("a");
 
-    link.href = url;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.textContent = url;
+    link.href =
+      String(url);
 
-    element.appendChild(link);
+    link.target =
+      "_blank";
+
+    link.rel =
+      "noopener noreferrer";
+
+    link.textContent =
+      String(url);
+
+    element.appendChild(
+      link
+    );
 
   }
 
 
-  function renderSources(sources) {
+  function renderSources(
+    sources
+  ) {
 
     const element =
       document.getElementById("sources");
@@ -1205,10 +1298,15 @@
       let name = "";
       let url = "";
 
-      if (typeof source === "string") {
+      if (
+        typeof source === "string"
+      ) {
 
-        name = source;
-        url = source;
+        name =
+          source;
+
+        url =
+          source;
 
       } else {
 
@@ -1225,12 +1323,19 @@
 
       }
 
-      const key =
-        (name + "|" + url).toLowerCase();
-
-      if (!name && !url) {
+      if (
+        isPlaceholder(name) &&
+        isPlaceholder(url)
+      ) {
         return;
       }
+
+      const key =
+        (
+          name +
+          "|" +
+          url
+        ).toLowerCase();
 
       if (seen.has(key)) {
         return;
@@ -1241,31 +1346,40 @@
       const link =
         document.createElement("a");
 
-      link.className = "source";
+      link.className =
+        "source";
 
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
+      link.target =
+        "_blank";
+
+      link.rel =
+        "noopener noreferrer";
 
       link.textContent =
         name || url;
 
       if (url) {
-        link.href = url;
-      } else {
-        link.removeAttribute("href");
+        link.href =
+          url;
       }
 
-      element.appendChild(link);
+      element.appendChild(
+        link
+      );
 
     });
 
   }
 
 
-  function renderResearchRevenue(revenue) {
+  function renderResearchRevenue(
+    revenue
+  ) {
 
     const element =
-      document.getElementById("researchRevenue");
+      document.getElementById(
+        "researchRevenue"
+      );
 
     if (!element) {
       return;
@@ -1273,17 +1387,24 @@
 
     if (!revenue) {
 
-      element.textContent = "—";
+      element.textContent =
+        "—";
 
       return;
+
     }
 
-    if (revenue.summary) {
+    if (
+      !isPlaceholder(
+        revenue.summary
+      )
+    ) {
 
       element.textContent =
         revenue.summary;
 
       return;
+
     }
 
     const parts = [];
@@ -1295,7 +1416,9 @@
 
       parts.push(
         "24h " +
-        formatCurrency(revenue.daily)
+        formatCurrency(
+          revenue.daily
+        )
       );
 
     }
@@ -1307,7 +1430,9 @@
 
       parts.push(
         "7d " +
-        formatCurrency(revenue.weekly)
+        formatCurrency(
+          revenue.weekly
+        )
       );
 
     }
@@ -1319,7 +1444,9 @@
 
       parts.push(
         "30d " +
-        formatCurrency(revenue.monthly)
+        formatCurrency(
+          revenue.monthly
+        )
       );
 
     }
@@ -1332,11 +1459,17 @@
   }
 
 
-  function renderHowItWorks(how) {
+  function renderHowItWorks(
+    how
+  ) {
+
+    const summary =
+      how?.summary;
 
     setText(
       "howSummary",
-      how?.summary
+      summary,
+      ""
     );
 
     const steps =
@@ -1349,57 +1482,59 @@
       steps
     );
 
+    clearIfEmpty(
+      "howSummary"
+    );
+
   }
 
 
-  function renderBusinessModel(business) {
+  function renderBusinessModel(
+    business
+  ) {
 
     setText(
       "businessStatus",
-      business?.title
+      business?.title,
+      ""
     );
 
     setText(
       "businessModel",
-      business?.explanation
+      business?.explanation,
+      ""
     );
 
     const revenueSources =
-      Array.isArray(business?.revenueSource)
+      Array.isArray(
+        business?.revenueSource
+      )
         ? business.revenueSource
         : [];
 
-    const revenueElement =
-      document.getElementById("revenueSources");
-
-    if (revenueElement) {
-
-      revenueElement.innerHTML = "";
-
+    setList(
+      "revenueSources",
       revenueSources
-        .filter(item =>
-          item !== null &&
-          item !== undefined &&
-          String(item).trim() !== ""
-        )
-        .forEach(item => {
+    );
 
-          const li =
-            document.createElement("li");
+    clearIfEmpty(
+      "businessStatus"
+    );
 
-          li.textContent =
-            String(item);
+    clearIfEmpty(
+      "businessModel"
+    );
 
-          revenueElement.appendChild(li);
-
-        });
-
-    }
+    clearIfEmpty(
+      "businessExplanation"
+    );
 
   }
 
 
-  function renderUsers(users) {
+  function renderUsers(
+    users
+  ) {
 
     setText(
       "usersStatus",
@@ -1419,17 +1554,25 @@
 
     setText(
       "adoption",
-      users?.summary
+      users?.summary,
+      ""
+    );
+
+    clearIfEmpty(
+      "adoption"
     );
 
   }
 
 
-  function renderCompetition(competition) {
+  function renderCompetition(
+    competition
+  ) {
 
     setText(
       "competitionStatus",
-      competition?.title
+      competition?.title,
+      ""
     );
 
     setText(
@@ -1444,13 +1587,24 @@
 
     setText(
       "differentiation",
-      competition?.differentiation
+      competition?.differentiation,
+      ""
+    );
+
+    clearIfEmpty(
+      "competitionStatus"
+    );
+
+    clearIfEmpty(
+      "differentiation"
     );
 
   }
 
 
-  function renderRisk(risk) {
+  function renderRisk(
+    risk
+  ) {
 
     setText(
       "riskSmartContract",
@@ -1495,7 +1649,9 @@
   }
 
 
-  function renderData(data) {
+  function renderData(
+    data
+  ) {
 
     const protocol =
       data.protocol || {};
@@ -1543,9 +1699,8 @@
 
     setText(
       "protocolMeta",
-      protocol.symbol
-        ? protocol.symbol
-        : ""
+      protocol.symbol,
+      ""
     );
 
     setText(
@@ -1680,12 +1835,22 @@
 
     setText(
       "researchStatus",
-      researchSummary.status
+      researchSummary.status,
+      ""
     );
 
     setText(
       "researchSummary",
-      researchSummary.summary
+      researchSummary.summary,
+      ""
+    );
+
+    clearIfEmpty(
+      "researchStatus"
+    );
+
+    clearIfEmpty(
+      "researchSummary"
     );
 
 
@@ -1734,11 +1899,11 @@
 
     }
 
-
     const slug =
       normalizeSlug(raw);
 
-    button.disabled = true;
+    button.disabled =
+      true;
 
     message.textContent =
       "Analyzing...";
@@ -1753,16 +1918,21 @@
       const url =
         API_URL +
         "?slug=" +
-        encodeURIComponent(slug) +
+        encodeURIComponent(
+          slug
+        ) +
         "&t=" +
         Date.now();
 
 
       const response =
-        await fetch(url, {
-          method: "GET",
-          cache: "no-store"
-        });
+        await fetch(
+          url,
+          {
+            method: "GET",
+            cache: "no-store"
+          }
+        );
 
 
       if (!response.ok) {
@@ -1825,7 +1995,8 @@
 
     } finally {
 
-      button.disabled = false;
+      button.disabled =
+        false;
 
     }
 
