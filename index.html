@@ -235,6 +235,18 @@
       font-weight: 400;
     }
 
+    .value a {
+      color: #ddd;
+      text-decoration: underline;
+      text-decoration-color: #444;
+      text-underline-offset: 3px;
+    }
+
+    .value a:hover {
+      color: #fff;
+      text-decoration-color: #fff;
+    }
+
     .card {
       border: 1px solid #1b1b1b;
       padding: 28px;
@@ -276,6 +288,7 @@
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.08em;
+      margin-bottom: 16px;
     }
 
     .chains {
@@ -398,9 +411,13 @@
   <section class="hero">
     <div class="container">
 
-      <div class="eyebrow">Independent Web3 Research</div>
+      <div class="eyebrow">
+        Independent Web3 Research
+      </div>
 
-      <h1>BOBOSYN Protocol Scout</h1>
+      <h1>
+        BOBOSYN Protocol Scout
+      </h1>
 
       <div class="tagline">
         Scout. Research. Understand.
@@ -414,7 +431,7 @@
         <input
           id="protocolInput"
           type="text"
-          placeholder="Enter a protocol, e.g. Aave V3"
+          placeholder="Enter a protocol"
           autocomplete="off"
         >
 
@@ -428,7 +445,6 @@
     </div>
   </section>
 
-  <!-- RESULTS ARE HIDDEN UNTIL A REAL ANALYSIS COMPLETES -->
   <div id="results" class="container hidden">
 
     <div class="protocol-title">
@@ -437,9 +453,13 @@
     </div>
 
     <section id="overview">
-      <div class="section-title">Protocol Overview</div>
+
+      <div class="section-title">
+        Protocol Overview
+      </div>
 
       <div class="grid">
+
         <div class="cell">
           <div class="label">Category</div>
           <div class="value" id="category">—</div>
@@ -459,13 +479,18 @@
           <div class="label">Chains</div>
           <div class="chains" id="chains"></div>
         </div>
+
       </div>
     </section>
 
     <section>
-      <div class="section-title">Market</div>
+
+      <div class="section-title">
+        Market
+      </div>
 
       <div class="grid">
+
         <div class="cell">
           <div class="label">TVL</div>
           <div class="value" id="tvl">—</div>
@@ -485,11 +510,15 @@
           <div class="label">24h Change</div>
           <div class="value" id="change24h">—</div>
         </div>
+
       </div>
     </section>
 
     <section>
-      <div class="section-title">Protocol Metrics</div>
+
+      <div class="section-title">
+        Protocol Metrics
+      </div>
 
       <div class="grid metric-grid">
 
@@ -528,161 +557,296 @@
 
     <section id="research">
 
-      <div class="section-title">How It Works</div>
+      <div class="section-title">
+        How It Works
+      </div>
 
       <div class="card">
-        <h3 id="howTitle">—</h3>
-        <p id="howSummary">—</p>
+
+        <h3 id="howTitle">
+          Protocol Mechanism
+        </h3>
+
+        <p id="howSummary">
+          —
+        </p>
+
         <ul id="howSteps"></ul>
+
       </div>
 
-      <div class="section-title">Business Model</div>
+      <div class="section-title">
+        Business Model
+      </div>
 
       <div class="card">
+
         <div id="businessStatus"></div>
-        <h3 id="businessModel">—</h3>
-        <p id="businessExplanation">—</p>
+
+        <h3 id="businessModel">
+          —
+        </h3>
+
+        <p id="businessExplanation">
+          —
+        </p>
+
         <ul id="revenueSources"></ul>
+
       </div>
 
-      <div class="section-title">Users & Adoption</div>
+      <div class="section-title">
+        Users & Adoption
+      </div>
 
       <div class="card">
+
         <div id="usersStatus"></div>
 
-        <h3>Primary Users</h3>
+        <h3>
+          Primary Users
+        </h3>
+
         <ul id="primaryUsers"></ul>
 
-        <h3>Use Cases</h3>
+        <h3>
+          Use Cases
+        </h3>
+
         <ul id="useCases"></ul>
 
         <p id="adoption"></p>
+
       </div>
 
-      <div class="section-title">Competitive Landscape</div>
+      <div class="section-title">
+        Competitive Landscape
+      </div>
 
       <div class="card">
+
         <div id="competitionStatus"></div>
 
-        <h3 id="competitionCategory">—</h3>
+        <h3 id="competitionCategory">
+          —
+        </h3>
 
-        <h3>Competitors</h3>
+        <h3>
+          Competitors
+        </h3>
+
         <ul id="competitors"></ul>
 
-        <h3>Differentiation</h3>
-        <p id="differentiation">—</p>
+        <h3>
+          Differentiation
+        </h3>
+
+        <p id="differentiation">
+          —
+        </p>
+
       </div>
 
     </section>
 
     <section id="risks">
 
-      <div class="section-title">Risk Analysis</div>
+      <div class="section-title">
+        Risk Analysis
+      </div>
 
       <div class="risk-grid">
 
         <div class="risk-card">
-          <h3>Smart Contract</h3>
-          <p id="riskSmartContract">—</p>
+          <h3>
+            Smart Contract
+          </h3>
+          <p id="riskSmartContract">
+            —
+          </p>
         </div>
 
         <div class="risk-card">
-          <h3>Protocol</h3>
-          <p id="riskProtocol">—</p>
+          <h3>
+            Protocol
+          </h3>
+          <p id="riskProtocol">
+            —
+          </p>
         </div>
 
         <div class="risk-card">
-          <h3>Token</h3>
-          <p id="riskToken">—</p>
+          <h3>
+            Token
+          </h3>
+          <p id="riskToken">
+            —
+          </p>
         </div>
 
         <div class="risk-card">
-          <h3>Dependencies</h3>
-          <p id="riskDependencies">—</p>
+          <h3>
+            Dependencies
+          </h3>
+          <p id="riskDependencies">
+            —
+          </p>
         </div>
 
       </div>
-
     </section>
 
     <section>
 
-      <div class="section-title">Research Summary</div>
+      <div class="section-title">
+        Research Summary
+      </div>
 
       <div class="card">
-        <div class="label">Research Status</div>
-        <div class="value" id="researchStatus">—</div>
 
-        <p id="researchSummary" style="margin-top:16px;"></p>
+        <div class="label">
+          Research Status
+        </div>
+
+        <div class="value" id="researchStatus">
+          —
+        </div>
+
+        <p
+          id="researchSummary"
+          style="margin-top:16px;"
+        >
+          —
+        </p>
+
       </div>
 
     </section>
 
     <section>
 
-      <div class="section-title">Research</div>
+      <div class="section-title">
+        Research
+      </div>
 
       <div class="two-col">
 
         <div class="card">
-          <h3>Core Function</h3>
-          <p id="coreFunction">—</p>
+          <h3>
+            Core Function
+          </h3>
+
+          <p id="coreFunction">
+            —
+          </p>
         </div>
 
         <div class="card">
-          <h3>Mechanism</h3>
-          <p id="mechanism">—</p>
+          <h3>
+            Mechanism
+          </h3>
+
+          <p id="mechanism">
+            —
+          </p>
         </div>
 
         <div class="card">
-          <h3>Users</h3>
-          <p id="researchUsers">—</p>
+          <h3>
+            Users
+          </h3>
+
+          <p id="researchUsers">
+            —
+          </p>
         </div>
 
         <div class="card">
-          <h3>Revenue</h3>
-          <p id="researchRevenue">—</p>
+          <h3>
+            Revenue
+          </h3>
+
+          <p id="researchRevenue">
+            —
+          </p>
         </div>
 
       </div>
-
     </section>
 
     <section>
 
-      <div class="section-title">Risk Snapshot</div>
+      <div class="section-title">
+        Risk Snapshot
+      </div>
 
       <div class="grid">
 
         <div class="cell">
-          <div class="label">Smart Contract</div>
-          <div class="value small" id="snapshotSmartContract">—</div>
+          <div class="label">
+            Smart Contract
+          </div>
+
+          <div
+            class="value small"
+            id="snapshotSmartContract"
+          >
+            —
+          </div>
         </div>
 
         <div class="cell">
-          <div class="label">Protocol</div>
-          <div class="value small" id="snapshotProtocol">—</div>
+          <div class="label">
+            Protocol
+          </div>
+
+          <div
+            class="value small"
+            id="snapshotProtocol"
+          >
+            —
+          </div>
         </div>
 
         <div class="cell">
-          <div class="label">Token</div>
-          <div class="value small" id="snapshotToken">—</div>
+          <div class="label">
+            Token
+          </div>
+
+          <div
+            class="value small"
+            id="snapshotToken"
+          >
+            —
+          </div>
         </div>
 
         <div class="cell">
-          <div class="label">Dependencies</div>
-          <div class="value small" id="snapshotDependencies">—</div>
+          <div class="label">
+            Dependencies
+          </div>
+
+          <div
+            class="value small"
+            id="snapshotDependencies"
+          >
+            —
+          </div>
         </div>
 
       </div>
-
     </section>
 
     <section>
 
-      <div class="section-title">Sources</div>
+      <div class="section-title">
+        Sources
+      </div>
 
-      <div class="card sources" id="sources"></div>
+      <div
+        class="card sources"
+        id="sources"
+      ></div>
 
     </section>
 
@@ -712,7 +876,24 @@
   const results =
     document.getElementById("results");
 
-  function text(value, fallback = "—") {
+
+  /*
+   * -----------------------------
+   * Safe value helpers
+   * -----------------------------
+   */
+
+  function isObject(value) {
+    return (
+      value !== null &&
+      typeof value === "object" &&
+      !Array.isArray(value)
+    );
+  }
+
+
+  function safeText(value, fallback = "—") {
+
     if (
       value === null ||
       value === undefined ||
@@ -721,10 +902,57 @@
       return fallback;
     }
 
-    return String(value);
+    if (
+      typeof value === "string" ||
+      typeof value === "number" ||
+      typeof value === "boolean"
+    ) {
+      return String(value);
+    }
+
+    if (Array.isArray(value)) {
+      if (value.length === 0) {
+        return fallback;
+      }
+
+      return value
+        .map(item => safeText(item, ""))
+        .filter(Boolean)
+        .join(", ");
+    }
+
+    if (isObject(value)) {
+
+      const preferred =
+        value.text ??
+        value.summary ??
+        value.description ??
+        value.explanation ??
+        value.content ??
+        value.message ??
+        value.value ??
+        value.name ??
+        value.title;
+
+      if (
+        preferred !== undefined &&
+        preferred !== null
+      ) {
+        return safeText(
+          preferred,
+          fallback
+        );
+      }
+
+      return fallback;
+    }
+
+    return fallback;
   }
 
-  function number(value) {
+
+  function getNumber(value) {
+
     if (
       value === null ||
       value === undefined ||
@@ -733,127 +961,337 @@
       return null;
     }
 
+    if (typeof value === "object") {
+
+      const candidate =
+        value.value ??
+        value.usd ??
+        value.amount ??
+        value.total;
+
+      return getNumber(candidate);
+    }
+
     const n = Number(value);
 
-    return Number.isFinite(n) ? n : null;
+    return Number.isFinite(n)
+      ? n
+      : null;
   }
 
-  function usd(value) {
-    const n = number(value);
+
+  function formatUsd(value) {
+
+    const n =
+      getNumber(value);
 
     if (n === null) {
       return "—";
+    }
+
+    if (Math.abs(n) >= 1e12) {
+      return "$" +
+        (n / 1e12).toFixed(2) +
+        "T";
     }
 
     if (Math.abs(n) >= 1e9) {
-      return "$" + (n / 1e9).toFixed(2) + "B";
+      return "$" +
+        (n / 1e9).toFixed(2) +
+        "B";
     }
 
     if (Math.abs(n) >= 1e6) {
-      return "$" + (n / 1e6).toFixed(2) + "M";
+      return "$" +
+        (n / 1e6).toFixed(2) +
+        "M";
     }
 
     if (Math.abs(n) >= 1e3) {
-      return "$" + (n / 1e3).toFixed(2) + "K";
+      return "$" +
+        (n / 1e3).toFixed(2) +
+        "K";
     }
 
-    return "$" + n.toFixed(2);
+    return "$" +
+      n.toFixed(2);
   }
 
-  function percent(value) {
-    const n = number(value);
+
+  function formatPercent(value) {
+
+    const n =
+      getNumber(value);
 
     if (n === null) {
       return "—";
     }
 
-    return (n > 0 ? "+" : "") +
+    return (
+      n >= 0 ? "+" : ""
+    ) +
       n.toFixed(2) +
       "%";
   }
 
-  function setText(id, value, fallback = "—") {
+
+  function setText(
+    id,
+    value,
+    fallback = "—"
+  ) {
+
     const element =
       document.getElementById(id);
 
-    if (!element) return;
-
-    element.textContent =
-      text(value, fallback);
-  }
-
-  function setList(id, values) {
-    const element =
-      document.getElementById(id);
-
-    if (!element) return;
-
-    element.innerHTML = "";
-
-    if (!Array.isArray(values) || values.length === 0) {
-      const li = document.createElement("li");
-      li.className = "empty";
-      li.textContent = "No data available";
-      element.appendChild(li);
+    if (!element) {
       return;
     }
 
-    values.forEach(value => {
-      const li =
-        document.createElement("li");
-
-      if (
-        typeof value === "object" &&
-        value !== null
-      ) {
-        li.textContent =
-          value.name ||
-          value.title ||
-          value.description ||
-          JSON.stringify(value);
-      } else {
-        li.textContent =
-          String(value);
-      }
-
-      element.appendChild(li);
-    });
+    element.textContent =
+      safeText(
+        value,
+        fallback
+      );
   }
 
-  function setStatus(id, value) {
+
+  /*
+   * -----------------------------
+   * Object normalization
+   * -----------------------------
+   */
+
+  function normalizeArray(value) {
+
+    if (Array.isArray(value)) {
+      return value;
+    }
+
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) {
+      return [];
+    }
+
+    return [value];
+  }
+
+
+  function objectText(value) {
+
+    if (!isObject(value)) {
+      return safeText(value);
+    }
+
+    return safeText(
+      value.text ??
+      value.summary ??
+      value.description ??
+      value.explanation ??
+      value.content ??
+      value.message ??
+      value.value ??
+      value.name ??
+      value.title
+    );
+  }
+
+
+  function renderListItemValue(value) {
+
+    if (
+      value === null ||
+      value === undefined
+    ) {
+      return "";
+    }
+
+    if (
+      typeof value === "string" ||
+      typeof value === "number" ||
+      typeof value === "boolean"
+    ) {
+      return String(value);
+    }
+
+    if (Array.isArray(value)) {
+      return value
+        .map(item =>
+          renderListItemValue(item)
+        )
+        .filter(Boolean)
+        .join(", ");
+    }
+
+    if (isObject(value)) {
+      return objectText(value);
+    }
+
+    return "";
+  }
+
+
+  function setList(
+    id,
+    values,
+    emptyText = "No data available"
+  ) {
+
     const element =
       document.getElementById(id);
 
-    if (!element) return;
+    if (!element) {
+      return;
+    }
 
     element.innerHTML = "";
 
-    if (!value) return;
+    const array =
+      normalizeArray(values)
+        .map(renderListItemValue)
+        .filter(Boolean);
+
+    if (array.length === 0) {
+
+      const li =
+        document.createElement("li");
+
+      li.className = "empty";
+      li.textContent = emptyText;
+
+      element.appendChild(li);
+
+      return;
+    }
+
+    array.forEach(value => {
+
+      const li =
+        document.createElement("li");
+
+      li.textContent = value;
+
+      element.appendChild(li);
+
+    });
+  }
+
+
+  function setStatus(
+    id,
+    value
+  ) {
+
+    const element =
+      document.getElementById(id);
+
+    if (!element) {
+      return;
+    }
+
+    element.innerHTML = "";
+
+    const status =
+      safeText(value, "");
+
+    if (!status) {
+      return;
+    }
 
     const span =
       document.createElement("span");
 
     span.className = "status";
-    span.textContent = value;
+    span.textContent = status;
 
     element.appendChild(span);
   }
 
+
+  /*
+   * -----------------------------
+   * Website
+   * -----------------------------
+   */
+
+  function renderWebsite(value) {
+
+    const element =
+      document.getElementById("website");
+
+    if (!element) {
+      return;
+    }
+
+    element.innerHTML = "";
+
+    const url =
+      safeText(value, "");
+
+    if (!url) {
+      element.textContent = "—";
+      return;
+    }
+
+    let href = url;
+
+    if (
+      !href.startsWith("http://") &&
+      !href.startsWith("https://")
+    ) {
+      href =
+        "https://" +
+        href;
+    }
+
+    const link =
+      document.createElement("a");
+
+    link.href = href;
+    link.target = "_blank";
+    link.rel =
+      "noopener noreferrer";
+
+    link.textContent = url;
+
+    element.appendChild(link);
+  }
+
+
+  /*
+   * -----------------------------
+   * Chains
+   * -----------------------------
+   */
+
   function renderChains(chains) {
+
     const container =
       document.getElementById("chains");
 
+    if (!container) {
+      return;
+    }
+
     container.innerHTML = "";
 
-    if (
-      !Array.isArray(chains) ||
-      chains.length === 0
-    ) {
+    const values =
+      normalizeArray(chains)
+        .map(value =>
+          renderListItemValue(value)
+        )
+        .filter(Boolean);
+
+    if (values.length === 0) {
       container.textContent = "—";
       return;
     }
 
-    chains.forEach(chain => {
+    values.forEach(chain => {
+
       const span =
         document.createElement("span");
 
@@ -861,156 +1299,476 @@
       span.textContent = chain;
 
       container.appendChild(span);
+
     });
   }
 
+
+  /*
+   * -----------------------------
+   * Sources
+   * -----------------------------
+   */
+
   function renderSources(sources) {
+
     const container =
       document.getElementById("sources");
 
-    container.innerHTML = "";
-
-    if (
-      !Array.isArray(sources) ||
-      sources.length === 0
-    ) {
-      container.textContent =
-        "No sources available";
-
+    if (!container) {
       return;
     }
 
+    container.innerHTML = "";
+
+    if (!Array.isArray(sources)) {
+      container.textContent =
+        "No sources available";
+      return;
+    }
+
+    let count = 0;
+
     sources.forEach(source => {
-      if (!source || !source.url) {
+
+      if (!source) {
+        return;
+      }
+
+      const url =
+        safeText(
+          source.url,
+          ""
+        );
+
+      if (!url) {
         return;
       }
 
       const link =
         document.createElement("a");
 
-      link.href = source.url;
+      link.href = url;
       link.target = "_blank";
-      link.rel = "noopener noreferrer";
+      link.rel =
+        "noopener noreferrer";
 
       link.textContent =
-        source.name || source.url;
+        safeText(
+          source.name,
+          url
+        );
 
       container.appendChild(link);
+
+      count++;
+
     });
+
+    if (count === 0) {
+      container.textContent =
+        "No sources available";
+    }
   }
 
-  function getToken(market) {
-    const token =
+
+  /*
+   * -----------------------------
+   * Token
+   * -----------------------------
+   */
+
+  function getToken(market, protocol) {
+
+    const marketToken =
       market?.token;
 
     if (
-      typeof token === "string"
+      typeof marketToken === "string"
     ) {
+
       return {
-        symbol: token,
-        price: null,
-        change24h: null
+        symbol: marketToken,
+        name: null,
+        price:
+          market?.price ?? null,
+        change24h:
+          market?.change24h ?? null
       };
     }
 
     if (
-      token &&
-      typeof token === "object"
+      marketToken &&
+      typeof marketToken === "object"
     ) {
+
       return {
         symbol:
-          token.symbol ||
-          token.name ||
+          marketToken.symbol ||
+          marketToken.name ||
+          protocol?.token ||
           "—",
 
+        name:
+          marketToken.name ||
+          protocol?.tokenName ||
+          null,
+
         price:
-          token.price,
+          market?.price ??
+          marketToken.price ??
+          null,
 
         change24h:
-          token.change24h
+          market?.change24h ??
+          marketToken.change24h ??
+          null
       };
     }
 
     return {
-      symbol: "—",
-      price: null,
-      change24h: null
+      symbol:
+        protocol?.token ||
+        "—",
+
+      name:
+        protocol?.tokenName ||
+        null,
+
+      price:
+        market?.price ??
+        null,
+
+      change24h:
+        market?.change24h ??
+        null
     };
   }
 
-  function render(data) {
-    const protocol =
-      data.protocol || {};
 
-    const market =
-      data.market || {};
+  /*
+   * -----------------------------
+   * Metrics
+   * -----------------------------
+   */
 
-    const metrics =
-      data.metrics || {};
+  function getMetric(
+    object,
+    primary,
+    secondary,
+    tertiary
+  ) {
 
-    const fees =
-      metrics.fees || {};
+    if (!object) {
+      return null;
+    }
 
-    const revenue =
-      metrics.revenue || {};
+    return (
+      object[primary] ??
+      object[secondary] ??
+      object[tertiary] ??
+      null
+    );
+  }
+
+
+  /*
+   * -----------------------------
+   * Research object compatibility
+   * -----------------------------
+   */
+
+  function getResearchObject(
+    data
+  ) {
 
     const research =
-      data.research || {};
+      isObject(data.research)
+        ? data.research
+        : {};
+
+    return research;
+  }
+
+
+  function getBusinessModel(
+    data,
+    research
+  ) {
+
+    if (
+      isObject(data.businessModel)
+    ) {
+      return data.businessModel;
+    }
+
+    if (
+      isObject(research.businessModel)
+    ) {
+      return research.businessModel;
+    }
+
+    return {};
+  }
+
+
+  function getUsers(
+    data,
+    research
+  ) {
+
+    if (
+      isObject(data.users)
+    ) {
+      return data.users;
+    }
+
+    if (
+      isObject(research.users)
+    ) {
+      return research.users;
+    }
+
+    return {};
+  }
+
+
+  function getCompetition(
+    data,
+    research
+  ) {
+
+    if (
+      isObject(data.competition)
+    ) {
+      return data.competition;
+    }
+
+    if (
+      isObject(research.competition)
+    ) {
+      return research.competition;
+    }
+
+    if (
+      isObject(
+        research.competitiveLandscape
+      )
+    ) {
+      return research.competitiveLandscape;
+    }
+
+    return {};
+  }
+
+
+  function getRisk(
+    data,
+    research
+  ) {
+
+    if (
+      isObject(data.risk)
+    ) {
+      return data.risk;
+    }
+
+    if (
+      isObject(research.risks)
+    ) {
+      return research.risks;
+    }
+
+    if (
+      isObject(data.riskSnapshot)
+    ) {
+      return data.riskSnapshot;
+    }
+
+    return {};
+  }
+
+
+  function getHowItWorks(
+    data,
+    research
+  ) {
+
+    if (
+      isObject(data.howItWorks)
+    ) {
+      return data.howItWorks;
+    }
+
+    if (
+      isObject(research.howItWorks)
+    ) {
+      return research.howItWorks;
+    }
+
+    return {};
+  }
+
+
+  /*
+   * -----------------------------
+   * Risk rendering
+   * -----------------------------
+   */
+
+  function riskValue(
+    risk,
+    key,
+    fallback
+  ) {
+
+    const value =
+      risk?.[key];
+
+    if (
+      value !== undefined &&
+      value !== null &&
+      value !== ""
+    ) {
+      return value;
+    }
+
+    if (
+      Array.isArray(risk?.risks) &&
+      risk.risks.length > 0
+    ) {
+      return risk.risks.join(" · ");
+    }
+
+    return fallback;
+  }
+
+
+  /*
+   * -----------------------------
+   * Main render
+   * -----------------------------
+   */
+
+  function render(data) {
+
+    const protocol =
+      isObject(data.protocol)
+        ? data.protocol
+        : {};
+
+    const overview =
+      isObject(data.overview)
+        ? data.overview
+        : {};
+
+    const market =
+      isObject(data.market)
+        ? data.market
+        : {};
+
+    const metrics =
+      isObject(data.metrics)
+        ? data.metrics
+        : {};
+
+    const fees =
+      isObject(metrics.fees)
+        ? metrics.fees
+        : {};
+
+    const revenue =
+      isObject(metrics.revenue)
+        ? metrics.revenue
+        : {};
+
+    const research =
+      getResearchObject(data);
 
     const business =
-      research.businessModel || {};
+      getBusinessModel(
+        data,
+        research
+      );
 
     const users =
-      research.users || {};
+      getUsers(
+        data,
+        research
+      );
 
     const competition =
-      research.competitiveLandscape || {};
-
-    const how =
-      research.howItWorks || {};
+      getCompetition(
+        data,
+        research
+      );
 
     const risk =
-      data.risk ||
-      research.risks ||
-      {};
+      getRisk(
+        data,
+        research
+      );
+
+    const how =
+      getHowItWorks(
+        data,
+        research
+      );
 
     const token =
-      getToken(market);
+      getToken(
+        market,
+        protocol
+      );
+
+
+    /*
+     * Protocol
+     */
 
     setText(
       "protocolName",
-      protocol.name
+      protocol.name ||
+      overview.name
     );
 
     setText(
       "protocolMeta",
-      protocol.category
-        ? protocol.category
-        : ""
+      protocol.category ||
+      overview.category
     );
 
     setText(
       "category",
-      protocol.category
+      protocol.category ||
+      overview.category
     );
 
     setText(
       "status",
-      protocol.status
+      protocol.status ||
+      overview.status
     );
 
-    setText(
-      "website",
-      protocol.website
+    renderWebsite(
+      protocol.website ||
+      overview.website
     );
 
     renderChains(
-      protocol.chains
+      protocol.chains ||
+      overview.chains
     );
+
+
+    /*
+     * Market
+     */
 
     setText(
       "tvl",
-      usd(market.tvl)
+      market.tvlFormatted ||
+      formatUsd(market.tvl)
     );
 
     setText(
@@ -1020,55 +1778,119 @@
 
     setText(
       "tokenPrice",
-      usd(token.price)
+      market.priceFormatted ||
+      formatUsd(token.price)
     );
 
     setText(
       "change24h",
-      percent(token.change24h)
+      market.change24hFormatted ||
+      formatPercent(
+        token.change24h
+      )
     );
+
+
+    /*
+     * Fees
+     */
 
     setText(
       "fees24h",
-      usd(fees["24h"])
+      formatUsd(
+        getMetric(
+          fees,
+          "daily",
+          "24h",
+          "fees24h"
+        )
+      )
     );
 
     setText(
       "fees7d",
-      usd(fees["7d"])
+      formatUsd(
+        getMetric(
+          fees,
+          "sevenDay",
+          "7d",
+          "fees7d"
+        )
+      )
     );
 
     setText(
       "fees30d",
-      usd(fees["30d"])
+      formatUsd(
+        getMetric(
+          fees,
+          "thirtyDay",
+          "30d",
+          "fees30d"
+        )
+      )
     );
+
+
+    /*
+     * Revenue
+     */
 
     setText(
       "revenue24h",
-      usd(revenue["24h"])
+      formatUsd(
+        getMetric(
+          revenue,
+          "daily",
+          "24h",
+          "revenue24h"
+        )
+      )
     );
 
     setText(
       "revenue7d",
-      usd(revenue["7d"])
+      formatUsd(
+        getMetric(
+          revenue,
+          "sevenDay",
+          "7d",
+          "revenue7d"
+        )
+      )
     );
 
     setText(
       "revenue30d",
-      usd(revenue["30d"])
+      formatUsd(
+        getMetric(
+          revenue,
+          "thirtyDay",
+          "30d",
+          "revenue30d"
+        )
+      )
     );
+
+
+    /*
+     * How It Works
+     */
 
     setText(
       "howTitle",
-      protocol.name
-        ? "Protocol Mechanism"
-        : "How It Works"
+      "Protocol Mechanism"
     );
+
+    const howSummary =
+      how.summary ||
+      research.mechanism ||
+      research.coreFunction ||
+      "";
 
     setText(
       "howSummary",
-      how.summary ||
-      research.mechanism
+      howSummary
     );
 
     setList(
@@ -1076,9 +1898,15 @@
       how.steps
     );
 
+
+    /*
+     * Business Model
+     */
+
     setStatus(
       "businessStatus",
-      business.status
+      business.status ||
+      "Observed"
     );
 
     setText(
@@ -1093,12 +1921,23 @@
 
     setList(
       "revenueSources",
-      business.revenueSources
+      business.revenueSources ||
+      (
+        business.revenueSource
+          ? [business.revenueSource]
+          : []
+      )
     );
+
+
+    /*
+     * Users
+     */
 
     setStatus(
       "usersStatus",
-      users.status
+      users.status ||
+      "Observed"
     );
 
     setList(
@@ -1116,14 +1955,21 @@
       users.adoption
     );
 
+
+    /*
+     * Competition
+     */
+
     setStatus(
       "competitionStatus",
-      competition.status
+      competition.status ||
+      "Observed"
     );
 
     setText(
       "competitionCategory",
-      competition.category
+      competition.category ||
+      protocol.category
     );
 
     setList(
@@ -1133,96 +1979,199 @@
 
     setText(
       "differentiation",
-      competition.differentiation
+      competition.differentiation ||
+      competition.comparison
     );
+
+
+    /*
+     * Risk
+     */
+
+    const smartContract =
+      risk.smartContract ||
+      risk.smart_contract ||
+      (
+        Array.isArray(risk.risks)
+          ? risk.risks.join(" · ")
+          : null
+      );
+
+    const protocolRisk =
+      risk.protocol ||
+      risk.protocolRisk ||
+      risk.explanation;
+
+    const tokenRisk =
+      risk.token ||
+      risk.tokenRisk ||
+      risk.explanation;
+
+    const dependencies =
+      risk.dependencies ||
+      risk.dependency ||
+      risk.explanation;
 
     setText(
       "riskSmartContract",
-      risk.smartContract
+      smartContract
     );
 
     setText(
       "riskProtocol",
-      risk.protocol
+      protocolRisk
     );
 
     setText(
       "riskToken",
-      risk.token
+      tokenRisk
     );
 
     setText(
       "riskDependencies",
-      risk.dependencies
+      dependencies
     );
+
+
+    /*
+     * Research Summary
+     */
+
+    const summary =
+      research.summary;
 
     setText(
       "researchStatus",
       data.ai?.status === "ok"
         ? "Complete"
-        : "Partial"
+        : (
+          summary?.status ||
+          "Complete"
+        )
     );
 
     setText(
       "researchSummary",
-      research.summary
+      isObject(summary)
+        ? (
+          summary.text ||
+          summary.summary ||
+          summary.description
+        )
+        : summary
     );
+
+
+    /*
+     * Research
+     */
+
+    const coreFunction =
+      research.coreFunction;
+
+    const mechanism =
+      research.mechanism;
 
     setText(
       "coreFunction",
-      research.coreFunction
+      isObject(coreFunction)
+        ? (
+          coreFunction.summary ||
+          coreFunction.text ||
+          coreFunction.description
+        )
+        : (
+          coreFunction ||
+          howSummary
+        )
     );
 
     setText(
       "mechanism",
-      research.mechanism ||
-      how.summary
+      isObject(mechanism)
+        ? (
+          mechanism.summary ||
+          mechanism.text ||
+          mechanism.description
+        )
+        : (
+          mechanism ||
+          howSummary
+        )
     );
 
     setText(
       "researchUsers",
-      users.adoption
+      users.adoption ||
+      users.summary ||
+      users.description
     );
 
     setText(
       "researchRevenue",
-      business.explanation
+      business.explanation ||
+      business.revenueSource ||
+      research.revenue?.summary
     );
+
+
+    /*
+     * Risk Snapshot
+     */
 
     setText(
       "snapshotSmartContract",
-      risk.smartContract
+      smartContract
     );
 
     setText(
       "snapshotProtocol",
-      risk.protocol
+      protocolRisk
     );
 
     setText(
       "snapshotToken",
-      risk.token
+      tokenRisk
     );
 
     setText(
       "snapshotDependencies",
-      risk.dependencies
+      dependencies
     );
+
+
+    /*
+     * Sources
+     */
 
     renderSources(
       data.sources
     );
+
+
+    /*
+     * Finally show results
+     */
 
     results.classList.remove(
       "hidden"
     );
   }
 
+
+  /*
+   * -----------------------------
+   * Analyze
+   * -----------------------------
+   */
+
   async function analyze() {
+
     const protocol =
       input.value.trim();
 
     if (!protocol) {
+
       message.textContent =
         "Please enter a protocol.";
 
@@ -1248,40 +2197,73 @@
     message.className =
       "message";
 
+
     try {
+
       const response =
         await fetch(
           API_URL +
           "?input=" +
-          encodeURIComponent(protocol),
+          encodeURIComponent(
+            protocol
+          ),
           {
             method: "GET",
+
             headers: {
               "Accept":
                 "application/json"
             },
+
             cache: "no-store"
           }
         );
 
-      const data =
-        await response.json();
+
+      const rawText =
+        await response.text();
+
+
+      let data;
+
+      try {
+
+        data =
+          JSON.parse(
+            rawText
+          );
+
+      } catch {
+
+        throw new Error(
+          "API returned invalid JSON."
+        );
+
+      }
+
 
       if (!response.ok) {
+
         throw new Error(
           data?.error ||
           `HTTP ${response.status}`
         );
+
       }
 
+
       if (!data.ok) {
+
         throw new Error(
           data.error ||
           "Analysis failed"
         );
+
       }
 
+
       render(data);
+
 
       message.textContent =
         "Analysis complete.";
@@ -1289,12 +2271,15 @@
       message.className =
         "message success";
 
+
       results.scrollIntoView({
         behavior: "smooth",
         block: "start"
       });
 
+
     } catch (error) {
+
       results.classList.add(
         "hidden"
       );
@@ -1310,29 +2295,38 @@
         "message error";
 
     } finally {
+
       button.disabled = false;
+
     }
   }
+
 
   button.addEventListener(
     "click",
     analyze
   );
 
+
   input.addEventListener(
     "keydown",
     event => {
-      if (event.key === "Enter") {
+
+      if (
+        event.key === "Enter"
+      ) {
         analyze();
       }
+
     }
   );
 
-  // IMPORTANT:
-  // Do not automatically analyze anything
-  // when the page loads.
-  // The results section remains hidden until
-  // the user enters a protocol and clicks Analyze.
+
+  /*
+   * Do not automatically analyze
+   * anything on page load.
+   */
+
 </script>
 
 </body>
