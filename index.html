@@ -656,6 +656,109 @@
       color: #2dd55b;
       text-decoration: underline;
     }
+
+    /* Watchlist & Alerts items */
+    .wl-item,
+    .alert-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+      border-top: 1px solid #1c1c1c;
+      font-size: 14px;
+    }
+
+    .wl-item:first-of-type,
+    .alert-item:first-of-type {
+      border-top: 0;
+    }
+
+    .wl-item .name,
+    .alert-item .name {
+      font-weight: 600;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    }
+
+    .wl-item .tvl,
+    .alert-item .meta {
+      color: #888;
+      font-size: 12px;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    }
+
+    .wl-item button,
+    .alert-item button {
+      height: 30px;
+      padding: 0 12px;
+      border: 1px solid #444;
+      border-radius: 6px;
+      background: transparent;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .wl-item button:hover,
+    .alert-item button:hover {
+      border-color: #fff;
+    }
+
+    .alert-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .alert-toggle .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #444;
+      transition: background 0.15s ease;
+    }
+
+    .alert-toggle.on .dot {
+      background: #2dd55b;
+    }
+
+    /* Add Watch / Add Alert button on report header */
+    .report-actions {
+      margin-top: 14px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .report-actions button {
+      height: 36px;
+      padding: 0 14px;
+      border: 1px solid #444;
+      border-radius: 8px;
+      background: transparent;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .report-actions button:hover {
+      border-color: #fff;
+    }
+
+    .report-actions button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .report-actions button.primary {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
   </style>
 </head>
 
@@ -712,8 +815,66 @@
     </div>
 
     <div class="modal-actions">
+      <button id="accWatchlistBtn" type="button">Watchlist</button>
+      <button id="accAlertsBtn" type="button">Alerts</button>
       <button id="accClose" type="button">Close</button>
       <button id="accSignOut" type="button">Sign out</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Watchlist modal -->
+<div id="watchlistModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="watchlistTitle">
+  <div class="modal" style="width:min(640px,100%);">
+    <h3 id="watchlistTitle">Watchlist</h3>
+    <div class="muted">Track TVL of the protocols you follow.</div>
+
+    <div id="watchlistList" style="margin-top:14px;">
+      <div id="watchlistEmpty" class="muted">No protocols yet.</div>
+      <div id="watchlistItems"></div>
+    </div>
+
+    <div class="modal-actions">
+      <button id="watchlistAddCurrentBtn" type="button" class="primary hidden">
+        Add current protocol
+      </button>
+      <button id="watchlistClose" type="button">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Alerts modal -->
+<div id="alertsModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="alertsTitle">
+  <div class="modal" style="width:min(640px,100%);">
+    <h3 id="alertsTitle">Alerts</h3>
+    <div class="muted">Get notified when thresholds are crossed.</div>
+
+    <div id="alertsList" style="margin-top:14px;">
+      <div id="alertsEmpty" class="muted">No alerts yet.</div>
+      <div id="alertsItems"></div>
+    </div>
+
+    <div id="alertCreateForm" class="hidden" style="margin-top:18px;padding-top:18px;border-top:1px solid #1c1c1c;">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+        <span id="alertCreateSlug" class="val" style="flex:1;min-width:160px;">—</span>
+        <select id="alertCreateType" style="height:38px;padding:0 10px;border:1px solid #333;border-radius:8px;background:#000;color:#fff;font-size:13px;">
+          <option value="price_above">Price &gt;</option>
+          <option value="price_below">Price &lt;</option>
+          <option value="tvl_above">TVL &gt;</option>
+        </select>
+        <input id="alertCreateThreshold" type="number" min="0" step="0.01" placeholder="threshold (USD)" style="height:38px;padding:0 12px;border:1px solid #333;border-radius:8px;background:#000;color:#fff;font-size:13px;width:160px;">
+        <button id="alertCreateSubmit" type="button" class="primary">Create</button>
+      </div>
+      <div id="alertCreateStatus" style="margin-top:8px;font-size:12px;color:#888;"></div>
+    </div>
+
+    <div class="modal-actions">
+      <button id="alertAddCurrentBtn" type="button" class="primary hidden">
+        Add alert for current protocol
+      </button>
+      <button id="alertsClose" type="button">Close</button>
     </div>
   </div>
 </div>
@@ -766,6 +927,12 @@
 
         <div id="protocolMeta" class="protocol-meta"></div>
 
+      </div>
+
+      <!-- Phase 3.0.0 / 3.1.0 — Quick actions for current protocol -->
+      <div id="reportActions" class="report-actions hidden">
+        <button id="watchCurrentBtn" type="button" class="primary">+ Watchlist</button>
+        <button id="alertCurrentBtn" type="button">+ Alert</button>
       </div>
 
       <!-- Phase 2.9.0 — Shareable Reports -->
@@ -2400,6 +2567,9 @@
         setShareUI();
       }
 
+      // Phase 3.0.0 / 3.1.0 — surface quick-actions on the new report
+      setReportActionsUI();
+
 
       message.textContent =
         "Analysis complete.";
@@ -2921,9 +3091,403 @@
   }
 
 
+  /* =========================================================
+     Phase 3.0.0 / 3.1.0 — Watchlist + Alerts UI
+  ========================================================== */
+
+  const reportActions = document.getElementById("reportActions");
+  const watchCurrentBtn = document.getElementById("watchCurrentBtn");
+  const alertCurrentBtn = document.getElementById("alertCurrentBtn");
+
+  const watchlistModal = document.getElementById("watchlistModal");
+  const watchlistEmpty = document.getElementById("watchlistEmpty");
+  const watchlistItems = document.getElementById("watchlistItems");
+  const watchlistAddCurrentBtn = document.getElementById(
+    "watchlistAddCurrentBtn"
+  );
+  const watchlistClose = document.getElementById("watchlistClose");
+
+  const alertsModal = document.getElementById("alertsModal");
+  const alertsEmpty = document.getElementById("alertsEmpty");
+  const alertsItems = document.getElementById("alertsItems");
+  const alertAddCurrentBtn = document.getElementById("alertAddCurrentBtn");
+  const alertsClose = document.getElementById("alertsClose");
+  const alertCreateForm = document.getElementById("alertCreateForm");
+  const alertCreateSlug = document.getElementById("alertCreateSlug");
+  const alertCreateType = document.getElementById("alertCreateType");
+  const alertCreateThreshold = document.getElementById(
+    "alertCreateThreshold"
+  );
+  const alertCreateSubmit = document.getElementById("alertCreateSubmit");
+  const alertCreateStatus = document.getElementById("alertCreateStatus");
+
+  const accWatchlistBtn = document.getElementById("accWatchlistBtn");
+  const accAlertsBtn = document.getElementById("accAlertsBtn");
+
+  // The slug of the most recently analyzed protocol (used by quick-actions).
+  function getCurrentProtocolSlug() {
+    const input = document.getElementById("protocolInput");
+    return normalizeSlugForUi(input ? input.value : "");
+  }
+  function normalizeSlugForUi(v) {
+    return String(v || "")
+      .trim()
+      .replace(/^https?:\/\//i, "")
+      .replace(/^www\./i, "")
+      .replace(/\/+$/, "")
+      .toLowerCase();
+  }
+
+  function setReportActionsUI() {
+    const slug = getCurrentProtocolSlug();
+    if (!state.user) {
+      reportActions.classList.add("hidden");
+      return;
+    }
+    reportActions.classList.remove("hidden");
+    watchCurrentBtn.disabled = !slug;
+    alertCurrentBtn.disabled = !slug;
+  }
+
+  /* ----- Watchlist ----- */
+
+  function openWatchlist() {
+    closeAccount();
+    watchlistModal.classList.remove("hidden");
+    loadWatchlist();
+  }
+  function closeWatchlist() {
+    watchlistModal.classList.add("hidden");
+  }
+
+  async function loadWatchlist() {
+    watchlistItems.innerHTML = "";
+    watchlistEmpty.classList.add("hidden");
+    watchlistAddCurrentBtn.classList.add("hidden");
+    try {
+      const r = await fetch(API_BASE + "/watchlist", {
+        credentials: "include",
+        cache: "no-store",
+      });
+      const data = await r.json();
+      if (!r.ok || !data.ok) {
+        watchlistEmpty.textContent =
+          "Failed to load watchlist.";
+        watchlistEmpty.classList.remove("hidden");
+        return;
+      }
+      const items = data.items || [];
+      if (items.length === 0) {
+        watchlistEmpty.textContent =
+          "No protocols yet. Analyze one and add it.";
+        watchlistEmpty.classList.remove("hidden");
+      } else {
+        for (const item of items) {
+          watchlistItems.appendChild(
+            renderWatchlistItem(item)
+          );
+        }
+      }
+      const slug = getCurrentProtocolSlug();
+      if (slug) {
+        watchlistAddCurrentBtn.classList.remove("hidden");
+        watchlistAddCurrentBtn.dataset.slug = slug;
+        watchlistAddCurrentBtn.textContent =
+          "Add " + slug + " to watchlist";
+      }
+    } catch (e) {
+      watchlistEmpty.textContent = "Network error.";
+      watchlistEmpty.classList.remove("hidden");
+    }
+  }
+
+  function renderWatchlistItem(item) {
+    const el = document.createElement("div");
+    el.className = "wl-item";
+    const tvlText =
+      item.snapshot && typeof item.snapshot.tvl === "number"
+        ? "TVL " + formatUsdShort(item.snapshot.tvl)
+        : "TVL —";
+    el.innerHTML =
+      '<div>' +
+        '<div class="name">' + escapeHtml(item.protocolSlug) + "</div>" +
+        '<div class="tvl">' + tvlText + "</div>" +
+      "</div>" +
+      '<button data-id="' + item.id + '">Remove</button>';
+    el.querySelector("button").addEventListener(
+      "click",
+      () => removeWatchlistItem(item.id, el)
+    );
+    return el;
+  }
+
+  async function removeWatchlistItem(id, el) {
+    try {
+      const r = await fetch(
+        API_BASE + "/watchlist?id=" + encodeURIComponent(id),
+        { method: "DELETE", credentials: "include" }
+      );
+      if (r.ok) {
+        el.remove();
+      } else {
+        alert("Remove failed.");
+      }
+    } catch {
+      alert("Network error.");
+    }
+  }
+
+  async function addCurrentToWatchlist() {
+    const slug = watchlistAddCurrentBtn.dataset.slug;
+    if (!slug) return;
+    watchlistAddCurrentBtn.disabled = true;
+    try {
+      const r = await fetch(API_BASE + "/watchlist", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug }),
+      });
+      const data = await r.json();
+      if (!r.ok || !data.ok) {
+        alert(
+          "Add failed: " +
+            (data.message || ("HTTP " + r.status))
+        );
+        return;
+      }
+      loadWatchlist();
+    } catch {
+      alert("Network error.");
+    } finally {
+      watchlistAddCurrentBtn.disabled = false;
+    }
+  }
+
+  watchCurrentBtn.addEventListener("click", openWatchlist);
+  watchlistClose.addEventListener("click", closeWatchlist);
+  watchlistAddCurrentBtn.addEventListener(
+    "click",
+    addCurrentToWatchlist
+  );
+  watchlistModal.addEventListener("click", (e) => {
+    if (e.target === watchlistModal) closeWatchlist();
+  });
+  accWatchlistBtn.addEventListener("click", openWatchlist);
+
+  /* ----- Alerts ----- */
+
+  function openAlerts() {
+    closeAccount();
+    alertsModal.classList.remove("hidden");
+    alertCreateForm.classList.add("hidden");
+    loadAlerts();
+  }
+  function closeAlerts() {
+    alertsModal.classList.add("hidden");
+  }
+
+  async function loadAlerts() {
+    alertsItems.innerHTML = "";
+    alertsEmpty.classList.add("hidden");
+    alertAddCurrentBtn.classList.add("hidden");
+    alertCreateForm.classList.add("hidden");
+    try {
+      const r = await fetch(API_BASE + "/alerts", {
+        credentials: "include",
+        cache: "no-store",
+      });
+      const data = await r.json();
+      if (!r.ok || !data.ok) {
+        alertsEmpty.textContent = "Failed to load alerts.";
+        alertsEmpty.classList.remove("hidden");
+        return;
+      }
+      const alerts = data.alerts || [];
+      if (alerts.length === 0) {
+        alertsEmpty.textContent =
+          "No alerts yet.";
+        alertsEmpty.classList.remove("hidden");
+      } else {
+        for (const a of alerts) {
+          alertsItems.appendChild(renderAlertItem(a));
+        }
+      }
+      const slug = getCurrentProtocolSlug();
+      if (slug) {
+        alertAddCurrentBtn.classList.remove("hidden");
+        alertAddCurrentBtn.dataset.slug = slug;
+        alertAddCurrentBtn.textContent =
+          "Add alert for " + slug;
+      }
+    } catch {
+      alertsEmpty.textContent = "Network error.";
+      alertsEmpty.classList.remove("hidden");
+    }
+  }
+
+  function renderAlertItem(a) {
+    const el = document.createElement("div");
+    el.className = "alert-item";
+    const triggered =
+      a.lastTriggeredAt
+        ? "Last fired: " + a.lastTriggeredAt
+        : "";
+    el.innerHTML =
+      '<div>' +
+        '<div class="name">' +
+          escapeHtml(a.protocolSlug) +
+        "</div>" +
+        '<div class="meta">' +
+          escapeHtml(a.alertType) +
+          " · " +
+          formatUsdShort(Number(a.threshold)) +
+          (triggered ? " · " + escapeHtml(triggered) : "") +
+        "</div>" +
+      "</div>" +
+      '<div style="display:flex;gap:8px;align-items:center;">' +
+        '<div class="alert-toggle ' +
+          (a.enabled ? "on" : "") +
+          '" data-id="' + a.id + '">' +
+          '<div class="dot"></div>' +
+          (a.enabled ? "On" : "Off") +
+        "</div>" +
+        '<button data-id="' + a.id + '">Remove</button>' +
+      "</div>";
+    el.querySelector(".alert-toggle").addEventListener(
+      "click",
+      () => toggleAlert(a, el)
+    );
+    el.querySelector("button").addEventListener("click", () =>
+      removeAlert(a.id, el)
+    );
+    return el;
+  }
+
+  async function toggleAlert(a, el) {
+    const next = !a.enabled;
+    try {
+      const r = await fetch(
+        API_BASE + "/alerts?id=" + encodeURIComponent(a.id),
+        {
+          method: "PATCH",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ enabled: next }),
+        }
+      );
+      if (r.ok) {
+        a.enabled = next;
+        const tog = el.querySelector(".alert-toggle");
+        tog.classList.toggle("on", next);
+        tog.childNodes[2].nodeValue = next ? "On" : "Off";
+      }
+    } catch {}
+  }
+
+  async function removeAlert(id, el) {
+    try {
+      const r = await fetch(
+        API_BASE + "/alerts?id=" + encodeURIComponent(id),
+        { method: "DELETE", credentials: "include" }
+      );
+      if (r.ok) el.remove();
+    } catch {}
+  }
+
+  function showCreateAlertForm() {
+    const slug = alertAddCurrentBtn.dataset.slug;
+    if (!slug) return;
+    alertCreateSlug.textContent = slug;
+    alertCreateForm.classList.remove("hidden");
+    alertCreateStatus.textContent = "";
+    alertCreateThreshold.value = "";
+    alertCreateType.value = "price_above";
+  }
+
+  async function submitCreateAlert() {
+    const slug = alertCreateSlug.textContent;
+    const alertType = alertCreateType.value;
+    const threshold = Number(alertCreateThreshold.value);
+    if (!slug) return;
+    if (!Number.isFinite(threshold) || threshold < 0) {
+      alertCreateStatus.textContent =
+        "✗ threshold must be a non-negative number";
+      alertCreateStatus.style.color = "#ff6b6b";
+      return;
+    }
+    alertCreateSubmit.disabled = true;
+    try {
+      const r = await fetch(API_BASE + "/alerts", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug, alertType, threshold }),
+      });
+      const data = await r.json();
+      if (!r.ok || !data.ok) {
+        alertCreateStatus.textContent =
+          "✗ " + (data.message || ("HTTP " + r.status));
+        alertCreateStatus.style.color = "#ff6b6b";
+        return;
+      }
+      alertCreateStatus.textContent = "✓ alert created";
+      alertCreateStatus.style.color = "#2dd55b";
+      setTimeout(() => loadAlerts(), 600);
+    } catch {
+      alertCreateStatus.textContent = "✗ network error";
+      alertCreateStatus.style.color = "#ff6b6b";
+    } finally {
+      alertCreateSubmit.disabled = false;
+    }
+  }
+
+  alertCurrentBtn.addEventListener("click", () => {
+    const slug = getCurrentProtocolSlug();
+    if (!slug) return;
+    state.currentProtocolSlug = slug;
+    openAlerts();
+    setTimeout(showCreateAlertForm, 50);
+  });
+  alertsClose.addEventListener("click", closeAlerts);
+  alertAddCurrentBtn.addEventListener("click", showCreateAlertForm);
+  alertCreateSubmit.addEventListener("click", submitCreateAlert);
+  alertsModal.addEventListener("click", (e) => {
+    if (e.target === alertsModal) closeAlerts();
+  });
+  accAlertsBtn.addEventListener("click", openAlerts);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      if (!accountModal.classList.contains("hidden")) closeAccount();
+      if (!watchlistModal.classList.contains("hidden")) closeWatchlist();
+      if (!alertsModal.classList.contains("hidden")) closeAlerts();
+    }
+  });
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    })[c]);
+  }
+
+  function formatUsdShort(value) {
+    if (!Number.isFinite(value)) return "—";
+    if (value >= 1e9) return "$" + (value / 1e9).toFixed(2) + "B";
+    if (value >= 1e6) return "$" + (value / 1e6).toFixed(2) + "M";
+    if (value >= 1e3) return "$" + (value / 1e3).toFixed(1) + "K";
+    return "$" + value.toFixed(2);
+  }
+
+
   // ----- Initialization -----
   setAuthUI();
   setShareUI();
+  setReportActionsUI();
   // Probe /auth/me to restore a session if cookie is present.
   (async () => {
     try {
@@ -2942,11 +3506,17 @@
         };
         setAuthUI();
         setShareUI();
+        setReportActionsUI();
       }
     } catch {}
     // Public share view runs regardless of auth state.
     maybeRenderSharedView();
   })();
+
+  // Re-evaluate the report-action buttons when the input changes.
+  document
+    .getElementById("protocolInput")
+    .addEventListener("input", setReportActionsUI);
 
 </script>
 
