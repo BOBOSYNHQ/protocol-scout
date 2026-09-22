@@ -412,6 +412,250 @@
         font-size: 34px;
       }
     }
+
+
+    /* ===== Phase 2.8.0 / 2.9.0 — auth + share styles ===== */
+
+    .nav-auth {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .auth-btn {
+      height: 38px;
+      padding: 0 16px;
+      border: 1px solid #fff;
+      border-radius: 8px;
+      background: #fff;
+      color: #000;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+    }
+
+    .auth-btn:hover {
+      opacity: 0.88;
+    }
+
+    .auth-btn.ghost {
+      background: transparent;
+      color: #fff;
+      border-color: #444;
+    }
+
+    .auth-btn.ghost:hover {
+      border-color: #fff;
+    }
+
+    .auth-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 38px;
+      padding: 0 14px;
+      border: 1px solid #333;
+      border-radius: 999px;
+      background: #0b0b0b;
+      color: #fff;
+      font-size: 13px;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      cursor: pointer;
+    }
+
+    .auth-pill:hover {
+      border-color: #fff;
+    }
+
+    .auth-pill .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #2dd55b;
+      box-shadow: 0 0 0 4px rgba(45, 213, 91, 0.15);
+    }
+
+    /* Account modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(6px);
+      z-index: 50;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 90px 20px 20px;
+    }
+
+    .modal-backdrop.hidden {
+      display: none;
+    }
+
+    .modal {
+      width: min(520px, 100%);
+      background: #0b0b0b;
+      border: 1px solid #2a2a2a;
+      border-radius: 14px;
+      padding: 26px;
+    }
+
+    .modal h3 {
+      margin: 0 0 4px;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+    }
+
+    .modal .muted {
+      color: #888;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    .modal-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-top: 1px solid #1c1c1c;
+      font-size: 14px;
+    }
+
+    .modal-row:first-of-type {
+      border-top: 0;
+    }
+
+    .modal-row .key {
+      color: #888;
+    }
+
+    .modal-row .val {
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      color: #fff;
+    }
+
+    .modal input[type="text"],
+    .modal input[type="email"] {
+      width: 100%;
+      height: 40px;
+      padding: 0 12px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      outline: none;
+      background: #000;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .modal input:focus {
+      border-color: #fff;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 22px;
+      justify-content: flex-end;
+    }
+
+    .modal-actions button {
+      height: 38px;
+      padding: 0 18px;
+      border: 1px solid #444;
+      border-radius: 8px;
+      background: transparent;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .modal-actions button.primary {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    .modal-actions button:hover {
+      opacity: 0.88;
+    }
+
+    /* Share section */
+    .share-block {
+      margin-top: 18px;
+      padding: 18px;
+      border: 1px solid #222;
+      border-radius: 10px;
+      background: #0a0a0a;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .share-block.hidden {
+      display: none;
+    }
+
+    .share-block input {
+      flex: 1;
+      min-width: 220px;
+      height: 38px;
+      padding: 0 12px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background: #000;
+      color: #fff;
+      font-size: 13px;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    }
+
+    .share-block button {
+      height: 38px;
+      padding: 0 16px;
+      border: 1px solid #fff;
+      border-radius: 8px;
+      background: #fff;
+      color: #000;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .share-block button.secondary {
+      background: transparent;
+      color: #fff;
+      border-color: #444;
+    }
+
+    .share-block .status {
+      flex-basis: 100%;
+      color: #888;
+      font-size: 12px;
+    }
+
+    /* Public-share banner */
+    .share-banner {
+      padding: 18px 22px;
+      margin-bottom: 24px;
+      border: 1px solid #2dd55b;
+      border-radius: 10px;
+      background: rgba(45, 213, 91, 0.08);
+      color: #fff;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .share-banner a {
+      color: #2dd55b;
+      text-decoration: underline;
+    }
   </style>
 </head>
 
@@ -426,8 +670,53 @@
       <a href="#research">Research</a>
       <a href="#risks">Risk</a>
     </div>
+
+    <div class="nav-auth">
+      <button id="authBtn" class="auth-btn ghost" type="button">
+        Connect Wallet
+      </button>
+    </div>
   </nav>
 </header>
+
+<!-- Account modal (hidden by default) -->
+<div id="accountModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="accountTitle">
+  <div class="modal">
+    <h3 id="accountTitle">Account</h3>
+    <div class="muted">Signed in via Ethereum wallet. Email is editable.</div>
+
+    <div class="modal-row">
+      <div class="key">Wallet</div>
+      <div id="accWallet" class="val">—</div>
+    </div>
+
+    <div class="modal-row">
+      <div class="key">Plan</div>
+      <div id="accPlan" class="val">—</div>
+    </div>
+
+    <div class="modal-row">
+      <div class="key">Analyzed this month</div>
+      <div id="accUsage" class="val">—</div>
+    </div>
+
+    <div class="modal-row">
+      <div class="key">Reports saved</div>
+      <div id="accReports" class="val">—</div>
+    </div>
+
+    <div class="modal-row" style="display:block;">
+      <div class="key" style="margin-bottom:6px;">Email</div>
+      <input id="accEmail" type="email" placeholder="you@example.com" autocomplete="off">
+      <div id="accEmailStatus" style="margin-top:6px;font-size:12px;color:#888;"></div>
+    </div>
+
+    <div class="modal-actions">
+      <button id="accClose" type="button">Close</button>
+      <button id="accSignOut" type="button">Sign out</button>
+    </div>
+  </div>
+</div>
 
 <main>
 
@@ -477,6 +766,15 @@
 
         <div id="protocolMeta" class="protocol-meta"></div>
 
+      </div>
+
+      <!-- Phase 2.9.0 — Shareable Reports -->
+      <div id="shareBlock" class="share-block hidden">
+        <input id="shareUrl" type="text" readonly placeholder="Share URL appears here once generated">
+        <button id="shareBtn" type="button">Share</button>
+        <button id="shareCopyBtn" class="secondary hidden" type="button">Copy</button>
+        <button id="shareRevokeBtn" class="secondary hidden" type="button">Revoke</button>
+        <div id="shareStatus" class="status">Sign in to enable sharing.</div>
       </div>
     </section>
 
@@ -2095,6 +2393,14 @@
       );
 
 
+      // Phase 2.9.0 — capture the new report id for sharing.
+      if (data && data.report && data.report.id) {
+        state.currentReportId = data.report.id;
+        state.currentShareToken = null;
+        setShareUI();
+      }
+
+
       message.textContent =
         "Analysis complete.";
 
@@ -2154,6 +2460,493 @@
 
     }
   );
+
+
+  /* =========================================================
+     Phase 2.8.0 / 2.9.0 — Wallet auth, Account, Share, Public view
+  ========================================================== */
+
+  const API_BASE =
+    "https://protocol-scout-api.superhelong.workers.dev";
+  const SHARE_URL_BASE =
+    "https://bobosynhq.github.io/protocol-scout/";
+
+  const authBtn =
+    document.getElementById("authBtn");
+
+  const accountModal =
+    document.getElementById("accountModal");
+  const accClose =
+    document.getElementById("accClose");
+  const accSignOut =
+    document.getElementById("accSignOut");
+  const accWallet =
+    document.getElementById("accWallet");
+  const accPlan =
+    document.getElementById("accPlan");
+  const accUsage =
+    document.getElementById("accUsage");
+  const accReports =
+    document.getElementById("accReports");
+  const accEmail =
+    document.getElementById("accEmail");
+  const accEmailStatus =
+    document.getElementById("accEmailStatus");
+
+  const shareBlock =
+    document.getElementById("shareBlock");
+  const shareUrlInput =
+    document.getElementById("shareUrl");
+  const shareBtn =
+    document.getElementById("shareBtn");
+  const shareCopyBtn =
+    document.getElementById("shareCopyBtn");
+  const shareRevokeBtn =
+    document.getElementById("shareRevokeBtn");
+  const shareStatus =
+    document.getElementById("shareStatus");
+
+
+  // State that the rest of the UI reads.
+  const state = {
+    user: null,            // { id, walletAddress, email, plan, status }
+    currentReportId: null, // report id of the rendered analysis
+    currentShareToken: null,
+  };
+
+
+  // ----- auth header (cookies carry session automatically for /auth/*)
+  // We rely on HttpOnly Secure cookie set by /auth/login. For direct calls
+  // outside the browser's cookie path we still have Bearer fallback in API.
+
+
+  function shortAddr(a) {
+    if (!a) return "";
+    return a.slice(0, 6) + "…" + a.slice(-4);
+  }
+
+
+  function setAuthUI() {
+    if (state.user && state.user.walletAddress) {
+      authBtn.classList.remove("ghost");
+      authBtn.classList.add("auth-pill");
+      authBtn.textContent =
+        shortAddr(state.user.walletAddress);
+      authBtn.title =
+        state.user.walletAddress;
+    } else {
+      authBtn.classList.add("ghost");
+      authBtn.classList.remove("auth-pill");
+      authBtn.textContent = "Connect Wallet";
+      authBtn.title = "";
+    }
+  }
+
+
+  function setShareUI() {
+    if (!state.user) {
+      shareBlock.classList.remove("hidden");
+      shareBtn.classList.remove("hidden");
+      shareCopyBtn.classList.add("hidden");
+      shareRevokeBtn.classList.add("hidden");
+      shareUrlInput.value = "";
+      shareStatus.textContent =
+        "Sign in to enable sharing.";
+      return;
+    }
+    shareBlock.classList.remove("hidden");
+    shareBtn.classList.remove("hidden");
+    if (state.currentShareToken) {
+      const url =
+        SHARE_URL_BASE +
+        "?share=" +
+        state.currentShareToken;
+      shareUrlInput.value = url;
+      shareCopyBtn.classList.remove("hidden");
+      shareRevokeBtn.classList.remove("hidden");
+      shareStatus.textContent =
+        "Anyone with this link can view this report.";
+    } else {
+      shareUrlInput.value = "";
+      shareCopyBtn.classList.add("hidden");
+      shareRevokeBtn.classList.add("hidden");
+      shareStatus.textContent =
+        state.currentReportId
+          ? "Generate a public link to share this report."
+          : "";
+    }
+  }
+
+
+  function openAccount() {
+    accountModal.classList.remove("hidden");
+    loadAccount();
+  }
+
+
+  function closeAccount() {
+    accountModal.classList.add("hidden");
+  }
+
+
+  async function loadAccount() {
+    accEmailStatus.textContent = "";
+    accWallet.textContent = "…";
+    accPlan.textContent = "…";
+    accUsage.textContent = "…";
+    accReports.textContent = "…";
+    try {
+      const r = await fetch(
+        API_BASE + "/auth/account",
+        { credentials: "include", cache: "no-store" }
+      );
+      if (!r.ok) {
+        if (r.status === 401) {
+          // Session expired
+          state.user = null;
+          setAuthUI();
+          setShareUI();
+          closeAccount();
+        }
+        const t = await r.text();
+        throw new Error("HTTP " + r.status + ": " + t);
+      }
+      const data = await r.json();
+      const a = data.account;
+      state.user = {
+        id: a.id,
+        walletAddress: a.walletAddress,
+        email: a.email,
+        plan: a.plan,
+        status: a.status,
+      };
+      setAuthUI();
+      accWallet.textContent =
+        shortAddr(a.walletAddress);
+      accPlan.textContent =
+        (a.plan || "free") + " · " + (a.status || "active");
+      const lim = a.limits && a.limits.analyze;
+      accUsage.textContent = lim
+        ? (a.usageThisMonth.analyze + " / " + lim)
+        : (a.usageThisMonth.analyze + " / ∞");
+      accReports.textContent =
+        String(a.counts.reports);
+      accEmail.value = a.email || "";
+    } catch (e) {
+      console.error("loadAccount", e);
+      accWallet.textContent = "error";
+      accPlan.textContent = "—";
+      accUsage.textContent = "—";
+      accReports.textContent = "—";
+    }
+  }
+
+
+  async function saveEmail() {
+    const email = accEmail.value.trim().toLowerCase();
+    accEmailStatus.textContent = "Saving…";
+    try {
+      const r = await fetch(
+        API_BASE + "/auth/account",
+        {
+          method: "PATCH",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        }
+      );
+      const data = await r.json();
+      if (!r.ok || !data.ok) {
+        accEmailStatus.textContent =
+          "✗ " + (data.message || ("HTTP " + r.status));
+        accEmailStatus.style.color = "#ff6b6b";
+        return;
+      }
+      accEmailStatus.textContent =
+        "✓ saved";
+      accEmailStatus.style.color = "#2dd55b";
+      state.user.email = data.account.email;
+    } catch (e) {
+      accEmailStatus.textContent = "✗ network error";
+      accEmailStatus.style.color = "#ff6b6b";
+    }
+  }
+
+
+  async function connectWallet() {
+    if (state.user && state.user.walletAddress) {
+      openAccount();
+      return;
+    }
+    if (typeof window.ethereum === "undefined") {
+      alert(
+        "No Ethereum wallet detected. Install MetaMask or another Web3 wallet to sign in."
+      );
+      return;
+    }
+    authBtn.disabled = true;
+    const oldLabel = authBtn.textContent;
+    authBtn.textContent = "Connecting…";
+    try {
+      // 1. Request accounts
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      if (!accounts || !accounts.length) {
+        throw new Error("No account returned by wallet.");
+      }
+      const walletAddress = accounts[0];
+
+      // 2. Get nonce + SIWE-style message
+      const nonceRes = await fetch(
+        API_BASE + "/auth/nonce",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ walletAddress }),
+        }
+      );
+      const nonceData = await nonceRes.json();
+      if (!nonceRes.ok || !nonceData.ok) {
+        throw new Error(
+          nonceData.message || ("HTTP " + nonceRes.status)
+        );
+      }
+
+      // 3. Sign via wallet (personal_sign, EIP-191)
+      const signature = await window.ethereum.request({
+        method: "personal_sign",
+        params: [nonceData.message, walletAddress],
+      });
+
+      // 4. Login
+      const loginRes = await fetch(
+        API_BASE + "/auth/login",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            walletAddress,
+            message: nonceData.message,
+            signature,
+          }),
+        }
+      );
+      const loginData = await loginRes.json();
+      if (!loginRes.ok || !loginData.ok) {
+        throw new Error(
+          loginData.message || ("HTTP " + loginRes.status)
+        );
+      }
+
+      state.user = {
+        id: loginData.user.id,
+        walletAddress: loginData.user.walletAddress,
+        email: null,
+        plan: "free",
+        status: "active",
+      };
+      setAuthUI();
+      setShareUI();
+      openAccount();
+    } catch (e) {
+      console.error("connectWallet", e);
+      alert("Sign in failed: " + (e.message || e));
+      authBtn.textContent = oldLabel;
+    } finally {
+      authBtn.disabled = false;
+    }
+  }
+
+
+  async function signOut() {
+    try {
+      await fetch(API_BASE + "/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch {}
+    state.user = null;
+    state.currentShareToken = null;
+    setAuthUI();
+    setShareUI();
+    closeAccount();
+  }
+
+
+  async function enableShare() {
+    if (!state.currentReportId) return;
+    if (!state.user) {
+      alert("Sign in first to enable sharing.");
+      return;
+    }
+    shareStatus.textContent = "Generating…";
+    try {
+      const r = await fetch(
+        API_BASE +
+          "/report/share?id=" +
+          encodeURIComponent(state.currentReportId),
+        {
+          method: "POST",
+          credentials: "include",
+        }
+      );
+      const data = await r.json();
+      if (!r.ok || !data.ok) {
+        shareStatus.textContent =
+          "✗ " + (data.message || ("HTTP " + r.status));
+        return;
+      }
+      state.currentShareToken = data.share.token;
+      setShareUI();
+    } catch (e) {
+      shareStatus.textContent = "✗ network error";
+    }
+  }
+
+
+  async function revokeShare() {
+    if (!state.currentReportId) return;
+    if (!confirm("Revoke the public link for this report?")) return;
+    try {
+      const r = await fetch(
+        API_BASE +
+          "/report/share?id=" +
+          encodeURIComponent(state.currentReportId),
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
+      if (!r.ok) {
+        const data = await r.json().catch(() => null);
+        alert(
+          "Revoke failed: " +
+            (data?.message || ("HTTP " + r.status))
+        );
+        return;
+      }
+      state.currentShareToken = null;
+      setShareUI();
+    } catch (e) {
+      alert("Revoke failed: network error");
+    }
+  }
+
+
+  async function copyShareUrl() {
+    if (!shareUrlInput.value) return;
+    try {
+      await navigator.clipboard.writeText(shareUrlInput.value);
+      shareStatus.textContent = "✓ copied to clipboard";
+      setTimeout(() => setShareUI(), 1200);
+    } catch {
+      // Fallback for non-secure contexts
+      shareUrlInput.select();
+      document.execCommand("copy");
+      shareStatus.textContent = "✓ copied (fallback)";
+      setTimeout(() => setShareUI(), 1200);
+    }
+  }
+
+
+  authBtn.addEventListener("click", connectWallet);
+  accClose.addEventListener("click", closeAccount);
+  accSignOut.addEventListener("click", signOut);
+  accEmail.addEventListener("blur", saveEmail);
+  shareBtn.addEventListener("click", enableShare);
+  shareCopyBtn.addEventListener("click", copyShareUrl);
+  shareRevokeBtn.addEventListener("click", revokeShare);
+
+  // Close modal on backdrop click
+  accountModal.addEventListener("click", e => {
+    if (e.target === accountModal) closeAccount();
+  });
+
+  // ESC closes modal
+  document.addEventListener("keydown", e => {
+    if (
+      e.key === "Escape" &&
+      !accountModal.classList.contains("hidden")
+    ) {
+      closeAccount();
+    }
+  });
+
+
+  // ----- Public share view (?share=<token>) -----
+  // Hides the analyzer and renders the shared report instead.
+  async function maybeRenderSharedView() {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("share");
+    if (!token) return;
+
+    document.querySelector(".hero").classList.add("hidden");
+
+    // Show a banner above the results
+    const banner = document.createElement("div");
+    banner.className = "share-banner";
+    banner.innerHTML =
+      '<div>You are viewing a shared BOBOSYN Protocol Scout report.</div>' +
+      '<a href="' +
+      SHARE_URL_BASE +
+      '">Open Scout →</a>';
+    results.classList.remove("hidden");
+    results.insertBefore(banner, results.firstChild);
+
+    try {
+      const r = await fetch(
+        API_BASE +
+          "/share?token=" +
+          encodeURIComponent(token),
+        { cache: "no-store" }
+      );
+      const data = await r.json();
+      if (!r.ok || !data.ok) {
+        message.textContent =
+          "This share link is invalid or has been revoked.";
+        return;
+      }
+      // Hide share block on public view (no auth, no further sharing).
+      shareBlock.classList.add("hidden");
+      renderData(data.report.content);
+      message.textContent =
+        "Shared report · " +
+        (data.report.protocolName || data.report.protocolSlug);
+    } catch (e) {
+      message.textContent = "Failed to load shared report.";
+    }
+  }
+
+
+  // ----- Initialization -----
+  setAuthUI();
+  setShareUI();
+  // Probe /auth/me to restore a session if cookie is present.
+  (async () => {
+    try {
+      const r = await fetch(API_BASE + "/auth/me", {
+        credentials: "include",
+        cache: "no-store",
+      });
+      if (r.ok) {
+        const data = await r.json();
+        state.user = {
+          id: data.user.id,
+          walletAddress: data.user.walletAddress,
+          email: data.user.email,
+          plan: data.user.plan,
+          status: data.user.status,
+        };
+        setAuthUI();
+        setShareUI();
+      }
+    } catch {}
+    // Public share view runs regardless of auth state.
+    maybeRenderSharedView();
+  })();
 
 </script>
 
