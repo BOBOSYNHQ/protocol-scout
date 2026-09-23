@@ -915,6 +915,10 @@
 
     <div id="topupChainInfo" class="muted" style="margin-top:6px;">Loading network…</div>
 
+    <div id="topupAcceptedTokens" class="muted" style="margin-top:6px;font-size:12px;">
+      Accepted tokens: —
+    </div>
+
     <div class="topup-block" style="margin-top:18px;">
       <div style="font-size:13px;color:#888;margin-bottom:8px;">1. Choose amount</div>
       <div class="topup-amount" id="topupAmountGroup">
@@ -3682,8 +3686,24 @@
         " (chain " +
         data.network?.chainId +
         ")";
+
+      // Show accepted tokens (USDC + USDT in V0)
+      const tokens = data.tokens || (data.token ? [data.token] : []);
+      const tokenSymbols = tokens
+        .map((t) => t.symbol)
+        .filter(Boolean)
+        .join(" or ");
+      const acceptedTokensEl = document.getElementById(
+        "topupAcceptedTokens"
+      );
+      if (acceptedTokensEl) {
+        acceptedTokensEl.textContent =
+          "Accepted tokens: " + tokenSymbols;
+      }
       topupChainInfo.textContent =
-        "Send USDC to the address below, then paste the tx hash.";
+        "Send " +
+        tokenSymbols +
+        " to the address below, then paste the tx hash.";
 
       if (data.receiverAddress) {
         topupReceiver.textContent = data.receiverAddress;
