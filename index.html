@@ -759,6 +759,86 @@
       color: #000;
       border-color: #fff;
     }
+
+    /* Top up modal */
+    .topup-block {
+      margin-top: 14px;
+      padding: 14px;
+      border: 1px solid #222;
+      border-radius: 10px;
+      background: #0a0a0a;
+    }
+
+    .topup-block .row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .topup-block input[type="text"] {
+      flex: 1;
+      min-width: 220px;
+      height: 36px;
+      padding: 0 12px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background: #000;
+      color: #fff;
+      font-size: 13px;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    }
+
+    .topup-block button {
+      height: 36px;
+      padding: 0 14px;
+      border: 1px solid #444;
+      border-radius: 8px;
+      background: transparent;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .topup-block button.primary {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    .topup-block .status {
+      margin-top: 8px;
+      color: #888;
+      font-size: 12px;
+    }
+
+    .topup-amount {
+      display: inline-flex;
+      gap: 6px;
+    }
+
+    .topup-amount button {
+      min-width: 60px;
+    }
+
+    .topup-amount button.active {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    .topup-receiver {
+      margin-top: 10px;
+      padding: 10px;
+      background: #000;
+      border: 1px dashed #2a2a2a;
+      border-radius: 8px;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 12px;
+      color: #2dd55b;
+      word-break: break-all;
+    }
   </style>
 </head>
 
@@ -815,10 +895,55 @@
     </div>
 
     <div class="modal-actions">
+      <button id="accTopupBtn" type="button">Top up</button>
       <button id="accWatchlistBtn" type="button">Watchlist</button>
       <button id="accAlertsBtn" type="button">Alerts</button>
       <button id="accClose" type="button">Close</button>
       <button id="accSignOut" type="button">Sign out</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Top up modal -->
+<div id="topupModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="topupTitle">
+  <div class="modal" style="width:min(620px,100%);">
+    <h3 id="topupTitle">Top up credits</h3>
+    <div class="muted">
+      Pay with USDC on Base. Each USDC = 10 analyze credits ($0.10 / analyze).
+    </div>
+
+    <div id="topupChainInfo" class="muted" style="margin-top:6px;">Loading network…</div>
+
+    <div class="topup-block" style="margin-top:18px;">
+      <div style="font-size:13px;color:#888;margin-bottom:8px;">1. Choose amount</div>
+      <div class="topup-amount" id="topupAmountGroup">
+        <button data-usdc="5" class="active" type="button">5 USDC</button>
+        <button data-usdc="10" type="button">10 USDC</button>
+        <button data-usdc="25" type="button">25 USDC</button>
+      </div>
+      <div id="topupCreditsLabel" style="margin-top:8px;font-size:12px;color:#888;">= 50 credits</div>
+    </div>
+
+    <div class="topup-block">
+      <div style="font-size:13px;color:#888;margin-bottom:8px;">2. Send USDC to this address</div>
+      <div id="topupReceiver" class="topup-receiver">—</div>
+      <div style="margin-top:8px;font-size:12px;color:#888;">
+        Network: <span id="topupNetworkName">—</span>
+      </div>
+    </div>
+
+    <div class="topup-block">
+      <div style="font-size:13px;color:#888;margin-bottom:8px;">3. Paste the transaction hash</div>
+      <div class="row">
+        <input id="topupTxHash" type="text" placeholder="0x… (64 hex chars)">
+        <button id="topupVerifyBtn" class="primary" type="button">Verify</button>
+      </div>
+      <div id="topupStatus" class="status">After sending, copy the tx hash from your wallet and paste it here.</div>
+    </div>
+
+    <div class="modal-actions">
+      <button id="topupClose" type="button">Close</button>
     </div>
   </div>
 </div>
@@ -2802,6 +2927,32 @@
       accReports.textContent =
         String(a.counts.reports);
       accEmail.value = a.email || "";
+
+      // Phase 3.2.0 — also fetch credit balance
+      try {
+        const rb = await fetch(API_BASE + "/billing/balance", {
+          credentials: "include",
+          cache: "no-store",
+        });
+        if (rb.ok) {
+          const db = await rb.json();
+          const credits = Number(db.balance?.creditBalance || 0);
+          const lim = a.limits && a.limits.analyze;
+          const monthUsed = a.usageThisMonth.analyze;
+          if (credits > 0) {
+            accUsage.textContent =
+              credits + " credits  (free " + monthUsed + " / " + (lim || "∞") + ")";
+            accPlan.textContent =
+              "credit · " + (a.status || "active");
+          } else if (lim) {
+            accUsage.textContent =
+              monthUsed + " / " + lim + " / month";
+          } else {
+            accUsage.textContent =
+              monthUsed + " / ∞";
+          }
+        }
+      } catch {}
     } catch (e) {
       console.error("loadAccount", e);
       accWallet.textContent = "error";
@@ -3462,8 +3613,169 @@
       if (!accountModal.classList.contains("hidden")) closeAccount();
       if (!watchlistModal.classList.contains("hidden")) closeWatchlist();
       if (!alertsModal.classList.contains("hidden")) closeAlerts();
+      if (!topupModal.classList.contains("hidden")) closeTopup();
     }
   });
+
+
+  /* =========================================================
+     Phase 3.2.0 — Top up modal (USDC on Base)
+  ========================================================== */
+
+  const topupModal = document.getElementById("topupModal");
+  const topupChainInfo = document.getElementById("topupChainInfo");
+  const topupAmountGroup = document.getElementById("topupAmountGroup");
+  const topupCreditsLabel = document.getElementById("topupCreditsLabel");
+  const topupReceiver = document.getElementById("topupReceiver");
+  const topupNetworkName = document.getElementById("topupNetworkName");
+  const topupTxHash = document.getElementById("topupTxHash");
+  const topupVerifyBtn = document.getElementById("topupVerifyBtn");
+  const topupStatus = document.getElementById("topupStatus");
+  const topupClose = document.getElementById("topupClose");
+  const accTopupBtn = document.getElementById("accTopupBtn");
+
+  const topupState = {
+    receiverAddress: null,
+    chainName: null,
+    creditsPerUsdc: 10,
+    selectedUsdc: 5,
+  };
+
+  async function openTopup() {
+    if (!state.user) {
+      alert("Sign in first.");
+      return;
+    }
+    closeAccount();
+    topupModal.classList.remove("hidden");
+    topupStatus.textContent =
+      "After sending, copy the tx hash from your wallet and paste it here.";
+    topupStatus.style.color = "#888";
+    topupTxHash.value = "";
+    await loadBillingInfo();
+    updateTopupCreditsLabel();
+  }
+
+  function closeTopup() {
+    topupModal.classList.add("hidden");
+  }
+
+  async function loadBillingInfo() {
+    try {
+      const r = await fetch(API_BASE + "/billing/info", {
+        cache: "no-store",
+      });
+      const data = await r.json();
+      if (!r.ok || !data.ok) {
+        topupChainInfo.textContent =
+          "Failed to load billing info.";
+        return;
+      }
+      topupState.receiverAddress = data.receiverAddress || null;
+      topupState.chainName =
+        data.network?.chainName || "Base";
+      topupState.creditsPerUsdc =
+        data.pricing?.creditsPerUsdc || 10;
+
+      topupNetworkName.textContent =
+        data.network?.chainName +
+        " (chain " +
+        data.network?.chainId +
+        ")";
+      topupChainInfo.textContent =
+        "Send USDC to the address below, then paste the tx hash.";
+
+      if (data.receiverAddress) {
+        topupReceiver.textContent = data.receiverAddress;
+        topupReceiver.style.color = "#2dd55b";
+      } else {
+        topupReceiver.textContent =
+          "(receiver not configured on server)";
+        topupReceiver.style.color = "#ff6b6b";
+      }
+    } catch (e) {
+      topupChainInfo.textContent = "Network error.";
+    }
+  }
+
+  function updateTopupCreditsLabel() {
+    const credits = topupState.selectedUsdc * topupState.creditsPerUsdc;
+    topupCreditsLabel.textContent =
+      "= " + credits + " credits";
+  }
+
+  topupAmountGroup.addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-usdc]");
+    if (!btn) return;
+    topupState.selectedUsdc = Number(btn.dataset.usdc);
+    topupAmountGroup
+      .querySelectorAll("button")
+      .forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    updateTopupCreditsLabel();
+  });
+
+  async function submitTopupVerify() {
+    const txHash = topupTxHash.value.trim();
+    if (!/^0x[a-fA-F0-9]{64}$/.test(txHash)) {
+      topupStatus.textContent =
+        "✗ Tx hash must be 0x + 64 hex chars";
+      topupStatus.style.color = "#ff6b6b";
+      return;
+    }
+    topupVerifyBtn.disabled = true;
+    topupStatus.textContent = "Verifying on-chain…";
+    topupStatus.style.color = "#888";
+    try {
+      const r = await fetch(
+        API_BASE + "/billing/topup/verify",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ txHash }),
+        }
+      );
+      const data = await r.json();
+      if (!r.ok || !data.ok) {
+        topupStatus.textContent =
+          "✗ " + (data.message || ("HTTP " + r.status));
+        topupStatus.style.color = "#ff6b6b";
+        return;
+      }
+      const creditsAdded =
+        data.topup?.creditsAdded ||
+        data.balance?.creditBalance ||
+        0;
+      const balance =
+        data.balance?.creditBalance != null
+          ? data.balance.creditBalance
+          : creditsAdded;
+      topupStatus.textContent =
+        "✓ credited! new balance = " +
+        balance +
+        " credits";
+      topupStatus.style.color = "#2dd55b";
+      // Refresh account modal numbers in the background
+      if (typeof loadAccount === "function") loadAccount();
+    } catch (e) {
+      topupStatus.textContent = "✗ network error";
+      topupStatus.style.color = "#ff6b6b";
+    } finally {
+      topupVerifyBtn.disabled = false;
+    }
+  }
+
+  accTopupBtn.addEventListener("click", openTopup);
+  topupClose.addEventListener("click", closeTopup);
+  topupVerifyBtn.addEventListener("click", submitTopupVerify);
+  topupTxHash.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") submitTopupVerify();
+  });
+  topupModal.addEventListener("click", (e) => {
+    if (e.target === topupModal) closeTopup();
+  });
+
 
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, (c) => ({
