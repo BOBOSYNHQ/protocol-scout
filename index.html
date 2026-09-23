@@ -1073,7 +1073,7 @@
 
     <div class="topup-block">
       <div style="font-size:13px;color:#ff9b6b;margin-bottom:8px;padding:6px 8px;background:#3d2410;border-radius:4px;border:1px solid #6b3818;">
-        ⚠ Before scanning, switch your wallet to <strong>Base Sepolia</strong> (chain 84532). Sending USDC on the wrong network will lose your funds.
+        ⚠ Before scanning, switch your wallet to <strong>Base</strong> mainnet (chain 8453). Sending USDC on the wrong network will lose your funds.
       </div>
       <div style="font-size:13px;color:#888;margin-bottom:8px;">2. Send USDC to this address</div>
       <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;">
@@ -4241,7 +4241,7 @@
   // `@chainId` on ERC-20 transfer URIs and surface it as "address
   // format error". The wallet will use whichever network the user
   // has currently selected — the page explicitly tells the user to
-  // switch to Base Sepolia first.
+  // switch to Base mainnet first.
   //   ethereum:<TOKEN>/transfer?address=<RECEIVER>&uint256=<AMOUNT_RAW>
   // USDC has 6 decimals, so 5 USDC = 5_000_000.
   function buildTopupUri() {
