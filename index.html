@@ -839,6 +839,109 @@
       color: #2dd55b;
       word-break: break-all;
     }
+
+    /* AI Deep Research block */
+    .ai-block {
+      margin-top: 24px;
+      padding: 24px;
+      border: 1px solid #222;
+      border-radius: 12px;
+      background: #0a0a0a;
+    }
+
+    .ai-block.hidden {
+      display: none;
+    }
+
+    .ai-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .ai-block-header h3 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+    }
+
+    .ai-block-header .muted {
+      font-size: 12px;
+    }
+
+    .ai-section {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid #1c1c1c;
+    }
+
+    .ai-section:first-of-type {
+      border-top: 0;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .ai-section .label {
+      color: #888;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 8px;
+    }
+
+    .ai-section .text {
+      color: #e5e5e5;
+      font-size: 15px;
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+
+    .ai-section ul {
+      margin: 0;
+      padding-left: 20px;
+      color: #e5e5e5;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .ai-section ul li {
+      margin-bottom: 6px;
+    }
+
+    .ai-section .sources {
+      color: #888;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .ai-section .sources a {
+      color: #2dd55b;
+      word-break: break-all;
+    }
+
+    .ai-loading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    .ai-loading .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #fff;
+      animation: ai-pulse 1.2s ease-in-out infinite;
+    }
+
+    @keyframes ai-pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
   </style>
 </head>
 
@@ -1058,10 +1161,20 @@
 
       </div>
 
-      <!-- Phase 3.0.0 / 3.1.0 — Quick actions for current protocol -->
+      <!-- Phase 3.0.0 / 3.1.0 / 3.3.0 — Quick actions for current protocol -->
       <div id="reportActions" class="report-actions hidden">
         <button id="watchCurrentBtn" type="button" class="primary">+ Watchlist</button>
         <button id="alertCurrentBtn" type="button">+ Alert</button>
+        <button id="deepResearchBtn" type="button">✨ AI Deep Research · 3 credits</button>
+      </div>
+
+      <!-- Phase 3.3.0 — AI insights section -->
+      <div id="aiInsightsBlock" class="ai-block hidden">
+        <div class="ai-block-header">
+          <h3>AI Deep Research</h3>
+          <span id="aiInsightsMeta" class="muted"></span>
+        </div>
+        <div id="aiInsightsContent"></div>
       </div>
 
       <!-- Phase 2.9.0 — Shareable Reports -->
@@ -3302,7 +3415,179 @@
     reportActions.classList.remove("hidden");
     watchCurrentBtn.disabled = !slug;
     alertCurrentBtn.disabled = !slug;
+    deepResearchBtn.disabled = !slug;
   }
+
+
+  /* ----- AI Deep Research ----- */
+
+  const aiInsightsBlock = document.getElementById("aiInsightsBlock");
+  const aiInsightsMeta = document.getElementById("aiInsightsMeta");
+  const aiInsightsContent = document.getElementById("aiInsightsContent");
+  const deepResearchBtn = document.getElementById("deepResearchBtn");
+
+  async function runDeepResearch() {
+    const slug = getCurrentProtocolSlug();
+    if (!slug) return;
+    if (!state.user) {
+      alert("Sign in first.");
+      return;
+    }
+
+    // Show loading state.
+    aiInsightsBlock.classList.remove("hidden");
+    aiInsightsMeta.textContent = "calling AI…";
+    aiInsightsContent.innerHTML =
+      '<div class="ai-loading"><div class="dot"></div>Querying Claude…</div>';
+    deepResearchBtn.disabled = true;
+
+    try {
+      const r = await fetch(API_BASE + "/research/deep", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ protocolSlug: slug }),
+      });
+      const body = await r.json();
+      if (!r.ok || !body.ok) {
+        aiInsightsContent.innerHTML = "";
+        const msg = body?.message || ("HTTP " + r.status);
+        aiInsightsMeta.textContent = "error";
+        aiInsightsContent.innerHTML =
+          '<div style="color:#ff6b6b;font-size:14px;">' +
+          escapeHtml(msg) +
+          "</div>";
+        if (typeof loadAccount === "function") loadAccount();
+        return;
+      }
+      renderAiInsights(body);
+      // Refresh account balance after credit charge.
+      if (typeof loadAccount === "function") loadAccount();
+    } catch (e) {
+      aiInsightsContent.innerHTML =
+        '<div style="color:#ff6b6b;font-size:14px;">Network error.</div>';
+    } finally {
+      deepResearchBtn.disabled = false;
+    }
+  }
+
+  function renderAiInsights(body) {
+    const i = body.insights || {};
+    const modelLabel = body.model || "LLM";
+    const cachedLabel = body.cached ? "cached" : "fresh";
+    const cost = body.costUsd !== undefined ? body.costUsd : 0;
+    const tokens = body.tokens || {};
+    const inTok = tokens.input || 0;
+    const outTok = tokens.output || 0;
+    aiInsightsMeta.innerHTML =
+      '<span style="color:#888;">' +
+      escapeHtml(modelLabel) +
+      " · " +
+      cachedLabel +
+      " · " +
+      inTok +
+      " in / " +
+      outTok +
+      " out · $≈" +
+      cost.toFixed(4) +
+      (body.creditsSpent
+        ? " · " + body.creditsSpent + " credit"
+        : "") +
+      "</span>";
+
+    const sections = [
+      {
+        label: "Narrative",
+        type: "text",
+        content: i.narrative || "",
+      },
+      {
+        label: "Mechanism",
+        type: "text",
+        content: i.mechanismAnalysis || "",
+      },
+      {
+        label: "Business",
+        type: "text",
+        content: i.businessAnalysis || "",
+      },
+      {
+        label: "Top risks",
+        type: "list",
+        items: Array.isArray(i.riskAnalysis) ? i.riskAnalysis : [],
+      },
+      {
+        label: "Sources",
+        type: "sources",
+        items: Array.isArray(i.sources) ? i.sources : [],
+      },
+    ];
+
+    aiInsightsContent.innerHTML = sections
+      .filter((s) => {
+        if (s.type === "text") return s.content && s.content.length > 0;
+        return Array.isArray(s.items) && s.items.length > 0;
+      })
+      .map((s) => {
+        if (s.type === "text") {
+          return (
+            '<div class="ai-section">' +
+            '<div class="label">' +
+            escapeHtml(s.label) +
+            "</div>" +
+            '<div class="text">' +
+            escapeHtml(s.content) +
+            "</div>" +
+            "</div>"
+          );
+        }
+        if (s.type === "list") {
+          return (
+            '<div class="ai-section">' +
+            '<div class="label">' +
+            escapeHtml(s.label) +
+            "</div>" +
+            "<ul>" +
+            s.items
+              .map(
+                (it) =>
+                  "<li>" + escapeHtml(String(it)) + "</li>"
+              )
+              .join("") +
+            "</ul>" +
+            "</div>"
+          );
+        }
+        if (s.type === "sources") {
+          return (
+            '<div class="ai-section">' +
+            '<div class="label">' +
+            escapeHtml(s.label) +
+            "</div>" +
+            '<div class="sources">' +
+            s.items
+              .map((it) => {
+                const text = escapeHtml(String(it));
+                if (/^https?:\/\//i.test(String(it))) {
+                  return '<a href="' +
+                    escapeHtml(String(it)) +
+                    '" target="_blank" rel="noopener">' +
+                    text +
+                    "</a><br>";
+                }
+                return text + "<br>";
+              })
+              .join("") +
+            "</div>" +
+            "</div>"
+          );
+        }
+        return "";
+      })
+      .join("");
+  }
+
+  deepResearchBtn.addEventListener("click", runDeepResearch);
 
   /* ----- Watchlist ----- */
 
