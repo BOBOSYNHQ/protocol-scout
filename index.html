@@ -2768,17 +2768,33 @@
           url,
           {
             method: "GET",
-            cache: "no-store"
+            cache: "no-store",
+            credentials: "include"
           }
         );
 
 
       if (!response.ok) {
 
-        throw new Error(
-          "API request failed: " +
-          response.status
-        );
+        let msg = "API request failed: " + response.status;
+        try {
+          const data = await response.json();
+          if (data && data.message) {
+            msg = data.message;
+            if (data.quota) {
+              const q = data.quota;
+              const parts = [];
+              if (q.limit !== null && q.limit !== undefined) {
+                parts.push(`used ${q.used}/${q.limit}`);
+              }
+              if (q.creditBalance !== undefined) {
+                parts.push(`credit balance ${q.creditBalance}`);
+              }
+              if (parts.length) msg += " (" + parts.join(", ") + ")";
+            }
+          }
+        } catch {}
+        throw new Error(msg);
 
       }
 
