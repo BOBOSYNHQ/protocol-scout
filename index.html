@@ -992,6 +992,19 @@
     </div>
 
     <div class="modal-row" style="display:block;">
+      <div class="key" style="margin-bottom:6px;">API Keys</div>
+      <div id="accApiKeysList" style="font-size:13px;color:#aaa;margin-bottom:8px;">
+        Loading…
+      </div>
+      <div id="accApiKeyCreate" style="display:flex;gap:6px;align-items:center;">
+        <input id="accApiKeyName" type="text" placeholder="key name (e.g. mcp-cursor)" autocomplete="off"
+               style="flex:1;">
+        <button id="accApiKeyCreateBtn" type="button">Generate</button>
+      </div>
+      <div id="accApiKeyStatus" style="margin-top:6px;font-size:12px;color:#888;"></div>
+    </div>
+
+    <div class="modal-row" style="display:block;">
       <div class="key" style="margin-bottom:6px;">Email</div>
       <input id="accEmail" type="email" placeholder="you@example.com" autocomplete="off">
       <div id="accEmailStatus" style="margin-top:6px;font-size:12px;color:#888;"></div>
@@ -1003,6 +1016,32 @@
       <button id="accAlertsBtn" type="button">Alerts</button>
       <button id="accClose" type="button">Close</button>
       <button id="accSignOut" type="button">Sign out</button>
+    </div>
+  </div>
+</div>
+
+<!-- API key reveal modal — shown once after creation so user can copy
+     the plaintext before it disappears. -->
+<div id="apiKeyRevealModal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+  <div class="modal">
+    <h3>New API key</h3>
+    <div class="muted" style="color:#ff9b6b;">
+      Copy this key now. You will not be able to see it again.
+    </div>
+    <div class="modal-row" style="display:block;">
+      <div class="key" style="margin-bottom:6px;">Name</div>
+      <div id="revealKeyName" style="font-size:14px;color:#ddd;"></div>
+    </div>
+    <div class="modal-row" style="display:block;">
+      <div class="key" style="margin-bottom:6px;">Bearer token</div>
+      <textarea id="revealKeyToken" readonly style="width:100%;font-family:monospace;font-size:13px;min-height:60px;word-break:break-all;background:#0e0e10;color:#ddd;border:1px solid #333;padding:8px;border-radius:4px;"></textarea>
+      <div style="margin-top:6px;font-size:12px;color:#888;">
+        Use as: <code>Authorization: Bearer &lt;token&gt;</code>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button id="revealKeyCopyBtn" type="button">Copy</button>
+      <button id="revealKeyCloseBtn" type="button">Done</button>
     </div>
   </div>
 </div>
@@ -2921,6 +2960,26 @@
   const accEmailStatus =
     document.getElementById("accEmailStatus");
 
+  const accApiKeysList =
+    document.getElementById("accApiKeysList");
+  const accApiKeyName =
+    document.getElementById("accApiKeyName");
+  const accApiKeyCreateBtn =
+    document.getElementById("accApiKeyCreateBtn");
+  const accApiKeyStatus =
+    document.getElementById("accApiKeyStatus");
+
+  const apiKeyRevealModal =
+    document.getElementById("apiKeyRevealModal");
+  const revealKeyName =
+    document.getElementById("revealKeyName");
+  const revealKeyToken =
+    document.getElementById("revealKeyToken");
+  const revealKeyCopyBtn =
+    document.getElementById("revealKeyCopyBtn");
+  const revealKeyCloseBtn =
+    document.getElementById("revealKeyCloseBtn");
+
   const shareBlock =
     document.getElementById("shareBlock");
   const shareUrlInput =
@@ -3086,6 +3145,9 @@
           }
         }
       } catch {}
+
+      // Phase 3.4.0 — fetch API keys
+      try { await loadApiKeys(); } catch (e) { console.error("loadApiKeys", e); }
     } catch (e) {
       console.error("loadAccount", e);
       accWallet.textContent = "error";
@@ -3094,6 +3156,126 @@
       accReports.textContent = "—";
     }
   }
+
+
+  async function loadApiKeys() {
+    accApiKeyStatus.textContent = "";
+    const r = await fetch(API_BASE + "/apikeys", {
+      credentials: "include",
+      cache: "no-store",
+    });
+    if (!r.ok) {
+      accApiKeysList.textContent = "—";
+      return;
+    }
+    const data = await r.json();
+    const keys = data.keys || [];
+    if (!keys.length) {
+      accApiKeysList.innerHTML =
+        '<div style="color:#888;">No keys yet. Generate one below to call the API from your own tools.</div>';
+      return;
+    }
+    accApiKeysList.innerHTML = keys.map((k) => {
+      const status = k.active
+        ? '<span style="color:#6cd982;">active</span>'
+        : '<span style="color:#888;">revoked</span>';
+      const lastUsed = k.lastUsedAt
+        ? "last used " + new Date(k.lastUsedAt).toLocaleString()
+        : "never used";
+      const revokeBtn = k.active
+        ? '<button class="revoke-api-key" data-id="' + escapeHtml(k.id) +
+          '" style="margin-left:8px;font-size:11px;padding:2px 6px;">Revoke</button>'
+        : "";
+      return (
+        '<div style="margin-bottom:6px;padding:6px 8px;background:#16161a;border-radius:4px;">' +
+          '<div><code style="font-size:12px;color:#9cdcfe;">' +
+            escapeHtml(k.prefix) + '\u2026</code> ' +
+            '<span style="color:#ccc;">' + escapeHtml(k.name) + '</span> ' +
+            status + revokeBtn +
+          '</div>' +
+          '<div style="font-size:11px;color:#666;">created ' +
+            new Date(k.createdAt).toLocaleDateString() +
+            ' \u00b7 ' + lastUsed +
+          '</div>' +
+        '</div>'
+      );
+    }).join("");
+    // Wire revoke buttons
+    accApiKeysList.querySelectorAll(".revoke-api-key").forEach((b) => {
+      b.addEventListener("click", async () => {
+        const id = b.getAttribute("data-id");
+        if (!confirm("Revoke this API key? Existing calls will stop working immediately.")) return;
+        try {
+          const del = await fetch(API_BASE + "/apikeys?id=" + encodeURIComponent(id), {
+            method: "DELETE",
+            credentials: "include",
+          });
+          if (!del.ok) {
+            const t = await del.text();
+            throw new Error("HTTP " + del.status + ": " + t);
+          }
+          accApiKeyStatus.textContent = "Revoked.";
+          await loadApiKeys();
+        } catch (err) {
+          accApiKeyStatus.textContent = "Revoke failed: " + (err.message || err);
+        }
+      });
+    });
+  }
+
+  async function createApiKey() {
+    const name = accApiKeyName.value.trim();
+    if (!name) {
+      accApiKeyStatus.textContent = "Name is required.";
+      return;
+    }
+    accApiKeyStatus.textContent = "Creating\u2026";
+    accApiKeyCreateBtn.disabled = true;
+    try {
+      const r = await fetch(API_BASE + "/apikeys", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name }),
+      });
+      const data = await r.json();
+      if (!r.ok || !data.ok) {
+        throw new Error(data.message || ("HTTP " + r.status));
+      }
+      accApiKeyName.value = "";
+      accApiKeyStatus.textContent = "Created.";
+      revealKeyName.textContent = data.key.name;
+      revealKeyToken.value = data.key.plaintext;
+      apiKeyRevealModal.classList.remove("hidden");
+      await loadApiKeys();
+    } catch (e) {
+      accApiKeyStatus.textContent = "Create failed: " + (e.message || e);
+    } finally {
+      accApiKeyCreateBtn.disabled = false;
+    }
+  }
+
+  accApiKeyCreateBtn.addEventListener("click", createApiKey);
+  revealKeyCloseBtn.addEventListener("click", () => {
+    apiKeyRevealModal.classList.add("hidden");
+    revealKeyToken.value = "";
+  });
+  revealKeyCopyBtn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(revealKeyToken.value);
+    } catch {
+      revealKeyToken.select();
+      document.execCommand("copy");
+    }
+    revealKeyCopyBtn.textContent = "Copied!";
+    setTimeout(() => { revealKeyCopyBtn.textContent = "Copy"; }, 1500);
+  });
+  apiKeyRevealModal.addEventListener("click", (e) => {
+    if (e.target === apiKeyRevealModal) {
+      apiKeyRevealModal.classList.add("hidden");
+      revealKeyToken.value = "";
+    }
+  });
 
 
   async function saveEmail() {
