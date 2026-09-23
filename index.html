@@ -4265,10 +4265,11 @@
       return;
     }
     try {
-      // Type 4 ~ 33x33 modules is plenty for a short EIP-681 URI on a
-      // 160px canvas (each module ~4px). Error correction "M" is fine —
-      // wallets usually scan in good light.
-      const qr = qrcode(4, "M");
+      // Let the library auto-pick the smallest QR type that fits. Type 0
+      // triggers make() to scan types 1..40 until one holds our URI.
+      // The EIP-681 string (token + chain + recipient + uint256) is
+      // ~140 bytes, which needs roughly Type 6+ at level M.
+      const qr = qrcode(0, "M");
       qr.addData(uri);
       qr.make();
       el.innerHTML = qr.createSvgTag({
