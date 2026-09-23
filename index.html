@@ -1072,6 +1072,9 @@
     </div>
 
     <div class="topup-block">
+      <div style="font-size:13px;color:#ff9b6b;margin-bottom:8px;padding:6px 8px;background:#3d2410;border-radius:4px;border:1px solid #6b3818;">
+        ⚠ Before scanning, switch your wallet to <strong>Base Sepolia</strong> (chain 84532). Sending USDC on the wrong network will lose your funds.
+      </div>
       <div style="font-size:13px;color:#888;margin-bottom:8px;">2. Send USDC to this address</div>
       <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;">
         <div id="topupQrWrap" style="flex:0 0 auto;background:#fff;padding:8px;border-radius:6px;border:1px solid #333;">
@@ -4233,17 +4236,22 @@
   }
 
   // EIP-681 URI so wallets prefill the transfer when they scan.
-  //   ethereum:<TOKEN>@<CHAIN_ID>/transfer?address=<RECEIVER>&uint256=<AMOUNT_RAW>
+  // We deliberately omit the @chainId segment because most mobile
+  // wallets (MetaMask mobile, Trust, imToken) don't accept
+  // `@chainId` on ERC-20 transfer URIs and surface it as "address
+  // format error". The wallet will use whichever network the user
+  // has currently selected — the page explicitly tells the user to
+  // switch to Base Sepolia first.
+  //   ethereum:<TOKEN>/transfer?address=<RECEIVER>&uint256=<AMOUNT_RAW>
   // USDC has 6 decimals, so 5 USDC = 5_000_000.
   function buildTopupUri() {
     const {
-      receiverAddress, usdcTokenAddress, chainId, selectedUsdc,
+      receiverAddress, usdcTokenAddress, selectedUsdc,
     } = topupState;
-    if (!receiverAddress || !usdcTokenAddress || !chainId) return null;
+    if (!receiverAddress || !usdcTokenAddress) return null;
     const amountRaw = BigInt(Math.floor(selectedUsdc * 1_000_000)).toString();
     return (
       "ethereum:" + usdcTokenAddress +
-      "@" + chainId +
       "/transfer?address=" + receiverAddress +
       "&uint256=" + amountRaw
     );
