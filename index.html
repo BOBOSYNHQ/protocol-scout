@@ -2949,10 +2949,14 @@
      Phase 2.8.0 / 2.9.0 — Wallet auth, Account, Share, Public view
   ========================================================== */
 
+  // API host: pinned to workers.dev (auto-signed cert, no extra Cloudflare setup needed).
+//   Once the api.protocol-scout.bobosyn.com Worker custom domain is bound, swap to:
+  //   const API_BASE = "https://api.protocol-scout.bobosyn.com";
   const API_BASE =
     "https://protocol-scout-api.superhelong.workers.dev";
-  const SHARE_URL_BASE =
-    "https://bobosynhq.github.io/protocol-scout/";
+  // Public site: front-end is hosted on GitHub Pages and fronted by protocol-scout.bobosyn.com
+  // (CNAME → bobosynhq.github.io, DNS-only). Share links use this vanity origin.
+  const SHARE_URL_BASE = "https://protocol-scout.bobosyn.com/";
 
   const authBtn =
     document.getElementById("authBtn");
