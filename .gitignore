@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build artifacts
+dist/
+build/
+*.js.map
+
+# Throwaway scripts + local-only files
+.smoke/
+tmp/
+*.bak
+*.tmp
+*.swp
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.sublime-*
+
+# Logs
+*.log
+
+# Frontend-specific
+.cache/
+.parcel-cache/
